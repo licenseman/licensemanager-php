@@ -1,5 +1,5 @@
 {
-    "name": "licenseman/sdk",
+    "name": "lman/sdk",
     "description": "PHP client for the LicenseManager API: products, policies, customers, licenses, machines and releases.",
     "keywords": [
         "licensemanager",

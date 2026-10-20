@@ -1,8 +1,8 @@
 # LicenseManager PHP SDK
 
-[![Packagist version](https://img.shields.io/packagist/v/licenseman/sdk)](https://packagist.org/packages/licenseman/sdk)
-[![PHP version](https://img.shields.io/packagist/dependency-v/licenseman/sdk/php)](https://packagist.org/packages/licenseman/sdk)
-[![Packagist downloads](https://img.shields.io/packagist/dt/licenseman/sdk)](https://packagist.org/packages/licenseman/sdk)
+[![Packagist version](https://img.shields.io/packagist/v/lman/sdk)](https://packagist.org/packages/lman/sdk)
+[![PHP version](https://img.shields.io/packagist/dependency-v/lman/sdk/php)](https://packagist.org/packages/lman/sdk)
+[![Packagist downloads](https://img.shields.io/packagist/dt/lman/sdk)](https://packagist.org/packages/lman/sdk)
 [![License](https://img.shields.io/github/license/licenseman/licensemanager-php)](https://github.com/licenseman/licensemanager-php/blob/main/LICENSE)
 [![Documentation](https://img.shields.io/badge/docs-licensemanager.dev-blue)](https://licensemanager.dev/docs/sdks/php)
 
@@ -17,7 +17,7 @@ PHP 8.1 or later.
 ## Installation
 
 ```sh
-composer require licenseman/sdk
+composer require lman/sdk
 ```
 
 ## Usage
