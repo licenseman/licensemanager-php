@@ -1,0 +1,46 @@
+{
+    "name": "licenseman/sdk",
+    "description": "PHP client for the LicenseManager API: products, policies, customers, licenses, machines and releases.",
+    "keywords": [
+        "licensemanager",
+        "licensing",
+        "license keys",
+        "api",
+        "sdk"
+    ],
+    "homepage": "https://licensemanager.dev",
+    "license": "Apache-2.0",
+    "authors": [
+        {
+            "name": "LicenseManager",
+            "homepage": "https://licensemanager.dev"
+        }
+    ],
+    "require": {
+        "php": "^8.1",
+        "ext-curl": "*",
+        "ext-json": "*",
+        "ext-mbstring": "*",
+        "guzzlehttp/guzzle": "^7.3",
+        "guzzlehttp/psr7": "^1.7 || ^2.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^8.0 || ^9.0",
+        "friendsofphp/php-cs-fixer": "^3.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "LicenseManager\\": "lib/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "LicenseManager\\Test\\": "test/"
+        }
+    },
+    "support": {
+        "docs": "https://licensemanager.dev/docs/sdks/php",
+        "issues": "https://github.com/licenseman/licensemanager-php/issues",
+        "source": "https://github.com/licenseman/licensemanager-php"
+    }
+}
