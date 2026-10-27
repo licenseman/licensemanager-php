@@ -251,6 +251,15 @@ class LicenseTest extends TestCase
     }
 
     /**
+     * Test attribute "subscription"
+     */
+    public function testPropertySubscription()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "cancellation_comment"
      */
     public function testPropertyCancellationComment()

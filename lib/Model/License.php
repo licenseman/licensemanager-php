@@ -76,6 +76,7 @@ class License implements ModelInterface, ArrayAccess, \JsonSerializable
         'cancellable_until' => '\DateTime',
         'canceled_at' => '\DateTime',
         'cancellation_reason' => '\LicenseManagerModelCancellationReasonString',
+        'subscription' => '\LicenseManager\Model\LicenseSubscription',
         'cancellation_comment' => 'string',
         'stripe_refund_id' => 'string',
         'updated_at' => '\DateTime'
@@ -108,6 +109,7 @@ class License implements ModelInterface, ArrayAccess, \JsonSerializable
         'cancellable_until' => 'date-time',
         'canceled_at' => 'date-time',
         'cancellation_reason' => null,
+        'subscription' => null,
         'cancellation_comment' => null,
         'stripe_refund_id' => null,
         'updated_at' => 'date-time'
@@ -138,6 +140,7 @@ class License implements ModelInterface, ArrayAccess, \JsonSerializable
         'cancellable_until' => true,
         'canceled_at' => true,
         'cancellation_reason' => false,
+        'subscription' => true,
         'cancellation_comment' => true,
         'stripe_refund_id' => true,
         'updated_at' => false
@@ -248,6 +251,7 @@ class License implements ModelInterface, ArrayAccess, \JsonSerializable
         'cancellable_until' => 'cancellableUntil',
         'canceled_at' => 'canceledAt',
         'cancellation_reason' => 'cancellationReason',
+        'subscription' => 'subscription',
         'cancellation_comment' => 'cancellationComment',
         'stripe_refund_id' => 'stripeRefundId',
         'updated_at' => 'updatedAt'
@@ -278,6 +282,7 @@ class License implements ModelInterface, ArrayAccess, \JsonSerializable
         'cancellable_until' => 'setCancellableUntil',
         'canceled_at' => 'setCanceledAt',
         'cancellation_reason' => 'setCancellationReason',
+        'subscription' => 'setSubscription',
         'cancellation_comment' => 'setCancellationComment',
         'stripe_refund_id' => 'setStripeRefundId',
         'updated_at' => 'setUpdatedAt'
@@ -308,6 +313,7 @@ class License implements ModelInterface, ArrayAccess, \JsonSerializable
         'cancellable_until' => 'getCancellableUntil',
         'canceled_at' => 'getCanceledAt',
         'cancellation_reason' => 'getCancellationReason',
+        'subscription' => 'getSubscription',
         'cancellation_comment' => 'getCancellationComment',
         'stripe_refund_id' => 'getStripeRefundId',
         'updated_at' => 'getUpdatedAt'
@@ -389,6 +395,7 @@ class License implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('cancellable_until', $data ?? [], null);
         $this->setIfExists('canceled_at', $data ?? [], null);
         $this->setIfExists('cancellation_reason', $data ?? [], null);
+        $this->setIfExists('subscription', $data ?? [], null);
         $this->setIfExists('cancellation_comment', $data ?? [], null);
         $this->setIfExists('stripe_refund_id', $data ?? [], null);
         $this->setIfExists('updated_at', $data ?? [], null);
@@ -477,6 +484,9 @@ class License implements ModelInterface, ArrayAccess, \JsonSerializable
         }
         if ($this->container['cancellation_reason'] === null) {
             $invalidProperties[] = "'cancellation_reason' can't be null";
+        }
+        if ($this->container['subscription'] === null && !$this->isNullableSetToNull('subscription')) {
+            $invalidProperties[] = "'subscription' is required";
         }
         if ($this->container['cancellation_comment'] === null && !$this->isNullableSetToNull('cancellation_comment')) {
             $invalidProperties[] = "'cancellation_comment' is required";
@@ -1067,6 +1077,40 @@ class License implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable cancellation_reason cannot be null');
         }
         $this->container['cancellation_reason'] = $cancellation_reason;
+
+        return $this;
+    }
+
+    /**
+     * Gets subscription
+     *
+     * @return \LicenseManager\Model\LicenseSubscription|null
+     */
+    public function getSubscription()
+    {
+        return $this->container['subscription'];
+    }
+
+    /**
+     * Sets subscription
+     *
+     * @param \LicenseManager\Model\LicenseSubscription|null $subscription subscription
+     *
+     * @return self
+     */
+    public function setSubscription($subscription)
+    {
+        if (is_null($subscription)) {
+            array_push($this->openAPINullablesSetToNull, 'subscription');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('subscription', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['subscription'] = $subscription;
 
         return $this;
     }

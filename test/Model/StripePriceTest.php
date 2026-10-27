@@ -125,6 +125,15 @@ class StripePriceTest extends TestCase
     }
 
     /**
+     * Test attribute "recurring"
+     */
+    public function testPropertyRecurring()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "mapped"
      */
     public function testPropertyMapped()

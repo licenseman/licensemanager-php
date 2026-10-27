@@ -236,6 +236,7 @@ class CreateToken implements ModelInterface, ArrayAccess, \JsonSerializable
 
     public const SCOPE_CUSTOMER_READ = 'customer:read';
     public const SCOPE_CUSTOMER_WRITE = 'customer:write';
+    public const SCOPE_CUSTOMER_BILLING = 'customer:billing';
     public const SCOPE_LICENSE_READ = 'license:read';
     public const SCOPE_LICENSE_WRITE = 'license:write';
     public const SCOPE_LICENSE_CANCEL = 'license:cancel';
@@ -253,6 +254,7 @@ class CreateToken implements ModelInterface, ArrayAccess, \JsonSerializable
         return [
             self::SCOPE_CUSTOMER_READ,
             self::SCOPE_CUSTOMER_WRITE,
+            self::SCOPE_CUSTOMER_BILLING,
             self::SCOPE_LICENSE_READ,
             self::SCOPE_LICENSE_WRITE,
             self::SCOPE_LICENSE_CANCEL,

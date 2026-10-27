@@ -114,4 +114,13 @@ class StripePermissionTest extends TestCase
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
+
+    /**
+     * Test attribute "subscriptions"
+     */
+    public function testPropertySubscriptions()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
 }

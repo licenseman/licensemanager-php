@@ -65,6 +65,7 @@ class IntegrationMapping implements ModelInterface, ArrayAccess, \JsonSerializab
         'stripe_price_id' => 'string',
         'product_name' => 'string',
         'price' => '\LicenseManager\Model\Price',
+        'recurring' => '\LicenseManager\Model\IntegrationMappingRecurring',
         'status' => 'string',
         'status_reason' => 'string',
         'created_at' => '\DateTime'
@@ -86,6 +87,7 @@ class IntegrationMapping implements ModelInterface, ArrayAccess, \JsonSerializab
         'stripe_price_id' => null,
         'product_name' => null,
         'price' => null,
+        'recurring' => null,
         'status' => null,
         'status_reason' => null,
         'created_at' => 'date-time'
@@ -105,6 +107,7 @@ class IntegrationMapping implements ModelInterface, ArrayAccess, \JsonSerializab
         'stripe_price_id' => false,
         'product_name' => false,
         'price' => true,
+        'recurring' => true,
         'status' => false,
         'status_reason' => true,
         'created_at' => false
@@ -204,6 +207,7 @@ class IntegrationMapping implements ModelInterface, ArrayAccess, \JsonSerializab
         'stripe_price_id' => 'stripePriceId',
         'product_name' => 'productName',
         'price' => 'price',
+        'recurring' => 'recurring',
         'status' => 'status',
         'status_reason' => 'statusReason',
         'created_at' => 'createdAt'
@@ -223,6 +227,7 @@ class IntegrationMapping implements ModelInterface, ArrayAccess, \JsonSerializab
         'stripe_price_id' => 'setStripePriceId',
         'product_name' => 'setProductName',
         'price' => 'setPrice',
+        'recurring' => 'setRecurring',
         'status' => 'setStatus',
         'status_reason' => 'setStatusReason',
         'created_at' => 'setCreatedAt'
@@ -242,6 +247,7 @@ class IntegrationMapping implements ModelInterface, ArrayAccess, \JsonSerializab
         'stripe_price_id' => 'getStripePriceId',
         'product_name' => 'getProductName',
         'price' => 'getPrice',
+        'recurring' => 'getRecurring',
         'status' => 'getStatus',
         'status_reason' => 'getStatusReason',
         'created_at' => 'getCreatedAt'
@@ -329,6 +335,7 @@ class IntegrationMapping implements ModelInterface, ArrayAccess, \JsonSerializab
         $this->setIfExists('stripe_price_id', $data ?? [], null);
         $this->setIfExists('product_name', $data ?? [], null);
         $this->setIfExists('price', $data ?? [], null);
+        $this->setIfExists('recurring', $data ?? [], null);
         $this->setIfExists('status', $data ?? [], null);
         $this->setIfExists('status_reason', $data ?? [], null);
         $this->setIfExists('created_at', $data ?? [], null);
@@ -384,6 +391,9 @@ class IntegrationMapping implements ModelInterface, ArrayAccess, \JsonSerializab
         }
         if ($this->container['price'] === null && !$this->isNullableSetToNull('price')) {
             $invalidProperties[] = "'price' is required";
+        }
+        if ($this->container['recurring'] === null && !$this->isNullableSetToNull('recurring')) {
+            $invalidProperties[] = "'recurring' is required";
         }
         if ($this->container['status'] === null) {
             $invalidProperties[] = "'status' can't be null";
@@ -637,6 +647,40 @@ class IntegrationMapping implements ModelInterface, ArrayAccess, \JsonSerializab
             }
         }
         $this->container['price'] = $price;
+
+        return $this;
+    }
+
+    /**
+     * Gets recurring
+     *
+     * @return \LicenseManager\Model\IntegrationMappingRecurring|null
+     */
+    public function getRecurring()
+    {
+        return $this->container['recurring'];
+    }
+
+    /**
+     * Sets recurring
+     *
+     * @param \LicenseManager\Model\IntegrationMappingRecurring|null $recurring recurring
+     *
+     * @return self
+     */
+    public function setRecurring($recurring)
+    {
+        if (is_null($recurring)) {
+            array_push($this->openAPINullablesSetToNull, 'recurring');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('recurring', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['recurring'] = $recurring;
 
         return $this;
     }

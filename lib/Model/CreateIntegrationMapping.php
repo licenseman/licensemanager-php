@@ -323,7 +323,7 @@ class CreateIntegrationMapping implements ModelInterface, ArrayAccess, \JsonSeri
     /**
      * Sets stripe_price_id
      *
-     * @param string $stripe_price_id Active one-time price of the Stripe account.
+     * @param string $stripe_price_id Active one-time or licensed recurring price of the Stripe account.
      *
      * @return self
      */

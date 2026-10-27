@@ -60,7 +60,8 @@ class StripePermission implements ModelInterface, ArrayAccess, \JsonSerializable
         'resource' => 'string',
         'access' => 'string',
         'reason' => 'string',
-        'optional' => 'bool'
+        'optional' => 'bool',
+        'subscriptions' => 'bool'
     ];
 
     /**
@@ -74,7 +75,8 @@ class StripePermission implements ModelInterface, ArrayAccess, \JsonSerializable
         'resource' => null,
         'access' => null,
         'reason' => null,
-        'optional' => null
+        'optional' => null,
+        'subscriptions' => null
     ];
 
     /**
@@ -86,7 +88,8 @@ class StripePermission implements ModelInterface, ArrayAccess, \JsonSerializable
         'resource' => false,
         'access' => false,
         'reason' => false,
-        'optional' => false
+        'optional' => false,
+        'subscriptions' => false
     ];
 
     /**
@@ -178,7 +181,8 @@ class StripePermission implements ModelInterface, ArrayAccess, \JsonSerializable
         'resource' => 'resource',
         'access' => 'access',
         'reason' => 'reason',
-        'optional' => 'optional'
+        'optional' => 'optional',
+        'subscriptions' => 'subscriptions'
     ];
 
     /**
@@ -190,7 +194,8 @@ class StripePermission implements ModelInterface, ArrayAccess, \JsonSerializable
         'resource' => 'setResource',
         'access' => 'setAccess',
         'reason' => 'setReason',
-        'optional' => 'setOptional'
+        'optional' => 'setOptional',
+        'subscriptions' => 'setSubscriptions'
     ];
 
     /**
@@ -202,7 +207,8 @@ class StripePermission implements ModelInterface, ArrayAccess, \JsonSerializable
         'resource' => 'getResource',
         'access' => 'getAccess',
         'reason' => 'getReason',
-        'optional' => 'getOptional'
+        'optional' => 'getOptional',
+        'subscriptions' => 'getSubscriptions'
     ];
 
     /**
@@ -283,6 +289,7 @@ class StripePermission implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('access', $data ?? [], null);
         $this->setIfExists('reason', $data ?? [], null);
         $this->setIfExists('optional', $data ?? [], null);
+        $this->setIfExists('subscriptions', $data ?? [], null);
     }
 
     /**
@@ -332,6 +339,9 @@ class StripePermission implements ModelInterface, ArrayAccess, \JsonSerializable
         }
         if ($this->container['optional'] === null) {
             $invalidProperties[] = "'optional' can't be null";
+        }
+        if ($this->container['subscriptions'] === null) {
+            $invalidProperties[] = "'subscriptions' can't be null";
         }
         return $invalidProperties;
     }
@@ -456,6 +466,33 @@ class StripePermission implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable optional cannot be null');
         }
         $this->container['optional'] = $optional;
+
+        return $this;
+    }
+
+    /**
+     * Gets subscriptions
+     *
+     * @return bool
+     */
+    public function getSubscriptions()
+    {
+        return $this->container['subscriptions'];
+    }
+
+    /**
+     * Sets subscriptions
+     *
+     * @param bool $subscriptions Whether it's only needed to sell subscriptions: checked once a recurring price is mapped.
+     *
+     * @return self
+     */
+    public function setSubscriptions($subscriptions)
+    {
+        if (is_null($subscriptions)) {
+            throw new \InvalidArgumentException('non-nullable subscriptions cannot be null');
+        }
+        $this->container['subscriptions'] = $subscriptions;
 
         return $this;
     }

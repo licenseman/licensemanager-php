@@ -57,7 +57,8 @@ class UpdateIntegration implements ModelInterface, ArrayAccess, \JsonSerializabl
      * @var string[]
      */
     protected static $openAPITypes = [
-        'auto_refund' => 'bool'
+        'auto_refund' => 'bool',
+        'subscription_grace_days' => 'int'
     ];
 
     /**
@@ -68,7 +69,8 @@ class UpdateIntegration implements ModelInterface, ArrayAccess, \JsonSerializabl
      * @psalm-var array<string, string|null>
      */
     protected static $openAPIFormats = [
-        'auto_refund' => null
+        'auto_refund' => null,
+        'subscription_grace_days' => null
     ];
 
     /**
@@ -77,7 +79,8 @@ class UpdateIntegration implements ModelInterface, ArrayAccess, \JsonSerializabl
      * @var boolean[]
      */
     protected static array $openAPINullables = [
-        'auto_refund' => false
+        'auto_refund' => false,
+        'subscription_grace_days' => false
     ];
 
     /**
@@ -166,7 +169,8 @@ class UpdateIntegration implements ModelInterface, ArrayAccess, \JsonSerializabl
      * @var string[]
      */
     protected static $attributeMap = [
-        'auto_refund' => 'autoRefund'
+        'auto_refund' => 'autoRefund',
+        'subscription_grace_days' => 'subscriptionGraceDays'
     ];
 
     /**
@@ -175,7 +179,8 @@ class UpdateIntegration implements ModelInterface, ArrayAccess, \JsonSerializabl
      * @var string[]
      */
     protected static $setters = [
-        'auto_refund' => 'setAutoRefund'
+        'auto_refund' => 'setAutoRefund',
+        'subscription_grace_days' => 'setSubscriptionGraceDays'
     ];
 
     /**
@@ -184,7 +189,8 @@ class UpdateIntegration implements ModelInterface, ArrayAccess, \JsonSerializabl
      * @var string[]
      */
     protected static $getters = [
-        'auto_refund' => 'getAutoRefund'
+        'auto_refund' => 'getAutoRefund',
+        'subscription_grace_days' => 'getSubscriptionGraceDays'
     ];
 
     /**
@@ -245,6 +251,7 @@ class UpdateIntegration implements ModelInterface, ArrayAccess, \JsonSerializabl
     public function __construct(?array $data = null)
     {
         $this->setIfExists('auto_refund', $data ?? [], null);
+        $this->setIfExists('subscription_grace_days', $data ?? [], null);
     }
 
     /**
@@ -273,6 +280,14 @@ class UpdateIntegration implements ModelInterface, ArrayAccess, \JsonSerializabl
     public function listInvalidProperties()
     {
         $invalidProperties = [];
+
+        if (!is_null($this->container['subscription_grace_days']) && ($this->container['subscription_grace_days'] > 60)) {
+            $invalidProperties[] = "invalid value for 'subscription_grace_days', must be smaller than or equal to 60.";
+        }
+
+        if (!is_null($this->container['subscription_grace_days']) && ($this->container['subscription_grace_days'] < 0)) {
+            $invalidProperties[] = "invalid value for 'subscription_grace_days', must be bigger than or equal to 0.";
+        }
 
         return $invalidProperties;
     }
@@ -312,6 +327,40 @@ class UpdateIntegration implements ModelInterface, ArrayAccess, \JsonSerializabl
             throw new \InvalidArgumentException('non-nullable auto_refund cannot be null');
         }
         $this->container['auto_refund'] = $auto_refund;
+
+        return $this;
+    }
+
+    /**
+     * Gets subscription_grace_days
+     *
+     * @return int|null
+     */
+    public function getSubscriptionGraceDays()
+    {
+        return $this->container['subscription_grace_days'];
+    }
+
+    /**
+     * Sets subscription_grace_days
+     *
+     * @param int|null $subscription_grace_days Days a subscription license stays valid after its period ends while its renewal is unpaid, as Stripe retries the payment.
+     *
+     * @return self
+     */
+    public function setSubscriptionGraceDays($subscription_grace_days)
+    {
+        if (is_null($subscription_grace_days)) {
+            throw new \InvalidArgumentException('non-nullable subscription_grace_days cannot be null');
+        }
+        if (($subscription_grace_days > 60)) {
+            throw new \InvalidArgumentException('invalid value for $subscription_grace_days when calling UpdateIntegration., must be smaller than or equal to 60.');
+        }
+        if (($subscription_grace_days < 0)) {
+            throw new \InvalidArgumentException('invalid value for $subscription_grace_days when calling UpdateIntegration., must be bigger than or equal to 0.');
+        }
+
+        $this->container['subscription_grace_days'] = $subscription_grace_days;
 
         return $this;
     }

@@ -96,7 +96,7 @@ Every method is documented, with its parameters and responses, in the [`docs`](d
 | Class | Methods |
 | --- | --- |
 | [`LicensesApi`](docs/Api/LicensesApi.md) | `validateKey`, `listLicenses`, `createLicense`, `listCustomerLicenses`, `getLicense`, `deleteLicense`, `updateLicense`, `getLicenseStats`, `cancelLicense`, `sendLicenseKeys`, `getSigningKey` |
-| [`PortalApi`](docs/Api/PortalApi.md) | `getPortal`, `requestPortalLink`, `createPortalLink`, `sendPortalLink` |
+| [`PortalApi`](docs/Api/PortalApi.md) | `getPortal`, `requestPortalLink`, `createPortalLink`, `createBillingPortalSession`, `sendPortalLink` |
 | [`ProductsApi`](docs/Api/ProductsApi.md) | `listProducts`, `createProduct`, `getProduct`, `deleteProduct`, `updateProduct`, `resetProduct`, `uploadProductLogo`, `deleteProductLogo`, `getProductStats` |
 | [`PoliciesApi`](docs/Api/PoliciesApi.md) | `listPolicies`, `createPolicy`, `getPolicy`, `deletePolicy`, `updatePolicy` |
 | [`CustomersApi`](docs/Api/CustomersApi.md) | `listCustomers`, `createCustomer`, `getCustomer`, `deleteCustomer`, `updateCustomer` |

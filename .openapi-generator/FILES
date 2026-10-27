@@ -14,11 +14,13 @@ docs/Api/PortalApi.md
 docs/Api/ProductsApi.md
 docs/Api/ReleasesApi.md
 docs/Api/TokensApi.md
+docs/Model/BillingPortalSession.md
 docs/Model/CancelLicense.md
 docs/Model/CancellationReason.md
 docs/Model/CancellationStats.md
 docs/Model/CancellationStatsByReasonInner.md
 docs/Model/ConnectStripe.md
+docs/Model/CreateBillingPortalSession.md
 docs/Model/CreateCustomer.md
 docs/Model/CreateIntegrationMapping.md
 docs/Model/CreateLicense.md
@@ -47,6 +49,7 @@ docs/Model/EventType.md
 docs/Model/FixedMaxVersion.md
 docs/Model/Integration.md
 docs/Model/IntegrationMapping.md
+docs/Model/IntegrationMappingRecurring.md
 docs/Model/IntegrationStatus.md
 docs/Model/License.md
 docs/Model/LicenseList.md
@@ -56,6 +59,7 @@ docs/Model/LicenseStats.md
 docs/Model/LicenseStatsActivationsByMachineInner.md
 docs/Model/LicenseStatsActivationsByVersionInner.md
 docs/Model/LicenseStatus.md
+docs/Model/LicenseSubscription.md
 docs/Model/LicenseToken.md
 docs/Model/ListPolicyEventsTypeParameter.md
 docs/Model/ListStripePrices200Response.md
@@ -66,6 +70,9 @@ docs/Model/LockMaxVersionMajorAfterOneOf1.md
 docs/Model/LockMaxVersionMinorAfter.md
 docs/Model/Machine.md
 docs/Model/MachineList.md
+docs/Model/Mrr.md
+docs/Model/MrrByIntervalInner.md
+docs/Model/MrrByPolicyInner.md
 docs/Model/Pagination.md
 docs/Model/Policy.md
 docs/Model/PolicyDuration.md
@@ -99,6 +106,8 @@ docs/Model/SigningKey.md
 docs/Model/StripeIntegration.md
 docs/Model/StripePermission.md
 docs/Model/StripePrice.md
+docs/Model/StripePriceRecurring.md
+docs/Model/SubscriptionStats.md
 docs/Model/Token.md
 docs/Model/UpdateCustomer.md
 docs/Model/UpdateIntegration.md
@@ -126,11 +135,13 @@ lib/ApiException.php
 lib/Configuration.php
 lib/FormDataProcessor.php
 lib/HeaderSelector.php
+lib/Model/BillingPortalSession.php
 lib/Model/CancelLicense.php
 lib/Model/CancellationReason.php
 lib/Model/CancellationStats.php
 lib/Model/CancellationStatsByReasonInner.php
 lib/Model/ConnectStripe.php
+lib/Model/CreateBillingPortalSession.php
 lib/Model/CreateCustomer.php
 lib/Model/CreateIntegrationMapping.php
 lib/Model/CreateLicense.php
@@ -159,6 +170,7 @@ lib/Model/EventType.php
 lib/Model/FixedMaxVersion.php
 lib/Model/Integration.php
 lib/Model/IntegrationMapping.php
+lib/Model/IntegrationMappingRecurring.php
 lib/Model/IntegrationStatus.php
 lib/Model/License.php
 lib/Model/LicenseList.php
@@ -168,6 +180,7 @@ lib/Model/LicenseStats.php
 lib/Model/LicenseStatsActivationsByMachineInner.php
 lib/Model/LicenseStatsActivationsByVersionInner.php
 lib/Model/LicenseStatus.php
+lib/Model/LicenseSubscription.php
 lib/Model/LicenseToken.php
 lib/Model/ListPolicyEventsTypeParameter.php
 lib/Model/ListStripePrices200Response.php
@@ -179,6 +192,9 @@ lib/Model/LockMaxVersionMinorAfter.php
 lib/Model/Machine.php
 lib/Model/MachineList.php
 lib/Model/ModelInterface.php
+lib/Model/Mrr.php
+lib/Model/MrrByIntervalInner.php
+lib/Model/MrrByPolicyInner.php
 lib/Model/Pagination.php
 lib/Model/Policy.php
 lib/Model/PolicyDuration.php
@@ -212,6 +228,8 @@ lib/Model/SigningKey.php
 lib/Model/StripeIntegration.php
 lib/Model/StripePermission.php
 lib/Model/StripePrice.php
+lib/Model/StripePriceRecurring.php
+lib/Model/SubscriptionStats.php
 lib/Model/Token.php
 lib/Model/UpdateCustomer.php
 lib/Model/UpdateIntegration.php
@@ -236,11 +254,13 @@ test/Api/PortalApiTest.php
 test/Api/ProductsApiTest.php
 test/Api/ReleasesApiTest.php
 test/Api/TokensApiTest.php
+test/Model/BillingPortalSessionTest.php
 test/Model/CancelLicenseTest.php
 test/Model/CancellationReasonTest.php
 test/Model/CancellationStatsByReasonInnerTest.php
 test/Model/CancellationStatsTest.php
 test/Model/ConnectStripeTest.php
+test/Model/CreateBillingPortalSessionTest.php
 test/Model/CreateCustomerTest.php
 test/Model/CreateIntegrationMappingTest.php
 test/Model/CreateLicenseTest.php
@@ -267,6 +287,7 @@ test/Model/EventMachineTest.php
 test/Model/EventTest.php
 test/Model/EventTypeTest.php
 test/Model/FixedMaxVersionTest.php
+test/Model/IntegrationMappingRecurringTest.php
 test/Model/IntegrationMappingTest.php
 test/Model/IntegrationStatusTest.php
 test/Model/IntegrationTest.php
@@ -277,6 +298,7 @@ test/Model/LicenseStatsActivationsByMachineInnerTest.php
 test/Model/LicenseStatsActivationsByVersionInnerTest.php
 test/Model/LicenseStatsTest.php
 test/Model/LicenseStatusTest.php
+test/Model/LicenseSubscriptionTest.php
 test/Model/LicenseTest.php
 test/Model/LicenseTokenTest.php
 test/Model/ListPolicyEventsTypeParameterTest.php
@@ -288,6 +310,9 @@ test/Model/LockMaxVersionMinorAfterTest.php
 test/Model/LockMaxVersionTest.php
 test/Model/MachineListTest.php
 test/Model/MachineTest.php
+test/Model/MrrByIntervalInnerTest.php
+test/Model/MrrByPolicyInnerTest.php
+test/Model/MrrTest.php
 test/Model/PaginationTest.php
 test/Model/PolicyDurationTest.php
 test/Model/PolicyListTest.php
@@ -320,7 +345,9 @@ test/Model/SendPortalLinkTest.php
 test/Model/SigningKeyTest.php
 test/Model/StripeIntegrationTest.php
 test/Model/StripePermissionTest.php
+test/Model/StripePriceRecurringTest.php
 test/Model/StripePriceTest.php
+test/Model/SubscriptionStatsTest.php
 test/Model/TokenTest.php
 test/Model/UpdateCustomerTest.php
 test/Model/UpdateIntegrationMappingTest.php

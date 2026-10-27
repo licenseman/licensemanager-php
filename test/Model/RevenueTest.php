@@ -34,7 +34,7 @@ use PHPUnit\Framework\TestCase;
  * RevenueTest Class Doc Comment
  *
  * @category    Class
- * @description Revenue of the licenses sold in one currency, each license counting on the day it was created. Licenses without a price are left out, and so are canceled ones, but in &#x60;canceledLicenseCount&#x60; and &#x60;canceledTotal&#x60;.
+ * @description Revenue in one currency: the licenses sold once, each counting on the day it was created, and the payments of the subscription licenses, each counting on the day it was paid, with the license&#39;s policy. Licenses without a price are left out, and so are canceled ones, but in &#x60;canceledLicenseCount&#x60; and &#x60;canceledTotal&#x60;.
  * @package     LicenseManager
  * @author      OpenAPI Generator team
  * @link        https://openapi-generator.tech
@@ -101,6 +101,24 @@ class RevenueTest extends TestCase
      * Test attribute "total"
      */
     public function testPropertyTotal()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "subscription_total"
+     */
+    public function testPropertySubscriptionTotal()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "payment_count"
+     */
+    public function testPropertyPaymentCount()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

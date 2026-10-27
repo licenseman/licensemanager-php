@@ -87,4 +87,13 @@ class UpdateIntegrationTest extends TestCase
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
+
+    /**
+     * Test attribute "subscription_grace_days"
+     */
+    public function testPropertySubscriptionGraceDays()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
 }

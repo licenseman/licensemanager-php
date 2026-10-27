@@ -5,10 +5,12 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **currency** | **string** | ISO 4217 code of the currency of the revenue. |
-**license_count** | **int** | Number of licenses sold in the currency, free ones included, canceled ones left out. |
-**total** | **float** | Sum of the prices of the licenses sold in the currency, in major units, canceled ones left out. |
-**canceled_license_count** | **int** | Number of canceled licenses sold in the currency. |
-**canceled_total** | **float** | Sum of the prices of the canceled licenses sold in the currency, in major units: revenue lost to cancellations. |
+**license_count** | **int** | Number of licenses sold once in the currency, free ones included, canceled ones and subscription licenses left out. |
+**total** | **float** | Revenue in the currency, in major units: the prices of the licenses sold once, canceled ones left out, plus the payments of the subscriptions, &#x60;subscriptionTotal&#x60;. |
+**subscription_total** | **float** | Sum of the payments of the subscription licenses in the currency, before taxes, in major units. |
+**payment_count** | **int** | Number of payments of the subscription licenses in the currency. |
+**canceled_license_count** | **int** | Number of canceled licenses sold once in the currency. |
+**canceled_total** | **float** | Sum of the prices of the canceled licenses sold once in the currency, in major units: revenue lost to cancellations. |
 **this_month** | **float** | Revenue of the current month, in UTC. |
 **last_month** | **float** | Revenue of the previous month, in UTC. |
 **last30_days** | **float** | Revenue of the last 30 days, today included, in UTC. |

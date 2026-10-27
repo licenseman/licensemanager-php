@@ -224,6 +224,15 @@ class ProductStatsTest extends TestCase
     }
 
     /**
+     * Test attribute "subscriptions"
+     */
+    public function testPropertySubscriptions()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "revenue"
      */
     public function testPropertyRevenue()

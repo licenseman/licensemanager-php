@@ -6,11 +6,79 @@ All URIs are relative to https://api.licensemanager.dev, except if the operation
 
 | Method | HTTP request | Description |
 | ------------- | ------------- | ------------- |
+| [**createBillingPortalSession()**](PortalApi.md#createBillingPortalSession) | **POST** /v1/customers/{id}/billing-portal-sessions | Open the Stripe customer portal of a customer |
 | [**createPortalLink()**](PortalApi.md#createPortalLink) | **POST** /v1/customers/{id}/portal-links | Create a link to the customer portal |
 | [**getPortal()**](PortalApi.md#getPortal) | **GET** /v1/portal/{productId} | Get the customer portal of a product |
 | [**requestPortalLink()**](PortalApi.md#requestPortalLink) | **POST** /v1/portal/{productId}/request-link | Email a link to the customer portal |
 | [**sendPortalLink()**](PortalApi.md#sendPortalLink) | **POST** /v1/customers/{id}/portal-links/send | Email a link to the customer portal to the customer |
 
+
+## `createBillingPortalSession()`
+
+```php
+createBillingPortalSession($id, $create_billing_portal_session): \LicenseManager\Model\BillingPortalSession
+```
+
+Open the Stripe customer portal of a customer
+
+Link to the Stripe customer portal of the customer's Stripe customer, where they manage their subscriptions: change their plan or payment method, see their invoices, cancel. Needs the Stripe integration's `canBillingPortal`, and the customer portal configured in the Stripe account's settings. The changes come back through the integration's webhook, keeping the subscription licenses in line.  **Token access**: customer tokens with the `customer:billing` permission (or the matching write one). A customer token reaches its own customer.  **Required role permission**: `portalLink:create` when called with a session, granted by the member's role. API keys aren't limited by roles.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: apiKey
+$config = LicenseManager\Configuration::getDefaultConfiguration()->setApiKey('x-api-key', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = LicenseManager\Configuration::getDefaultConfiguration()->setApiKeyPrefix('x-api-key', 'Bearer');
+
+// Configure Bearer (JWT) authorization: token
+$config = LicenseManager\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
+
+
+$apiInstance = new LicenseManager\Api\PortalApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$id = c9Wd3RtE; // string
+$create_billing_portal_session = new \LicenseManager\Model\CreateBillingPortalSession(); // \LicenseManager\Model\CreateBillingPortalSession
+
+try {
+    $result = $apiInstance->createBillingPortalSession($id, $create_billing_portal_session);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling PortalApi->createBillingPortalSession: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **id** | **string**|  | |
+| **create_billing_portal_session** | [**\LicenseManager\Model\CreateBillingPortalSession**](../Model/CreateBillingPortalSession.md)|  | [optional] |
+
+### Return type
+
+[**\LicenseManager\Model\BillingPortalSession**](../Model/BillingPortalSession.md)
+
+### Authorization
+
+[apiKey](../../README.md#apiKey), [token](../../README.md#token)
+
+### HTTP request headers
+
+- **Content-Type**: `application/json`
+- **Accept**: `application/json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
 
 ## `createPortalLink()`
 

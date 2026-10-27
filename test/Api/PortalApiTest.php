@@ -72,6 +72,18 @@ class PortalApiTest extends TestCase
     }
 
     /**
+     * Test case for createBillingPortalSession
+     *
+     * Open the Stripe customer portal of a customer.
+     *
+     */
+    public function testCreateBillingPortalSession()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for createPortalLink
      *
      * Create a link to the customer portal.

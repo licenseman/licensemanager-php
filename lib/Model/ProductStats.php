@@ -73,6 +73,7 @@ class ProductStats implements ModelInterface, ArrayAccess, \JsonSerializable
         'new_licenses_by_month' => 'int[]',
         'new_licenses_by_policy' => '\LicenseManager\Model\ProductStatsNewLicensesByPolicyInner[]',
         'cancellation' => '\LicenseManager\Model\CancellationStats',
+        'subscriptions' => '\LicenseManager\Model\SubscriptionStats',
         'revenue' => '\LicenseManager\Model\Revenue[]',
         'activations_by_version' => '\LicenseManager\Model\ProductStatsActivationsByVersionInner[]',
         'active_machines_by_version' => '\LicenseManager\Model\ProductStatsActiveMachinesByVersionInner[]',
@@ -103,6 +104,7 @@ class ProductStats implements ModelInterface, ArrayAccess, \JsonSerializable
         'new_licenses_by_month' => null,
         'new_licenses_by_policy' => null,
         'cancellation' => null,
+        'subscriptions' => null,
         'revenue' => null,
         'activations_by_version' => null,
         'active_machines_by_version' => null,
@@ -131,6 +133,7 @@ class ProductStats implements ModelInterface, ArrayAccess, \JsonSerializable
         'new_licenses_by_month' => false,
         'new_licenses_by_policy' => false,
         'cancellation' => true,
+        'subscriptions' => true,
         'revenue' => false,
         'activations_by_version' => false,
         'active_machines_by_version' => false,
@@ -239,6 +242,7 @@ class ProductStats implements ModelInterface, ArrayAccess, \JsonSerializable
         'new_licenses_by_month' => 'newLicensesByMonth',
         'new_licenses_by_policy' => 'newLicensesByPolicy',
         'cancellation' => 'cancellation',
+        'subscriptions' => 'subscriptions',
         'revenue' => 'revenue',
         'activations_by_version' => 'activationsByVersion',
         'active_machines_by_version' => 'activeMachinesByVersion',
@@ -267,6 +271,7 @@ class ProductStats implements ModelInterface, ArrayAccess, \JsonSerializable
         'new_licenses_by_month' => 'setNewLicensesByMonth',
         'new_licenses_by_policy' => 'setNewLicensesByPolicy',
         'cancellation' => 'setCancellation',
+        'subscriptions' => 'setSubscriptions',
         'revenue' => 'setRevenue',
         'activations_by_version' => 'setActivationsByVersion',
         'active_machines_by_version' => 'setActiveMachinesByVersion',
@@ -295,6 +300,7 @@ class ProductStats implements ModelInterface, ArrayAccess, \JsonSerializable
         'new_licenses_by_month' => 'getNewLicensesByMonth',
         'new_licenses_by_policy' => 'getNewLicensesByPolicy',
         'cancellation' => 'getCancellation',
+        'subscriptions' => 'getSubscriptions',
         'revenue' => 'getRevenue',
         'activations_by_version' => 'getActivationsByVersion',
         'active_machines_by_version' => 'getActiveMachinesByVersion',
@@ -374,6 +380,7 @@ class ProductStats implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('new_licenses_by_month', $data ?? [], null);
         $this->setIfExists('new_licenses_by_policy', $data ?? [], null);
         $this->setIfExists('cancellation', $data ?? [], null);
+        $this->setIfExists('subscriptions', $data ?? [], null);
         $this->setIfExists('revenue', $data ?? [], null);
         $this->setIfExists('activations_by_version', $data ?? [], null);
         $this->setIfExists('active_machines_by_version', $data ?? [], null);
@@ -454,6 +461,9 @@ class ProductStats implements ModelInterface, ArrayAccess, \JsonSerializable
         }
         if ($this->container['cancellation'] === null && !$this->isNullableSetToNull('cancellation')) {
             $invalidProperties[] = "'cancellation' is required";
+        }
+        if ($this->container['subscriptions'] === null && !$this->isNullableSetToNull('subscriptions')) {
+            $invalidProperties[] = "'subscriptions' is required";
         }
         if ($this->container['revenue'] === null) {
             $invalidProperties[] = "'revenue' can't be null";
@@ -917,6 +927,40 @@ class ProductStats implements ModelInterface, ArrayAccess, \JsonSerializable
             }
         }
         $this->container['cancellation'] = $cancellation;
+
+        return $this;
+    }
+
+    /**
+     * Gets subscriptions
+     *
+     * @return \LicenseManager\Model\SubscriptionStats|null
+     */
+    public function getSubscriptions()
+    {
+        return $this->container['subscriptions'];
+    }
+
+    /**
+     * Sets subscriptions
+     *
+     * @param \LicenseManager\Model\SubscriptionStats|null $subscriptions Subscriptions of the product. `null` when it has never had one.
+     *
+     * @return self
+     */
+    public function setSubscriptions($subscriptions)
+    {
+        if (is_null($subscriptions)) {
+            array_push($this->openAPINullablesSetToNull, 'subscriptions');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('subscriptions', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['subscriptions'] = $subscriptions;
 
         return $this;
     }

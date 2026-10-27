@@ -69,6 +69,9 @@ class Integration implements ModelInterface, ArrayAccess, \JsonSerializable
         'last_event_at' => '\DateTime',
         'auto_refund' => 'bool',
         'can_refund' => 'bool',
+        'can_manage_subscriptions' => 'bool',
+        'can_billing_portal' => 'bool',
+        'subscription_grace_days' => 'int',
         'created_at' => '\DateTime'
     ];
 
@@ -92,6 +95,9 @@ class Integration implements ModelInterface, ArrayAccess, \JsonSerializable
         'last_event_at' => 'date-time',
         'auto_refund' => null,
         'can_refund' => null,
+        'can_manage_subscriptions' => null,
+        'can_billing_portal' => null,
+        'subscription_grace_days' => null,
         'created_at' => 'date-time'
     ];
 
@@ -113,6 +119,9 @@ class Integration implements ModelInterface, ArrayAccess, \JsonSerializable
         'last_event_at' => true,
         'auto_refund' => false,
         'can_refund' => false,
+        'can_manage_subscriptions' => false,
+        'can_billing_portal' => false,
+        'subscription_grace_days' => false,
         'created_at' => false
     ];
 
@@ -214,6 +223,9 @@ class Integration implements ModelInterface, ArrayAccess, \JsonSerializable
         'last_event_at' => 'lastEventAt',
         'auto_refund' => 'autoRefund',
         'can_refund' => 'canRefund',
+        'can_manage_subscriptions' => 'canManageSubscriptions',
+        'can_billing_portal' => 'canBillingPortal',
+        'subscription_grace_days' => 'subscriptionGraceDays',
         'created_at' => 'createdAt'
     ];
 
@@ -235,6 +247,9 @@ class Integration implements ModelInterface, ArrayAccess, \JsonSerializable
         'last_event_at' => 'setLastEventAt',
         'auto_refund' => 'setAutoRefund',
         'can_refund' => 'setCanRefund',
+        'can_manage_subscriptions' => 'setCanManageSubscriptions',
+        'can_billing_portal' => 'setCanBillingPortal',
+        'subscription_grace_days' => 'setSubscriptionGraceDays',
         'created_at' => 'setCreatedAt'
     ];
 
@@ -256,6 +271,9 @@ class Integration implements ModelInterface, ArrayAccess, \JsonSerializable
         'last_event_at' => 'getLastEventAt',
         'auto_refund' => 'getAutoRefund',
         'can_refund' => 'getCanRefund',
+        'can_manage_subscriptions' => 'getCanManageSubscriptions',
+        'can_billing_portal' => 'getCanBillingPortal',
+        'subscription_grace_days' => 'getSubscriptionGraceDays',
         'created_at' => 'getCreatedAt'
     ];
 
@@ -343,6 +361,9 @@ class Integration implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('last_event_at', $data ?? [], null);
         $this->setIfExists('auto_refund', $data ?? [], null);
         $this->setIfExists('can_refund', $data ?? [], null);
+        $this->setIfExists('can_manage_subscriptions', $data ?? [], null);
+        $this->setIfExists('can_billing_portal', $data ?? [], null);
+        $this->setIfExists('subscription_grace_days', $data ?? [], null);
         $this->setIfExists('created_at', $data ?? [], null);
     }
 
@@ -417,6 +438,15 @@ class Integration implements ModelInterface, ArrayAccess, \JsonSerializable
         }
         if ($this->container['can_refund'] === null) {
             $invalidProperties[] = "'can_refund' can't be null";
+        }
+        if ($this->container['can_manage_subscriptions'] === null) {
+            $invalidProperties[] = "'can_manage_subscriptions' can't be null";
+        }
+        if ($this->container['can_billing_portal'] === null) {
+            $invalidProperties[] = "'can_billing_portal' can't be null";
+        }
+        if ($this->container['subscription_grace_days'] === null) {
+            $invalidProperties[] = "'subscription_grace_days' can't be null";
         }
         if ($this->container['created_at'] === null) {
             $invalidProperties[] = "'created_at' can't be null";
@@ -788,6 +818,87 @@ class Integration implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable can_refund cannot be null');
         }
         $this->container['can_refund'] = $can_refund;
+
+        return $this;
+    }
+
+    /**
+     * Gets can_manage_subscriptions
+     *
+     * @return bool
+     */
+    public function getCanManageSubscriptions()
+    {
+        return $this->container['can_manage_subscriptions'];
+    }
+
+    /**
+     * Sets can_manage_subscriptions
+     *
+     * @param bool $can_manage_subscriptions Whether the API key has the optional Subscriptions: Write permission, checked when connecting and every day. Without it, subscription licenses can't be canceled from the app: cancel their subscriptions from Stripe.
+     *
+     * @return self
+     */
+    public function setCanManageSubscriptions($can_manage_subscriptions)
+    {
+        if (is_null($can_manage_subscriptions)) {
+            throw new \InvalidArgumentException('non-nullable can_manage_subscriptions cannot be null');
+        }
+        $this->container['can_manage_subscriptions'] = $can_manage_subscriptions;
+
+        return $this;
+    }
+
+    /**
+     * Gets can_billing_portal
+     *
+     * @return bool
+     */
+    public function getCanBillingPortal()
+    {
+        return $this->container['can_billing_portal'];
+    }
+
+    /**
+     * Sets can_billing_portal
+     *
+     * @param bool $can_billing_portal Whether the API key has the optional Customer portal: Write permission, checked when connecting and every day. Without it, the license portal doesn't link to the Stripe customer portal.
+     *
+     * @return self
+     */
+    public function setCanBillingPortal($can_billing_portal)
+    {
+        if (is_null($can_billing_portal)) {
+            throw new \InvalidArgumentException('non-nullable can_billing_portal cannot be null');
+        }
+        $this->container['can_billing_portal'] = $can_billing_portal;
+
+        return $this;
+    }
+
+    /**
+     * Gets subscription_grace_days
+     *
+     * @return int
+     */
+    public function getSubscriptionGraceDays()
+    {
+        return $this->container['subscription_grace_days'];
+    }
+
+    /**
+     * Sets subscription_grace_days
+     *
+     * @param int $subscription_grace_days Days a subscription license stays valid after its period ends while its renewal is unpaid, as Stripe retries the payment. 7 by default.
+     *
+     * @return self
+     */
+    public function setSubscriptionGraceDays($subscription_grace_days)
+    {
+        if (is_null($subscription_grace_days)) {
+            throw new \InvalidArgumentException('non-nullable subscription_grace_days cannot be null');
+        }
+        $this->container['subscription_grace_days'] = $subscription_grace_days;
 
         return $this;
     }

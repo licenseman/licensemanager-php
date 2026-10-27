@@ -20,6 +20,7 @@ Name | Type | Description | Notes
 **new_licenses_by_month** | **int[]** | Number of licenses created each month, aligned on &#x60;months&#x60;. |
 **new_licenses_by_policy** | [**\LicenseManager\Model\ProductStatsNewLicensesByPolicyInner[]**](ProductStatsNewLicensesByPolicyInner.md) | Number of licenses of each policy created each day and each month, for the policies with licenses created over the covered months. |
 **cancellation** | [**\LicenseManager\Model\CancellationStats**](CancellationStats.md) | Cancellations of the licenses with a money back guarantee. &#x60;null&#x60; when no license of the product has one. |
+**subscriptions** | [**\LicenseManager\Model\SubscriptionStats**](SubscriptionStats.md) | Subscriptions of the product. &#x60;null&#x60; when it has never had one. |
 **revenue** | [**\LicenseManager\Model\Revenue[]**](Revenue.md) | Revenue in each currency licenses were sold in, from the one with the most licenses sold. Amounts aren&#39;t converted between currencies. |
 **activations_by_version** | [**\LicenseManager\Model\ProductStatsActivationsByVersionInner[]**](ProductStatsActivationsByVersionInner.md) | Successful activations of the licenses of the product each day, per version of the application, from the most recent one. |
 **active_machines_by_version** | [**\LicenseManager\Model\ProductStatsActiveMachinesByVersionInner[]**](ProductStatsActiveMachinesByVersionInner.md) | Number of active machines running each version of the application, from the most recent one. |

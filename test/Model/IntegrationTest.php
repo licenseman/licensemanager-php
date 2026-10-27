@@ -188,6 +188,33 @@ class IntegrationTest extends TestCase
     }
 
     /**
+     * Test attribute "can_manage_subscriptions"
+     */
+    public function testPropertyCanManageSubscriptions()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "can_billing_portal"
+     */
+    public function testPropertyCanBillingPortal()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "subscription_grace_days"
+     */
+    public function testPropertySubscriptionGraceDays()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "created_at"
      */
     public function testPropertyCreatedAt()

@@ -62,6 +62,7 @@ class StripePrice implements ModelInterface, ArrayAccess, \JsonSerializable
         'product_name' => 'string',
         'nickname' => 'string',
         'price' => '\LicenseManager\Model\Price',
+        'recurring' => '\LicenseManager\Model\StripePriceRecurring',
         'mapped' => 'bool'
     ];
 
@@ -78,6 +79,7 @@ class StripePrice implements ModelInterface, ArrayAccess, \JsonSerializable
         'product_name' => null,
         'nickname' => null,
         'price' => null,
+        'recurring' => null,
         'mapped' => null
     ];
 
@@ -92,6 +94,7 @@ class StripePrice implements ModelInterface, ArrayAccess, \JsonSerializable
         'product_name' => false,
         'nickname' => true,
         'price' => true,
+        'recurring' => true,
         'mapped' => false
     ];
 
@@ -186,6 +189,7 @@ class StripePrice implements ModelInterface, ArrayAccess, \JsonSerializable
         'product_name' => 'productName',
         'nickname' => 'nickname',
         'price' => 'price',
+        'recurring' => 'recurring',
         'mapped' => 'mapped'
     ];
 
@@ -200,6 +204,7 @@ class StripePrice implements ModelInterface, ArrayAccess, \JsonSerializable
         'product_name' => 'setProductName',
         'nickname' => 'setNickname',
         'price' => 'setPrice',
+        'recurring' => 'setRecurring',
         'mapped' => 'setMapped'
     ];
 
@@ -214,6 +219,7 @@ class StripePrice implements ModelInterface, ArrayAccess, \JsonSerializable
         'product_name' => 'getProductName',
         'nickname' => 'getNickname',
         'price' => 'getPrice',
+        'recurring' => 'getRecurring',
         'mapped' => 'getMapped'
     ];
 
@@ -279,6 +285,7 @@ class StripePrice implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('product_name', $data ?? [], null);
         $this->setIfExists('nickname', $data ?? [], null);
         $this->setIfExists('price', $data ?? [], null);
+        $this->setIfExists('recurring', $data ?? [], null);
         $this->setIfExists('mapped', $data ?? [], null);
     }
 
@@ -323,6 +330,9 @@ class StripePrice implements ModelInterface, ArrayAccess, \JsonSerializable
         }
         if ($this->container['price'] === null && !$this->isNullableSetToNull('price')) {
             $invalidProperties[] = "'price' is required";
+        }
+        if ($this->container['recurring'] === null && !$this->isNullableSetToNull('recurring')) {
+            $invalidProperties[] = "'recurring' is required";
         }
         if ($this->container['mapped'] === null) {
             $invalidProperties[] = "'mapped' can't be null";
@@ -487,6 +497,40 @@ class StripePrice implements ModelInterface, ArrayAccess, \JsonSerializable
             }
         }
         $this->container['price'] = $price;
+
+        return $this;
+    }
+
+    /**
+     * Gets recurring
+     *
+     * @return \LicenseManager\Model\StripePriceRecurring|null
+     */
+    public function getRecurring()
+    {
+        return $this->container['recurring'];
+    }
+
+    /**
+     * Sets recurring
+     *
+     * @param \LicenseManager\Model\StripePriceRecurring|null $recurring recurring
+     *
+     * @return self
+     */
+    public function setRecurring($recurring)
+    {
+        if (is_null($recurring)) {
+            array_push($this->openAPINullablesSetToNull, 'recurring');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('recurring', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['recurring'] = $recurring;
 
         return $this;
     }
