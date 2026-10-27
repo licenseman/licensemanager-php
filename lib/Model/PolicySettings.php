@@ -60,7 +60,8 @@ class PolicySettings implements ModelInterface, ArrayAccess, \JsonSerializable
         'duration' => '\LicenseManager\Model\PolicySettingsDuration',
         'max_machines' => 'int',
         'max_offline_duration_seconds' => 'int',
-        'max_version' => '\LicenseManager\Model\PolicySettingsMaxVersion'
+        'max_version' => '\LicenseManager\Model\PolicySettingsMaxVersion',
+        'money_back_guarantee_days' => 'int'
     ];
 
     /**
@@ -74,7 +75,8 @@ class PolicySettings implements ModelInterface, ArrayAccess, \JsonSerializable
         'duration' => null,
         'max_machines' => null,
         'max_offline_duration_seconds' => null,
-        'max_version' => null
+        'max_version' => null,
+        'money_back_guarantee_days' => null
     ];
 
     /**
@@ -86,7 +88,8 @@ class PolicySettings implements ModelInterface, ArrayAccess, \JsonSerializable
         'duration' => true,
         'max_machines' => true,
         'max_offline_duration_seconds' => false,
-        'max_version' => true
+        'max_version' => true,
+        'money_back_guarantee_days' => true
     ];
 
     /**
@@ -178,7 +181,8 @@ class PolicySettings implements ModelInterface, ArrayAccess, \JsonSerializable
         'duration' => 'duration',
         'max_machines' => 'maxMachines',
         'max_offline_duration_seconds' => 'maxOfflineDurationSeconds',
-        'max_version' => 'maxVersion'
+        'max_version' => 'maxVersion',
+        'money_back_guarantee_days' => 'moneyBackGuaranteeDays'
     ];
 
     /**
@@ -190,7 +194,8 @@ class PolicySettings implements ModelInterface, ArrayAccess, \JsonSerializable
         'duration' => 'setDuration',
         'max_machines' => 'setMaxMachines',
         'max_offline_duration_seconds' => 'setMaxOfflineDurationSeconds',
-        'max_version' => 'setMaxVersion'
+        'max_version' => 'setMaxVersion',
+        'money_back_guarantee_days' => 'setMoneyBackGuaranteeDays'
     ];
 
     /**
@@ -202,7 +207,8 @@ class PolicySettings implements ModelInterface, ArrayAccess, \JsonSerializable
         'duration' => 'getDuration',
         'max_machines' => 'getMaxMachines',
         'max_offline_duration_seconds' => 'getMaxOfflineDurationSeconds',
-        'max_version' => 'getMaxVersion'
+        'max_version' => 'getMaxVersion',
+        'money_back_guarantee_days' => 'getMoneyBackGuaranteeDays'
     ];
 
     /**
@@ -266,6 +272,7 @@ class PolicySettings implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('max_machines', $data ?? [], null);
         $this->setIfExists('max_offline_duration_seconds', $data ?? [], null);
         $this->setIfExists('max_version', $data ?? [], null);
+        $this->setIfExists('money_back_guarantee_days', $data ?? [], null);
     }
 
     /**
@@ -309,6 +316,14 @@ class PolicySettings implements ModelInterface, ArrayAccess, \JsonSerializable
 
         if (!is_null($this->container['max_offline_duration_seconds']) && ($this->container['max_offline_duration_seconds'] < 3600)) {
             $invalidProperties[] = "invalid value for 'max_offline_duration_seconds', must be bigger than or equal to 3600.";
+        }
+
+        if (!is_null($this->container['money_back_guarantee_days']) && ($this->container['money_back_guarantee_days'] > 3650)) {
+            $invalidProperties[] = "invalid value for 'money_back_guarantee_days', must be smaller than or equal to 3650.";
+        }
+
+        if (!is_null($this->container['money_back_guarantee_days']) && ($this->container['money_back_guarantee_days'] <= 0)) {
+            $invalidProperties[] = "invalid value for 'money_back_guarantee_days', must be bigger than 0.";
         }
 
         return $invalidProperties;
@@ -465,6 +480,47 @@ class PolicySettings implements ModelInterface, ArrayAccess, \JsonSerializable
             }
         }
         $this->container['max_version'] = $max_version;
+
+        return $this;
+    }
+
+    /**
+     * Gets money_back_guarantee_days
+     *
+     * @return int|null
+     */
+    public function getMoneyBackGuaranteeDays()
+    {
+        return $this->container['money_back_guarantee_days'];
+    }
+
+    /**
+     * Sets money_back_guarantee_days
+     *
+     * @param int|null $money_back_guarantee_days Number of days after their creation during which customers can cancel the licenses created with this policy, from the customer portal or with `cancelLicense`, which refunds their Stripe payment. Each license keeps the end of its own period as `cancellableUntil`. `null` for no money back guarantee. Defaults to `null`.
+     *
+     * @return self
+     */
+    public function setMoneyBackGuaranteeDays($money_back_guarantee_days)
+    {
+        if (is_null($money_back_guarantee_days)) {
+            array_push($this->openAPINullablesSetToNull, 'money_back_guarantee_days');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('money_back_guarantee_days', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        if (!is_null($money_back_guarantee_days) && ($money_back_guarantee_days > 3650)) {
+            throw new \InvalidArgumentException('invalid value for $money_back_guarantee_days when calling PolicySettings., must be smaller than or equal to 3650.');
+        }
+        if (!is_null($money_back_guarantee_days) && ($money_back_guarantee_days <= 0)) {
+            throw new \InvalidArgumentException('invalid value for $money_back_guarantee_days when calling PolicySettings., must be bigger than 0.');
+        }
+
+        $this->container['money_back_guarantee_days'] = $money_back_guarantee_days;
 
         return $this;
     }

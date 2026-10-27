@@ -105,4 +105,13 @@ class UpdateProductTest extends TestCase
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
+
+    /**
+     * Test attribute "auto_machine_change"
+     */
+    public function testPropertyAutoMachineChange()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
 }

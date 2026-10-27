@@ -238,6 +238,7 @@ class CreateToken implements ModelInterface, ArrayAccess, \JsonSerializable
     public const SCOPE_CUSTOMER_WRITE = 'customer:write';
     public const SCOPE_LICENSE_READ = 'license:read';
     public const SCOPE_LICENSE_WRITE = 'license:write';
+    public const SCOPE_LICENSE_CANCEL = 'license:cancel';
     public const SCOPE_MACHINE_READ = 'machine:read';
     public const SCOPE_MACHINE_WRITE = 'machine:write';
     public const SCOPE_UNKNOWN_DEFAULT_OPEN_API = 'unknown_default_open_api';
@@ -254,6 +255,7 @@ class CreateToken implements ModelInterface, ArrayAccess, \JsonSerializable
             self::SCOPE_CUSTOMER_WRITE,
             self::SCOPE_LICENSE_READ,
             self::SCOPE_LICENSE_WRITE,
+            self::SCOPE_LICENSE_CANCEL,
             self::SCOPE_MACHINE_READ,
             self::SCOPE_MACHINE_WRITE,
             self::SCOPE_UNKNOWN_DEFAULT_OPEN_API,
@@ -349,7 +351,7 @@ class CreateToken implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets scope
      *
-     * @param string[] $scope Permissions of the token. A write permission implies the matching read one. A token creating a token can only give the permissions it has.
+     * @param string[] $scope Permissions of the token. A write permission implies the other ones of its resource, like the read one: `license:write` implies `license:read` and `license:cancel`. A token creating a token can only give the permissions it has.
      *
      * @return self
      */

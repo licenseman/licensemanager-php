@@ -13,6 +13,7 @@ All URIs are relative to https://api.licensemanager.dev, except if the operation
 | [**disconnectIntegration()**](IntegrationsApi.md#disconnectIntegration) | **DELETE** /v1/integrations/{id} | Disconnect an integration |
 | [**getStripeIntegration()**](IntegrationsApi.md#getStripeIntegration) | **GET** /v1/products/{productId}/integrations/stripe | Get the Stripe integration of a product |
 | [**listStripePrices()**](IntegrationsApi.md#listStripePrices) | **GET** /v1/integrations/{id}/stripe/prices | List the Stripe prices of an integration |
+| [**updateIntegration()**](IntegrationsApi.md#updateIntegration) | **PATCH** /v1/integrations/{id} | Update an integration |
 | [**updateStripeMapping()**](IntegrationsApi.md#updateStripeMapping) | **PATCH** /v1/integration-mappings/{id} | Change the policy of a mapping |
 
 
@@ -446,6 +447,70 @@ try {
 ### HTTP request headers
 
 - **Content-Type**: Not defined
+- **Accept**: `application/json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `updateIntegration()`
+
+```php
+updateIntegration($id, $update_integration): \LicenseManager\Model\Integration
+```
+
+Update an integration
+
+Changes the settings of the integration, for every product of its mode. Doesn't accept tokens: only API keys and sessions.  **Required role permission**: `integration:update` when called with a session, granted by the member's role. API keys aren't limited by roles.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: apiKey
+$config = LicenseManager\Configuration::getDefaultConfiguration()->setApiKey('x-api-key', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = LicenseManager\Configuration::getDefaultConfiguration()->setApiKeyPrefix('x-api-key', 'Bearer');
+
+
+$apiInstance = new LicenseManager\Api\IntegrationsApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$id = i8Fz4QnRt; // string
+$update_integration = new \LicenseManager\Model\UpdateIntegration(); // \LicenseManager\Model\UpdateIntegration
+
+try {
+    $result = $apiInstance->updateIntegration($id, $update_integration);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling IntegrationsApi->updateIntegration: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **id** | **string**|  | |
+| **update_integration** | [**\LicenseManager\Model\UpdateIntegration**](../Model/UpdateIntegration.md)|  | |
+
+### Return type
+
+[**\LicenseManager\Model\Integration**](../Model/Integration.md)
+
+### Authorization
+
+[apiKey](../../README.md#apiKey)
+
+### HTTP request headers
+
+- **Content-Type**: `application/json`
 - **Accept**: `application/json`
 
 [[Back to top]](#) [[Back to API list]](../../README.md#endpoints)

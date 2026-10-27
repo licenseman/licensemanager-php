@@ -63,6 +63,7 @@ class Product implements ModelInterface, ArrayAccess, \JsonSerializable
         'is_test_from_product_id' => 'string',
         'logo_url' => 'string',
         'portal' => '\LicenseManager\Model\PortalSettings',
+        'auto_machine_change' => 'bool',
         'created_at' => '\DateTime',
         'updated_at' => '\DateTime'
     ];
@@ -81,6 +82,7 @@ class Product implements ModelInterface, ArrayAccess, \JsonSerializable
         'is_test_from_product_id' => null,
         'logo_url' => 'uri',
         'portal' => null,
+        'auto_machine_change' => null,
         'created_at' => 'date-time',
         'updated_at' => 'date-time'
     ];
@@ -97,6 +99,7 @@ class Product implements ModelInterface, ArrayAccess, \JsonSerializable
         'is_test_from_product_id' => true,
         'logo_url' => true,
         'portal' => false,
+        'auto_machine_change' => false,
         'created_at' => false,
         'updated_at' => false
     ];
@@ -193,6 +196,7 @@ class Product implements ModelInterface, ArrayAccess, \JsonSerializable
         'is_test_from_product_id' => 'isTestFromProductId',
         'logo_url' => 'logoUrl',
         'portal' => 'portal',
+        'auto_machine_change' => 'autoMachineChange',
         'created_at' => 'createdAt',
         'updated_at' => 'updatedAt'
     ];
@@ -209,6 +213,7 @@ class Product implements ModelInterface, ArrayAccess, \JsonSerializable
         'is_test_from_product_id' => 'setIsTestFromProductId',
         'logo_url' => 'setLogoUrl',
         'portal' => 'setPortal',
+        'auto_machine_change' => 'setAutoMachineChange',
         'created_at' => 'setCreatedAt',
         'updated_at' => 'setUpdatedAt'
     ];
@@ -225,6 +230,7 @@ class Product implements ModelInterface, ArrayAccess, \JsonSerializable
         'is_test_from_product_id' => 'getIsTestFromProductId',
         'logo_url' => 'getLogoUrl',
         'portal' => 'getPortal',
+        'auto_machine_change' => 'getAutoMachineChange',
         'created_at' => 'getCreatedAt',
         'updated_at' => 'getUpdatedAt'
     ];
@@ -292,6 +298,7 @@ class Product implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('is_test_from_product_id', $data ?? [], null);
         $this->setIfExists('logo_url', $data ?? [], null);
         $this->setIfExists('portal', $data ?? [], null);
+        $this->setIfExists('auto_machine_change', $data ?? [], null);
         $this->setIfExists('created_at', $data ?? [], null);
         $this->setIfExists('updated_at', $data ?? [], null);
     }
@@ -340,6 +347,9 @@ class Product implements ModelInterface, ArrayAccess, \JsonSerializable
         }
         if ($this->container['portal'] === null) {
             $invalidProperties[] = "'portal' can't be null";
+        }
+        if ($this->container['auto_machine_change'] === null) {
+            $invalidProperties[] = "'auto_machine_change' can't be null";
         }
         if ($this->container['created_at'] === null) {
             $invalidProperties[] = "'created_at' can't be null";
@@ -534,6 +544,33 @@ class Product implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable portal cannot be null');
         }
         $this->container['portal'] = $portal;
+
+        return $this;
+    }
+
+    /**
+     * Gets auto_machine_change
+     *
+     * @return bool
+     */
+    public function getAutoMachineChange()
+    {
+        return $this->container['auto_machine_change'];
+    }
+
+    /**
+     * Sets auto_machine_change
+     *
+     * @param bool $auto_machine_change Whether a new machine validating a license already on its max machines takes the place of the license's machine validated the longest ago, rather than being refused with `machine_limit_reached`. When the replaced machine is validated again, it takes its place back and the machine that replaced it is locked. See `validateKey`.
+     *
+     * @return self
+     */
+    public function setAutoMachineChange($auto_machine_change)
+    {
+        if (is_null($auto_machine_change)) {
+            throw new \InvalidArgumentException('non-nullable auto_machine_change cannot be null');
+        }
+        $this->container['auto_machine_change'] = $auto_machine_change;
 
         return $this;
     }

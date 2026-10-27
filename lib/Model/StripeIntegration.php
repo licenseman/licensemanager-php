@@ -399,7 +399,7 @@ class StripeIntegration implements ModelInterface, ArrayAccess, \JsonSerializabl
     /**
      * Sets required_permissions
      *
-     * @param \LicenseManager\Model\StripePermission[] $required_permissions Permissions the restricted API key needs, and why. Every other permission can stay `None`.
+     * @param \LicenseManager\Model\StripePermission[] $required_permissions Permissions the restricted API key needs, and why, the `optional` ones included. Every other permission can stay `None`.
      *
      * @return self
      */

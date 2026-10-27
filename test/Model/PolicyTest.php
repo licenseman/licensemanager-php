@@ -161,6 +161,15 @@ class PolicyTest extends TestCase
     }
 
     /**
+     * Test attribute "money_back_guarantee_days"
+     */
+    public function testPropertyMoneyBackGuaranteeDays()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "license_count"
      */
     public function testPropertyLicenseCount()

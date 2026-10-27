@@ -132,4 +132,13 @@ class UpdateLicenseTest extends TestCase
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
+
+    /**
+     * Test attribute "cancellable_until"
+     */
+    public function testPropertyCancellableUntil()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
 }

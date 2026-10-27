@@ -215,6 +215,15 @@ class ProductStatsTest extends TestCase
     }
 
     /**
+     * Test attribute "cancellation"
+     */
+    public function testPropertyCancellation()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "revenue"
      */
     public function testPropertyRevenue()

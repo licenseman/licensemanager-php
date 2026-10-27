@@ -170,6 +170,24 @@ class IntegrationTest extends TestCase
     }
 
     /**
+     * Test attribute "auto_refund"
+     */
+    public function testPropertyAutoRefund()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "can_refund"
+     */
+    public function testPropertyCanRefund()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "created_at"
      */
     public function testPropertyCreatedAt()

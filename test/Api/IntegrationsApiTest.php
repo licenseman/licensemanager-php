@@ -156,6 +156,18 @@ class IntegrationsApiTest extends TestCase
     }
 
     /**
+     * Test case for updateIntegration
+     *
+     * Update an integration.
+     *
+     */
+    public function testUpdateIntegration()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for updateStripeMapping
      *
      * Change the policy of a mapping.

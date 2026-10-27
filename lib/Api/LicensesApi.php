@@ -74,6 +74,9 @@ class LicensesApi
 
     /** @var string[] $contentTypes **/
     public const contentTypes = [
+        'cancelLicense' => [
+            'application/json',
+        ],
         'createLicense' => [
             'application/json',
         ],
@@ -150,6 +153,408 @@ class LicensesApi
     public function getConfig()
     {
         return $this->config;
+    }
+
+    /**
+     * Operation cancelLicense
+     *
+     * Cancel a license
+     *
+     * @param  string $id id (required)
+     * @param  \LicenseManager\Model\CancelLicense $cancel_license cancel_license (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['cancelLicense'] to see the possible values for this operation
+     *
+     * @throws \LicenseManager\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return \LicenseManager\Model\License|\LicenseManager\Model\Error|\LicenseManager\Model\Error|\LicenseManager\Model\Error|\LicenseManager\Model\Error|\LicenseManager\Model\Error|\LicenseManager\Model\Error|\LicenseManager\Model\Error
+     */
+    public function cancelLicense($id, $cancel_license, string $contentType = self::contentTypes['cancelLicense'][0])
+    {
+        list($response) = $this->cancelLicenseWithHttpInfo($id, $cancel_license, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation cancelLicenseWithHttpInfo
+     *
+     * Cancel a license
+     *
+     * @param  string $id (required)
+     * @param  \LicenseManager\Model\CancelLicense $cancel_license (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['cancelLicense'] to see the possible values for this operation
+     *
+     * @throws \LicenseManager\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return array of \LicenseManager\Model\License|\LicenseManager\Model\Error|\LicenseManager\Model\Error|\LicenseManager\Model\Error|\LicenseManager\Model\Error|\LicenseManager\Model\Error|\LicenseManager\Model\Error|\LicenseManager\Model\Error, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function cancelLicenseWithHttpInfo($id, $cancel_license, string $contentType = self::contentTypes['cancelLicense'][0])
+    {
+        $request = $this->cancelLicenseRequest($id, $cancel_license, $contentType);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+
+            switch($statusCode) {
+                case 200:
+                    return $this->handleResponseWithDataType(
+                        '\LicenseManager\Model\License',
+                        $request,
+                        $response,
+                    );
+                case 401:
+                    return $this->handleResponseWithDataType(
+                        '\LicenseManager\Model\Error',
+                        $request,
+                        $response,
+                    );
+                case 402:
+                    return $this->handleResponseWithDataType(
+                        '\LicenseManager\Model\Error',
+                        $request,
+                        $response,
+                    );
+                case 403:
+                    return $this->handleResponseWithDataType(
+                        '\LicenseManager\Model\Error',
+                        $request,
+                        $response,
+                    );
+                case 404:
+                    return $this->handleResponseWithDataType(
+                        '\LicenseManager\Model\Error',
+                        $request,
+                        $response,
+                    );
+                case 409:
+                    return $this->handleResponseWithDataType(
+                        '\LicenseManager\Model\Error',
+                        $request,
+                        $response,
+                    );
+                case 422:
+                    return $this->handleResponseWithDataType(
+                        '\LicenseManager\Model\Error',
+                        $request,
+                        $response,
+                    );
+                case 429:
+                    return $this->handleResponseWithDataType(
+                        '\LicenseManager\Model\Error',
+                        $request,
+                        $response,
+                    );
+            }
+
+            
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            return $this->handleResponseWithDataType(
+                '\LicenseManager\Model\License',
+                $request,
+                $response,
+            );
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\LicenseManager\Model\License',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 401:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\LicenseManager\Model\Error',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 402:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\LicenseManager\Model\Error',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 403:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\LicenseManager\Model\Error',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 404:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\LicenseManager\Model\Error',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 409:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\LicenseManager\Model\Error',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 422:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\LicenseManager\Model\Error',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 429:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\LicenseManager\Model\Error',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+            }
+        
+
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation cancelLicenseAsync
+     *
+     * Cancel a license
+     *
+     * @param  string $id (required)
+     * @param  \LicenseManager\Model\CancelLicense $cancel_license (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['cancelLicense'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function cancelLicenseAsync($id, $cancel_license, string $contentType = self::contentTypes['cancelLicense'][0])
+    {
+        return $this->cancelLicenseAsyncWithHttpInfo($id, $cancel_license, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation cancelLicenseAsyncWithHttpInfo
+     *
+     * Cancel a license
+     *
+     * @param  string $id (required)
+     * @param  \LicenseManager\Model\CancelLicense $cancel_license (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['cancelLicense'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function cancelLicenseAsyncWithHttpInfo($id, $cancel_license, string $contentType = self::contentTypes['cancelLicense'][0])
+    {
+        $returnType = '\LicenseManager\Model\License';
+        $request = $this->cancelLicenseRequest($id, $cancel_license, $contentType);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'cancelLicense'
+     *
+     * @param  string $id (required)
+     * @param  \LicenseManager\Model\CancelLicense $cancel_license (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['cancelLicense'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function cancelLicenseRequest($id, $cancel_license, string $contentType = self::contentTypes['cancelLicense'][0])
+    {
+
+        // verify the required parameter 'id' is set
+        if ($id === null || (is_array($id) && count($id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $id when calling cancelLicense'
+            );
+        }
+
+        // verify the required parameter 'cancel_license' is set
+        if ($cancel_license === null || (is_array($cancel_license) && count($cancel_license) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $cancel_license when calling cancelLicense'
+            );
+        }
+
+
+        $resourcePath = '/v1/licenses/{id}/cancel';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
+
+        // path params
+        if ($id !== null) {
+            $resourcePath = str_replace(
+                '{id}',
+                ObjectSerializer::toPathValue($id),
+                $resourcePath
+            );
+        }
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (isset($cancel_license)) {
+            if (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the body
+                try {
+                    $httpBody = json_encode(ObjectSerializer::sanitizeForSerialization($cancel_license), JSON_THROW_ON_ERROR);
+                } catch (\JsonException $e) {
+                    throw new \InvalidArgumentException('json_encode error: ' . $e->getMessage(), 0, $e);
+                }
+            } else {
+                $httpBody = $cancel_license;
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                try {
+                    $httpBody = json_encode($formParams, JSON_THROW_ON_ERROR);
+                } catch (\JsonException $e) {
+                    throw new \InvalidArgumentException('json_encode error: ' . $e->getMessage(), 0, $e);
+                }
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('x-api-key');
+        if ($apiKey !== null) {
+            $headers['x-api-key'] = $apiKey;
+        }
+        // this endpoint requires Bearer (JWT) authentication (access token)
+        if (!empty($this->config->getAccessToken())) {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'POST',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
     }
 
     /**

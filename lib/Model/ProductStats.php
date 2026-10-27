@@ -72,6 +72,7 @@ class ProductStats implements ModelInterface, ArrayAccess, \JsonSerializable
         'new_licenses_by_day' => 'int[]',
         'new_licenses_by_month' => 'int[]',
         'new_licenses_by_policy' => '\LicenseManager\Model\ProductStatsNewLicensesByPolicyInner[]',
+        'cancellation' => '\LicenseManager\Model\CancellationStats',
         'revenue' => '\LicenseManager\Model\Revenue[]',
         'activations_by_version' => '\LicenseManager\Model\ProductStatsActivationsByVersionInner[]',
         'active_machines_by_version' => '\LicenseManager\Model\ProductStatsActiveMachinesByVersionInner[]',
@@ -101,6 +102,7 @@ class ProductStats implements ModelInterface, ArrayAccess, \JsonSerializable
         'new_licenses_by_day' => null,
         'new_licenses_by_month' => null,
         'new_licenses_by_policy' => null,
+        'cancellation' => null,
         'revenue' => null,
         'activations_by_version' => null,
         'active_machines_by_version' => null,
@@ -128,6 +130,7 @@ class ProductStats implements ModelInterface, ArrayAccess, \JsonSerializable
         'new_licenses_by_day' => false,
         'new_licenses_by_month' => false,
         'new_licenses_by_policy' => false,
+        'cancellation' => true,
         'revenue' => false,
         'activations_by_version' => false,
         'active_machines_by_version' => false,
@@ -235,6 +238,7 @@ class ProductStats implements ModelInterface, ArrayAccess, \JsonSerializable
         'new_licenses_by_day' => 'newLicensesByDay',
         'new_licenses_by_month' => 'newLicensesByMonth',
         'new_licenses_by_policy' => 'newLicensesByPolicy',
+        'cancellation' => 'cancellation',
         'revenue' => 'revenue',
         'activations_by_version' => 'activationsByVersion',
         'active_machines_by_version' => 'activeMachinesByVersion',
@@ -262,6 +266,7 @@ class ProductStats implements ModelInterface, ArrayAccess, \JsonSerializable
         'new_licenses_by_day' => 'setNewLicensesByDay',
         'new_licenses_by_month' => 'setNewLicensesByMonth',
         'new_licenses_by_policy' => 'setNewLicensesByPolicy',
+        'cancellation' => 'setCancellation',
         'revenue' => 'setRevenue',
         'activations_by_version' => 'setActivationsByVersion',
         'active_machines_by_version' => 'setActiveMachinesByVersion',
@@ -289,6 +294,7 @@ class ProductStats implements ModelInterface, ArrayAccess, \JsonSerializable
         'new_licenses_by_day' => 'getNewLicensesByDay',
         'new_licenses_by_month' => 'getNewLicensesByMonth',
         'new_licenses_by_policy' => 'getNewLicensesByPolicy',
+        'cancellation' => 'getCancellation',
         'revenue' => 'getRevenue',
         'activations_by_version' => 'getActivationsByVersion',
         'active_machines_by_version' => 'getActiveMachinesByVersion',
@@ -367,6 +373,7 @@ class ProductStats implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('new_licenses_by_day', $data ?? [], null);
         $this->setIfExists('new_licenses_by_month', $data ?? [], null);
         $this->setIfExists('new_licenses_by_policy', $data ?? [], null);
+        $this->setIfExists('cancellation', $data ?? [], null);
         $this->setIfExists('revenue', $data ?? [], null);
         $this->setIfExists('activations_by_version', $data ?? [], null);
         $this->setIfExists('active_machines_by_version', $data ?? [], null);
@@ -445,6 +452,9 @@ class ProductStats implements ModelInterface, ArrayAccess, \JsonSerializable
         if ($this->container['new_licenses_by_policy'] === null) {
             $invalidProperties[] = "'new_licenses_by_policy' can't be null";
         }
+        if ($this->container['cancellation'] === null && !$this->isNullableSetToNull('cancellation')) {
+            $invalidProperties[] = "'cancellation' is required";
+        }
         if ($this->container['revenue'] === null) {
             $invalidProperties[] = "'revenue' can't be null";
         }
@@ -512,7 +522,7 @@ class ProductStats implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets active_license_count
      *
-     * @param int $active_license_count Number of licenses that haven't expired, and that a machine validated in the last 90 days.
+     * @param int $active_license_count Number of licenses that haven't expired nor were canceled, and that a machine validated in the last 90 days.
      *
      * @return self
      */
@@ -566,7 +576,7 @@ class ProductStats implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets expiring_license_count
      *
-     * @param int $expiring_license_count Number of licenses expiring in the next 30 days.
+     * @param int $expiring_license_count Number of licenses expiring in the next 30 days, canceled ones left out.
      *
      * @return self
      */
@@ -593,7 +603,7 @@ class ProductStats implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets expired_license_count
      *
-     * @param int $expired_license_count Number of licenses that expired in the last 30 days.
+     * @param int $expired_license_count Number of licenses that expired in the last 30 days, canceled ones left out.
      *
      * @return self
      */
@@ -674,7 +684,7 @@ class ProductStats implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets seat_count
      *
-     * @param int $seat_count Sum of the maximum numbers of machines of the licenses that haven't expired. Licenses without a maximum are left out.
+     * @param int $seat_count Sum of the maximum numbers of machines of the licenses that haven't expired nor were canceled. Licenses without a maximum are left out.
      *
      * @return self
      */
@@ -873,6 +883,40 @@ class ProductStats implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable new_licenses_by_policy cannot be null');
         }
         $this->container['new_licenses_by_policy'] = $new_licenses_by_policy;
+
+        return $this;
+    }
+
+    /**
+     * Gets cancellation
+     *
+     * @return \LicenseManager\Model\CancellationStats|null
+     */
+    public function getCancellation()
+    {
+        return $this->container['cancellation'];
+    }
+
+    /**
+     * Sets cancellation
+     *
+     * @param \LicenseManager\Model\CancellationStats|null $cancellation Cancellations of the licenses with a money back guarantee. `null` when no license of the product has one.
+     *
+     * @return self
+     */
+    public function setCancellation($cancellation)
+    {
+        if (is_null($cancellation)) {
+            array_push($this->openAPINullablesSetToNull, 'cancellation');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('cancellation', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['cancellation'] = $cancellation;
 
         return $this;
     }

@@ -73,6 +73,11 @@ class License implements ModelInterface, ArrayAccess, \JsonSerializable
         'max_version' => '\LicenseManager\Model\LicenseMaxVersion',
         'price' => '\LicenseManager\Model\Price',
         'status' => '\LicenseManager\Model\LicenseStatus',
+        'cancellable_until' => '\DateTime',
+        'canceled_at' => '\DateTime',
+        'cancellation_reason' => '\LicenseManagerModelCancellationReasonString',
+        'cancellation_comment' => 'string',
+        'stripe_refund_id' => 'string',
         'updated_at' => '\DateTime'
     ];
 
@@ -100,6 +105,11 @@ class License implements ModelInterface, ArrayAccess, \JsonSerializable
         'max_version' => null,
         'price' => null,
         'status' => null,
+        'cancellable_until' => 'date-time',
+        'canceled_at' => 'date-time',
+        'cancellation_reason' => null,
+        'cancellation_comment' => null,
+        'stripe_refund_id' => null,
         'updated_at' => 'date-time'
     ];
 
@@ -125,6 +135,11 @@ class License implements ModelInterface, ArrayAccess, \JsonSerializable
         'max_version' => false,
         'price' => true,
         'status' => false,
+        'cancellable_until' => true,
+        'canceled_at' => true,
+        'cancellation_reason' => false,
+        'cancellation_comment' => true,
+        'stripe_refund_id' => true,
         'updated_at' => false
     ];
 
@@ -230,6 +245,11 @@ class License implements ModelInterface, ArrayAccess, \JsonSerializable
         'max_version' => 'maxVersion',
         'price' => 'price',
         'status' => 'status',
+        'cancellable_until' => 'cancellableUntil',
+        'canceled_at' => 'canceledAt',
+        'cancellation_reason' => 'cancellationReason',
+        'cancellation_comment' => 'cancellationComment',
+        'stripe_refund_id' => 'stripeRefundId',
         'updated_at' => 'updatedAt'
     ];
 
@@ -255,6 +275,11 @@ class License implements ModelInterface, ArrayAccess, \JsonSerializable
         'max_version' => 'setMaxVersion',
         'price' => 'setPrice',
         'status' => 'setStatus',
+        'cancellable_until' => 'setCancellableUntil',
+        'canceled_at' => 'setCanceledAt',
+        'cancellation_reason' => 'setCancellationReason',
+        'cancellation_comment' => 'setCancellationComment',
+        'stripe_refund_id' => 'setStripeRefundId',
         'updated_at' => 'setUpdatedAt'
     ];
 
@@ -280,6 +305,11 @@ class License implements ModelInterface, ArrayAccess, \JsonSerializable
         'max_version' => 'getMaxVersion',
         'price' => 'getPrice',
         'status' => 'getStatus',
+        'cancellable_until' => 'getCancellableUntil',
+        'canceled_at' => 'getCanceledAt',
+        'cancellation_reason' => 'getCancellationReason',
+        'cancellation_comment' => 'getCancellationComment',
+        'stripe_refund_id' => 'getStripeRefundId',
         'updated_at' => 'getUpdatedAt'
     ];
 
@@ -356,6 +386,11 @@ class License implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('max_version', $data ?? [], null);
         $this->setIfExists('price', $data ?? [], null);
         $this->setIfExists('status', $data ?? [], null);
+        $this->setIfExists('cancellable_until', $data ?? [], null);
+        $this->setIfExists('canceled_at', $data ?? [], null);
+        $this->setIfExists('cancellation_reason', $data ?? [], null);
+        $this->setIfExists('cancellation_comment', $data ?? [], null);
+        $this->setIfExists('stripe_refund_id', $data ?? [], null);
         $this->setIfExists('updated_at', $data ?? [], null);
     }
 
@@ -433,6 +468,21 @@ class License implements ModelInterface, ArrayAccess, \JsonSerializable
         }
         if ($this->container['status'] === null) {
             $invalidProperties[] = "'status' can't be null";
+        }
+        if ($this->container['cancellable_until'] === null && !$this->isNullableSetToNull('cancellable_until')) {
+            $invalidProperties[] = "'cancellable_until' is required";
+        }
+        if ($this->container['canceled_at'] === null && !$this->isNullableSetToNull('canceled_at')) {
+            $invalidProperties[] = "'canceled_at' is required";
+        }
+        if ($this->container['cancellation_reason'] === null) {
+            $invalidProperties[] = "'cancellation_reason' can't be null";
+        }
+        if ($this->container['cancellation_comment'] === null && !$this->isNullableSetToNull('cancellation_comment')) {
+            $invalidProperties[] = "'cancellation_comment' is required";
+        }
+        if ($this->container['stripe_refund_id'] === null && !$this->isNullableSetToNull('stripe_refund_id')) {
+            $invalidProperties[] = "'stripe_refund_id' is required";
         }
         if ($this->container['updated_at'] === null) {
             $invalidProperties[] = "'updated_at' can't be null";
@@ -922,6 +972,169 @@ class License implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable status cannot be null');
         }
         $this->container['status'] = $status;
+
+        return $this;
+    }
+
+    /**
+     * Gets cancellable_until
+     *
+     * @return \DateTime|null
+     */
+    public function getCancellableUntil()
+    {
+        return $this->container['cancellable_until'];
+    }
+
+    /**
+     * Sets cancellable_until
+     *
+     * @param \DateTime|null $cancellable_until End of the money back guarantee: until then, the customer can cancel the license from the customer portal, or with a token. Set from the policy's `moneyBackGuaranteeDays` when the license is created. `null` when the customer can't cancel it.
+     *
+     * @return self
+     */
+    public function setCancellableUntil($cancellable_until)
+    {
+        if (is_null($cancellable_until)) {
+            array_push($this->openAPINullablesSetToNull, 'cancellable_until');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('cancellable_until', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['cancellable_until'] = $cancellable_until;
+
+        return $this;
+    }
+
+    /**
+     * Gets canceled_at
+     *
+     * @return \DateTime|null
+     */
+    public function getCanceledAt()
+    {
+        return $this->container['canceled_at'];
+    }
+
+    /**
+     * Sets canceled_at
+     *
+     * @param \DateTime|null $canceled_at When the license was canceled: validating its key fails since. `null` when it wasn't.
+     *
+     * @return self
+     */
+    public function setCanceledAt($canceled_at)
+    {
+        if (is_null($canceled_at)) {
+            array_push($this->openAPINullablesSetToNull, 'canceled_at');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('canceled_at', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['canceled_at'] = $canceled_at;
+
+        return $this;
+    }
+
+    /**
+     * Gets cancellation_reason
+     *
+     * @return \LicenseManagerModelCancellationReasonString
+     */
+    public function getCancellationReason()
+    {
+        return $this->container['cancellation_reason'];
+    }
+
+    /**
+     * Sets cancellation_reason
+     *
+     * @param \LicenseManagerModelCancellationReasonString $cancellation_reason cancellation_reason
+     *
+     * @return self
+     */
+    public function setCancellationReason($cancellation_reason)
+    {
+        if (is_null($cancellation_reason)) {
+            throw new \InvalidArgumentException('non-nullable cancellation_reason cannot be null');
+        }
+        $this->container['cancellation_reason'] = $cancellation_reason;
+
+        return $this;
+    }
+
+    /**
+     * Gets cancellation_comment
+     *
+     * @return string|null
+     */
+    public function getCancellationComment()
+    {
+        return $this->container['cancellation_comment'];
+    }
+
+    /**
+     * Sets cancellation_comment
+     *
+     * @param string|null $cancellation_comment Comment given when the license was canceled. `null` when there's none.
+     *
+     * @return self
+     */
+    public function setCancellationComment($cancellation_comment)
+    {
+        if (is_null($cancellation_comment)) {
+            array_push($this->openAPINullablesSetToNull, 'cancellation_comment');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('cancellation_comment', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['cancellation_comment'] = $cancellation_comment;
+
+        return $this;
+    }
+
+    /**
+     * Gets stripe_refund_id
+     *
+     * @return string|null
+     */
+    public function getStripeRefundId()
+    {
+        return $this->container['stripe_refund_id'];
+    }
+
+    /**
+     * Sets stripe_refund_id
+     *
+     * @param string|null $stripe_refund_id Id of the Stripe refund of the license's payment once it was canceled, through the Stripe integration. `null` otherwise.
+     *
+     * @return self
+     */
+    public function setStripeRefundId($stripe_refund_id)
+    {
+        if (is_null($stripe_refund_id)) {
+            array_push($this->openAPINullablesSetToNull, 'stripe_refund_id');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('stripe_refund_id', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['stripe_refund_id'] = $stripe_refund_id;
 
         return $this;
     }

@@ -72,6 +72,18 @@ class LicensesApiTest extends TestCase
     }
 
     /**
+     * Test case for cancelLicense
+     *
+     * Cancel a license.
+     *
+     */
+    public function testCancelLicense()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for createLicense
      *
      * Create a license.

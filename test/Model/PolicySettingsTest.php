@@ -114,4 +114,13 @@ class PolicySettingsTest extends TestCase
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
+
+    /**
+     * Test attribute "money_back_guarantee_days"
+     */
+    public function testPropertyMoneyBackGuaranteeDays()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
 }

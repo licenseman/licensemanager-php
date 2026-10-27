@@ -105,4 +105,13 @@ class StripePermissionTest extends TestCase
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
+
+    /**
+     * Test attribute "optional"
+     */
+    public function testPropertyOptional()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
 }

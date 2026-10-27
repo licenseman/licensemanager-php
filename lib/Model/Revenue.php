@@ -35,7 +35,7 @@ use \LicenseManager\ObjectSerializer;
  * Revenue Class Doc Comment
  *
  * @category Class
- * @description Revenue of the licenses sold in one currency, each license counting on the day it was created. Licenses without a price are left out.
+ * @description Revenue of the licenses sold in one currency, each license counting on the day it was created. Licenses without a price are left out, and so are canceled ones, but in &#x60;canceledLicenseCount&#x60; and &#x60;canceledTotal&#x60;.
  * @package  LicenseManager
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
@@ -61,6 +61,8 @@ class Revenue implements ModelInterface, ArrayAccess, \JsonSerializable
         'currency' => 'string',
         'license_count' => 'int',
         'total' => 'float',
+        'canceled_license_count' => 'int',
+        'canceled_total' => 'float',
         'this_month' => 'float',
         'last_month' => 'float',
         'last30_days' => 'float',
@@ -80,6 +82,8 @@ class Revenue implements ModelInterface, ArrayAccess, \JsonSerializable
         'currency' => null,
         'license_count' => null,
         'total' => null,
+        'canceled_license_count' => null,
+        'canceled_total' => null,
         'this_month' => null,
         'last_month' => null,
         'last30_days' => null,
@@ -97,6 +101,8 @@ class Revenue implements ModelInterface, ArrayAccess, \JsonSerializable
         'currency' => false,
         'license_count' => false,
         'total' => false,
+        'canceled_license_count' => false,
+        'canceled_total' => false,
         'this_month' => false,
         'last_month' => false,
         'last30_days' => false,
@@ -194,6 +200,8 @@ class Revenue implements ModelInterface, ArrayAccess, \JsonSerializable
         'currency' => 'currency',
         'license_count' => 'licenseCount',
         'total' => 'total',
+        'canceled_license_count' => 'canceledLicenseCount',
+        'canceled_total' => 'canceledTotal',
         'this_month' => 'thisMonth',
         'last_month' => 'lastMonth',
         'last30_days' => 'last30Days',
@@ -211,6 +219,8 @@ class Revenue implements ModelInterface, ArrayAccess, \JsonSerializable
         'currency' => 'setCurrency',
         'license_count' => 'setLicenseCount',
         'total' => 'setTotal',
+        'canceled_license_count' => 'setCanceledLicenseCount',
+        'canceled_total' => 'setCanceledTotal',
         'this_month' => 'setThisMonth',
         'last_month' => 'setLastMonth',
         'last30_days' => 'setLast30Days',
@@ -228,6 +238,8 @@ class Revenue implements ModelInterface, ArrayAccess, \JsonSerializable
         'currency' => 'getCurrency',
         'license_count' => 'getLicenseCount',
         'total' => 'getTotal',
+        'canceled_license_count' => 'getCanceledLicenseCount',
+        'canceled_total' => 'getCanceledTotal',
         'this_month' => 'getThisMonth',
         'last_month' => 'getLastMonth',
         'last30_days' => 'getLast30Days',
@@ -296,6 +308,8 @@ class Revenue implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('currency', $data ?? [], null);
         $this->setIfExists('license_count', $data ?? [], null);
         $this->setIfExists('total', $data ?? [], null);
+        $this->setIfExists('canceled_license_count', $data ?? [], null);
+        $this->setIfExists('canceled_total', $data ?? [], null);
         $this->setIfExists('this_month', $data ?? [], null);
         $this->setIfExists('last_month', $data ?? [], null);
         $this->setIfExists('last30_days', $data ?? [], null);
@@ -339,6 +353,12 @@ class Revenue implements ModelInterface, ArrayAccess, \JsonSerializable
         }
         if ($this->container['total'] === null) {
             $invalidProperties[] = "'total' can't be null";
+        }
+        if ($this->container['canceled_license_count'] === null) {
+            $invalidProperties[] = "'canceled_license_count' can't be null";
+        }
+        if ($this->container['canceled_total'] === null) {
+            $invalidProperties[] = "'canceled_total' can't be null";
         }
         if ($this->container['this_month'] === null) {
             $invalidProperties[] = "'this_month' can't be null";
@@ -413,7 +433,7 @@ class Revenue implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets license_count
      *
-     * @param int $license_count Number of licenses sold in the currency, free ones included.
+     * @param int $license_count Number of licenses sold in the currency, free ones included, canceled ones left out.
      *
      * @return self
      */
@@ -440,7 +460,7 @@ class Revenue implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets total
      *
-     * @param float $total Sum of the prices of the licenses sold in the currency, in major units.
+     * @param float $total Sum of the prices of the licenses sold in the currency, in major units, canceled ones left out.
      *
      * @return self
      */
@@ -450,6 +470,60 @@ class Revenue implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable total cannot be null');
         }
         $this->container['total'] = $total;
+
+        return $this;
+    }
+
+    /**
+     * Gets canceled_license_count
+     *
+     * @return int
+     */
+    public function getCanceledLicenseCount()
+    {
+        return $this->container['canceled_license_count'];
+    }
+
+    /**
+     * Sets canceled_license_count
+     *
+     * @param int $canceled_license_count Number of canceled licenses sold in the currency.
+     *
+     * @return self
+     */
+    public function setCanceledLicenseCount($canceled_license_count)
+    {
+        if (is_null($canceled_license_count)) {
+            throw new \InvalidArgumentException('non-nullable canceled_license_count cannot be null');
+        }
+        $this->container['canceled_license_count'] = $canceled_license_count;
+
+        return $this;
+    }
+
+    /**
+     * Gets canceled_total
+     *
+     * @return float
+     */
+    public function getCanceledTotal()
+    {
+        return $this->container['canceled_total'];
+    }
+
+    /**
+     * Sets canceled_total
+     *
+     * @param float $canceled_total Sum of the prices of the canceled licenses sold in the currency, in major units: revenue lost to cancellations.
+     *
+     * @return self
+     */
+    public function setCanceledTotal($canceled_total)
+    {
+        if (is_null($canceled_total)) {
+            throw new \InvalidArgumentException('non-nullable canceled_total cannot be null');
+        }
+        $this->container['canceled_total'] = $canceled_total;
 
         return $this;
     }

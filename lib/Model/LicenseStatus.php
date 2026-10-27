@@ -33,7 +33,7 @@ use \LicenseManager\ObjectSerializer;
  * LicenseStatus Class Doc Comment
  *
  * @category Class
- * @description &#x60;expired&#x60; when the license has expired, &#x60;active&#x60; when a machine validated its key in the last 90 days, &#x60;inactive&#x60; otherwise.
+ * @description &#x60;canceled&#x60; when the license was canceled, &#x60;expired&#x60; when it has expired, &#x60;active&#x60; when a machine validated its key in the last 90 days, &#x60;inactive&#x60; otherwise.
  * @package  LicenseManager
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
@@ -49,6 +49,8 @@ class LicenseStatus
 
     public const EXPIRED = 'expired';
 
+    public const CANCELED = 'canceled';
+
     public const UNKNOWN_DEFAULT_OPEN_API = 'unknown_default_open_api';
 
     /**
@@ -61,6 +63,7 @@ class LicenseStatus
             self::ACTIVE,
             self::INACTIVE,
             self::EXPIRED,
+            self::CANCELED,
             self::UNKNOWN_DEFAULT_OPEN_API
         ];
     }

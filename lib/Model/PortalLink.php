@@ -352,7 +352,7 @@ class PortalLink implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets token
      *
-     * @param string $token Customer token in the link, with the `customer:read`, `license:read` and `machine:write` permissions.
+     * @param string $token Customer token in the link, with the `customer:read`, `license:read`, `license:cancel` and `machine:write` permissions.
      *
      * @return self
      */

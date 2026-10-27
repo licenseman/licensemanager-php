@@ -10,5 +10,6 @@ Name | Type | Description | Notes
 **max_offline_duration_seconds** | **int** | Longest the applications can run offline with the license, in seconds. At least one hour (&#x60;3600&#x60;). | [optional]
 **max_version** | [**\LicenseManager\Model\LicenseMaxVersionInput**](LicenseMaxVersionInput.md) | Latest version of the product the license can use. The values left out are kept. | [optional]
 **price** | [**\LicenseManager\Model\PriceInput**](PriceInput.md) |  | [optional]
+**cancellable_until** | **\DateTime** | End of the money back guarantee: until then, the customer can cancel the license from the customer portal, or with a token. &#x60;null&#x60; to not let them. | [optional]
 
 [[Back to Model list]](../../README.md#models) [[Back to API list]](../../README.md#endpoints) [[Back to README]](../../README.md)

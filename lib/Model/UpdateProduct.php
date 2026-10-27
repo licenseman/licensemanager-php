@@ -59,7 +59,8 @@ class UpdateProduct implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static $openAPITypes = [
         'name' => 'string',
         'slug' => 'string',
-        'portal' => '\LicenseManager\Model\UpdateProductPortal'
+        'portal' => '\LicenseManager\Model\UpdateProductPortal',
+        'auto_machine_change' => 'bool'
     ];
 
     /**
@@ -72,7 +73,8 @@ class UpdateProduct implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static $openAPIFormats = [
         'name' => null,
         'slug' => null,
-        'portal' => null
+        'portal' => null,
+        'auto_machine_change' => null
     ];
 
     /**
@@ -83,7 +85,8 @@ class UpdateProduct implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static array $openAPINullables = [
         'name' => false,
         'slug' => false,
-        'portal' => false
+        'portal' => false,
+        'auto_machine_change' => false
     ];
 
     /**
@@ -174,7 +177,8 @@ class UpdateProduct implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static $attributeMap = [
         'name' => 'name',
         'slug' => 'slug',
-        'portal' => 'portal'
+        'portal' => 'portal',
+        'auto_machine_change' => 'autoMachineChange'
     ];
 
     /**
@@ -185,7 +189,8 @@ class UpdateProduct implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static $setters = [
         'name' => 'setName',
         'slug' => 'setSlug',
-        'portal' => 'setPortal'
+        'portal' => 'setPortal',
+        'auto_machine_change' => 'setAutoMachineChange'
     ];
 
     /**
@@ -196,7 +201,8 @@ class UpdateProduct implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static $getters = [
         'name' => 'getName',
         'slug' => 'getSlug',
-        'portal' => 'getPortal'
+        'portal' => 'getPortal',
+        'auto_machine_change' => 'getAutoMachineChange'
     ];
 
     /**
@@ -259,6 +265,7 @@ class UpdateProduct implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('name', $data ?? [], null);
         $this->setIfExists('slug', $data ?? [], null);
         $this->setIfExists('portal', $data ?? [], null);
+        $this->setIfExists('auto_machine_change', $data ?? [], null);
     }
 
     /**
@@ -417,6 +424,33 @@ class UpdateProduct implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable portal cannot be null');
         }
         $this->container['portal'] = $portal;
+
+        return $this;
+    }
+
+    /**
+     * Gets auto_machine_change
+     *
+     * @return bool|null
+     */
+    public function getAutoMachineChange()
+    {
+        return $this->container['auto_machine_change'];
+    }
+
+    /**
+     * Sets auto_machine_change
+     *
+     * @param bool|null $auto_machine_change Whether a new machine validating a license already on its max machines takes the place of the license's machine validated the longest ago, rather than being refused with `machine_limit_reached`. When the replaced machine is validated again, it takes its place back and the machine that replaced it is locked. See `validateKey`.
+     *
+     * @return self
+     */
+    public function setAutoMachineChange($auto_machine_change)
+    {
+        if (is_null($auto_machine_change)) {
+            throw new \InvalidArgumentException('non-nullable auto_machine_change cannot be null');
+        }
+        $this->container['auto_machine_change'] = $auto_machine_change;
 
         return $this;
     }

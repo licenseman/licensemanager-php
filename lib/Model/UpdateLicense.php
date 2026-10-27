@@ -62,7 +62,8 @@ class UpdateLicense implements ModelInterface, ArrayAccess, \JsonSerializable
         'max_machines' => 'int',
         'max_offline_duration_seconds' => 'int',
         'max_version' => '\LicenseManager\Model\LicenseMaxVersionInput',
-        'price' => '\LicenseManager\Model\PriceInput'
+        'price' => '\LicenseManager\Model\PriceInput',
+        'cancellable_until' => '\DateTime'
     ];
 
     /**
@@ -78,7 +79,8 @@ class UpdateLicense implements ModelInterface, ArrayAccess, \JsonSerializable
         'max_machines' => null,
         'max_offline_duration_seconds' => null,
         'max_version' => null,
-        'price' => null
+        'price' => null,
+        'cancellable_until' => 'date-time'
     ];
 
     /**
@@ -92,7 +94,8 @@ class UpdateLicense implements ModelInterface, ArrayAccess, \JsonSerializable
         'max_machines' => true,
         'max_offline_duration_seconds' => false,
         'max_version' => false,
-        'price' => true
+        'price' => true,
+        'cancellable_until' => true
     ];
 
     /**
@@ -186,7 +189,8 @@ class UpdateLicense implements ModelInterface, ArrayAccess, \JsonSerializable
         'max_machines' => 'maxMachines',
         'max_offline_duration_seconds' => 'maxOfflineDurationSeconds',
         'max_version' => 'maxVersion',
-        'price' => 'price'
+        'price' => 'price',
+        'cancellable_until' => 'cancellableUntil'
     ];
 
     /**
@@ -200,7 +204,8 @@ class UpdateLicense implements ModelInterface, ArrayAccess, \JsonSerializable
         'max_machines' => 'setMaxMachines',
         'max_offline_duration_seconds' => 'setMaxOfflineDurationSeconds',
         'max_version' => 'setMaxVersion',
-        'price' => 'setPrice'
+        'price' => 'setPrice',
+        'cancellable_until' => 'setCancellableUntil'
     ];
 
     /**
@@ -214,7 +219,8 @@ class UpdateLicense implements ModelInterface, ArrayAccess, \JsonSerializable
         'max_machines' => 'getMaxMachines',
         'max_offline_duration_seconds' => 'getMaxOfflineDurationSeconds',
         'max_version' => 'getMaxVersion',
-        'price' => 'getPrice'
+        'price' => 'getPrice',
+        'cancellable_until' => 'getCancellableUntil'
     ];
 
     /**
@@ -280,6 +286,7 @@ class UpdateLicense implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('max_offline_duration_seconds', $data ?? [], null);
         $this->setIfExists('max_version', $data ?? [], null);
         $this->setIfExists('price', $data ?? [], null);
+        $this->setIfExists('cancellable_until', $data ?? [], null);
     }
 
     /**
@@ -540,6 +547,40 @@ class UpdateLicense implements ModelInterface, ArrayAccess, \JsonSerializable
             }
         }
         $this->container['price'] = $price;
+
+        return $this;
+    }
+
+    /**
+     * Gets cancellable_until
+     *
+     * @return \DateTime|null
+     */
+    public function getCancellableUntil()
+    {
+        return $this->container['cancellable_until'];
+    }
+
+    /**
+     * Sets cancellable_until
+     *
+     * @param \DateTime|null $cancellable_until End of the money back guarantee: until then, the customer can cancel the license from the customer portal, or with a token. `null` to not let them.
+     *
+     * @return self
+     */
+    public function setCancellableUntil($cancellable_until)
+    {
+        if (is_null($cancellable_until)) {
+            array_push($this->openAPINullablesSetToNull, 'cancellable_until');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('cancellable_until', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['cancellable_until'] = $cancellable_until;
 
         return $this;
     }

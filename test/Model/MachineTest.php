@@ -143,6 +143,15 @@ class MachineTest extends TestCase
     }
 
     /**
+     * Test attribute "overridden_by_machine_id"
+     */
+    public function testPropertyOverriddenByMachineId()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "last_validated_at"
      */
     public function testPropertyLastValidatedAt()

@@ -67,6 +67,8 @@ class Integration implements ModelInterface, ArrayAccess, \JsonSerializable
         'status_reason' => 'string',
         'last_checked_at' => '\DateTime',
         'last_event_at' => '\DateTime',
+        'auto_refund' => 'bool',
+        'can_refund' => 'bool',
         'created_at' => '\DateTime'
     ];
 
@@ -88,6 +90,8 @@ class Integration implements ModelInterface, ArrayAccess, \JsonSerializable
         'status_reason' => null,
         'last_checked_at' => 'date-time',
         'last_event_at' => 'date-time',
+        'auto_refund' => null,
+        'can_refund' => null,
         'created_at' => 'date-time'
     ];
 
@@ -107,6 +111,8 @@ class Integration implements ModelInterface, ArrayAccess, \JsonSerializable
         'status_reason' => true,
         'last_checked_at' => true,
         'last_event_at' => true,
+        'auto_refund' => false,
+        'can_refund' => false,
         'created_at' => false
     ];
 
@@ -206,6 +212,8 @@ class Integration implements ModelInterface, ArrayAccess, \JsonSerializable
         'status_reason' => 'statusReason',
         'last_checked_at' => 'lastCheckedAt',
         'last_event_at' => 'lastEventAt',
+        'auto_refund' => 'autoRefund',
+        'can_refund' => 'canRefund',
         'created_at' => 'createdAt'
     ];
 
@@ -225,6 +233,8 @@ class Integration implements ModelInterface, ArrayAccess, \JsonSerializable
         'status_reason' => 'setStatusReason',
         'last_checked_at' => 'setLastCheckedAt',
         'last_event_at' => 'setLastEventAt',
+        'auto_refund' => 'setAutoRefund',
+        'can_refund' => 'setCanRefund',
         'created_at' => 'setCreatedAt'
     ];
 
@@ -244,6 +254,8 @@ class Integration implements ModelInterface, ArrayAccess, \JsonSerializable
         'status_reason' => 'getStatusReason',
         'last_checked_at' => 'getLastCheckedAt',
         'last_event_at' => 'getLastEventAt',
+        'auto_refund' => 'getAutoRefund',
+        'can_refund' => 'getCanRefund',
         'created_at' => 'getCreatedAt'
     ];
 
@@ -329,6 +341,8 @@ class Integration implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('status_reason', $data ?? [], null);
         $this->setIfExists('last_checked_at', $data ?? [], null);
         $this->setIfExists('last_event_at', $data ?? [], null);
+        $this->setIfExists('auto_refund', $data ?? [], null);
+        $this->setIfExists('can_refund', $data ?? [], null);
         $this->setIfExists('created_at', $data ?? [], null);
     }
 
@@ -397,6 +411,12 @@ class Integration implements ModelInterface, ArrayAccess, \JsonSerializable
         }
         if ($this->container['last_event_at'] === null && !$this->isNullableSetToNull('last_event_at')) {
             $invalidProperties[] = "'last_event_at' is required";
+        }
+        if ($this->container['auto_refund'] === null) {
+            $invalidProperties[] = "'auto_refund' can't be null";
+        }
+        if ($this->container['can_refund'] === null) {
+            $invalidProperties[] = "'can_refund' can't be null";
         }
         if ($this->container['created_at'] === null) {
             $invalidProperties[] = "'created_at' can't be null";
@@ -714,6 +734,60 @@ class Integration implements ModelInterface, ArrayAccess, \JsonSerializable
             }
         }
         $this->container['last_event_at'] = $last_event_at;
+
+        return $this;
+    }
+
+    /**
+     * Gets auto_refund
+     *
+     * @return bool
+     */
+    public function getAutoRefund()
+    {
+        return $this->container['auto_refund'];
+    }
+
+    /**
+     * Sets auto_refund
+     *
+     * @param bool $auto_refund Whether canceling a license bought through Stripe refunds its payment. On by default, always off when `canRefund` is false.
+     *
+     * @return self
+     */
+    public function setAutoRefund($auto_refund)
+    {
+        if (is_null($auto_refund)) {
+            throw new \InvalidArgumentException('non-nullable auto_refund cannot be null');
+        }
+        $this->container['auto_refund'] = $auto_refund;
+
+        return $this;
+    }
+
+    /**
+     * Gets can_refund
+     *
+     * @return bool
+     */
+    public function getCanRefund()
+    {
+        return $this->container['can_refund'];
+    }
+
+    /**
+     * Sets can_refund
+     *
+     * @param bool $can_refund Whether the API key has the optional Refunds: Write permission, checked when connecting and every day. Without it, canceled licenses aren't refunded: refund their payments from Stripe.
+     *
+     * @return self
+     */
+    public function setCanRefund($can_refund)
+    {
+        if (is_null($can_refund)) {
+            throw new \InvalidArgumentException('non-nullable can_refund cannot be null');
+        }
+        $this->container['can_refund'] = $can_refund;
 
         return $this;
     }

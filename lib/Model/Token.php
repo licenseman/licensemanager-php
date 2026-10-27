@@ -254,6 +254,7 @@ class Token implements ModelInterface, ArrayAccess, \JsonSerializable
     public const SCOPE_CUSTOMER_WRITE = 'customer:write';
     public const SCOPE_LICENSE_READ = 'license:read';
     public const SCOPE_LICENSE_WRITE = 'license:write';
+    public const SCOPE_LICENSE_CANCEL = 'license:cancel';
     public const SCOPE_MACHINE_READ = 'machine:read';
     public const SCOPE_MACHINE_WRITE = 'machine:write';
     public const SCOPE_UNKNOWN_DEFAULT_OPEN_API = 'unknown_default_open_api';
@@ -285,6 +286,7 @@ class Token implements ModelInterface, ArrayAccess, \JsonSerializable
             self::SCOPE_CUSTOMER_WRITE,
             self::SCOPE_LICENSE_READ,
             self::SCOPE_LICENSE_WRITE,
+            self::SCOPE_LICENSE_CANCEL,
             self::SCOPE_MACHINE_READ,
             self::SCOPE_MACHINE_WRITE,
             self::SCOPE_UNKNOWN_DEFAULT_OPEN_API,

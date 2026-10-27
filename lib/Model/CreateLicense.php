@@ -66,6 +66,7 @@ class CreateLicense implements ModelInterface, ArrayAccess, \JsonSerializable
         'max_offline_duration_seconds' => 'int',
         'price' => '\LicenseManager\Model\PriceInput',
         'max_version' => '\LicenseManager\Model\LicenseMaxVersionInput',
+        'cancellable_until' => '\DateTime',
         'send_key' => 'bool'
     ];
 
@@ -86,6 +87,7 @@ class CreateLicense implements ModelInterface, ArrayAccess, \JsonSerializable
         'max_offline_duration_seconds' => null,
         'price' => null,
         'max_version' => null,
+        'cancellable_until' => 'date-time',
         'send_key' => null
     ];
 
@@ -104,6 +106,7 @@ class CreateLicense implements ModelInterface, ArrayAccess, \JsonSerializable
         'max_offline_duration_seconds' => false,
         'price' => true,
         'max_version' => false,
+        'cancellable_until' => true,
         'send_key' => false
     ];
 
@@ -202,6 +205,7 @@ class CreateLicense implements ModelInterface, ArrayAccess, \JsonSerializable
         'max_offline_duration_seconds' => 'maxOfflineDurationSeconds',
         'price' => 'price',
         'max_version' => 'maxVersion',
+        'cancellable_until' => 'cancellableUntil',
         'send_key' => 'sendKey'
     ];
 
@@ -220,6 +224,7 @@ class CreateLicense implements ModelInterface, ArrayAccess, \JsonSerializable
         'max_offline_duration_seconds' => 'setMaxOfflineDurationSeconds',
         'price' => 'setPrice',
         'max_version' => 'setMaxVersion',
+        'cancellable_until' => 'setCancellableUntil',
         'send_key' => 'setSendKey'
     ];
 
@@ -238,6 +243,7 @@ class CreateLicense implements ModelInterface, ArrayAccess, \JsonSerializable
         'max_offline_duration_seconds' => 'getMaxOfflineDurationSeconds',
         'price' => 'getPrice',
         'max_version' => 'getMaxVersion',
+        'cancellable_until' => 'getCancellableUntil',
         'send_key' => 'getSendKey'
     ];
 
@@ -307,6 +313,7 @@ class CreateLicense implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('max_offline_duration_seconds', $data ?? [], null);
         $this->setIfExists('price', $data ?? [], null);
         $this->setIfExists('max_version', $data ?? [], null);
+        $this->setIfExists('cancellable_until', $data ?? [], null);
         $this->setIfExists('send_key', $data ?? [], null);
     }
 
@@ -675,6 +682,40 @@ class CreateLicense implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable max_version cannot be null');
         }
         $this->container['max_version'] = $max_version;
+
+        return $this;
+    }
+
+    /**
+     * Gets cancellable_until
+     *
+     * @return \DateTime|null
+     */
+    public function getCancellableUntil()
+    {
+        return $this->container['cancellable_until'];
+    }
+
+    /**
+     * Sets cancellable_until
+     *
+     * @param \DateTime|null $cancellable_until End of the money back guarantee: until then, the customer can cancel the license from the customer portal, or with a token. `null` to not let them. Defaults to the creation date plus the policy's `moneyBackGuaranteeDays`, or `null` when it has none.
+     *
+     * @return self
+     */
+    public function setCancellableUntil($cancellable_until)
+    {
+        if (is_null($cancellable_until)) {
+            array_push($this->openAPINullablesSetToNull, 'cancellable_until');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('cancellable_until', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['cancellable_until'] = $cancellable_until;
 
         return $this;
     }

@@ -161,6 +161,15 @@ class CreateLicenseTest extends TestCase
     }
 
     /**
+     * Test attribute "cancellable_until"
+     */
+    public function testPropertyCancellableUntil()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "send_key"
      */
     public function testPropertySendKey()

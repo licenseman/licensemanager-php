@@ -5,8 +5,10 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **currency** | **string** | ISO 4217 code of the currency of the revenue. |
-**license_count** | **int** | Number of licenses sold in the currency, free ones included. |
-**total** | **float** | Sum of the prices of the licenses sold in the currency, in major units. |
+**license_count** | **int** | Number of licenses sold in the currency, free ones included, canceled ones left out. |
+**total** | **float** | Sum of the prices of the licenses sold in the currency, in major units, canceled ones left out. |
+**canceled_license_count** | **int** | Number of canceled licenses sold in the currency. |
+**canceled_total** | **float** | Sum of the prices of the canceled licenses sold in the currency, in major units: revenue lost to cancellations. |
 **this_month** | **float** | Revenue of the current month, in UTC. |
 **last_month** | **float** | Revenue of the previous month, in UTC. |
 **last30_days** | **float** | Revenue of the last 30 days, today included, in UTC. |

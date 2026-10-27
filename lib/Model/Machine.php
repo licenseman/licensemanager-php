@@ -64,6 +64,7 @@ class Machine implements ModelInterface, ArrayAccess, \JsonSerializable
         'name' => 'string',
         'status' => 'string',
         'version' => 'string',
+        'overridden_by_machine_id' => 'string',
         'last_validated_at' => '\DateTime',
         'created_at' => '\DateTime',
         'updated_at' => '\DateTime'
@@ -84,6 +85,7 @@ class Machine implements ModelInterface, ArrayAccess, \JsonSerializable
         'name' => null,
         'status' => null,
         'version' => null,
+        'overridden_by_machine_id' => null,
         'last_validated_at' => 'date-time',
         'created_at' => 'date-time',
         'updated_at' => 'date-time'
@@ -102,6 +104,7 @@ class Machine implements ModelInterface, ArrayAccess, \JsonSerializable
         'name' => true,
         'status' => false,
         'version' => true,
+        'overridden_by_machine_id' => true,
         'last_validated_at' => true,
         'created_at' => false,
         'updated_at' => false
@@ -200,6 +203,7 @@ class Machine implements ModelInterface, ArrayAccess, \JsonSerializable
         'name' => 'name',
         'status' => 'status',
         'version' => 'version',
+        'overridden_by_machine_id' => 'overriddenByMachineId',
         'last_validated_at' => 'lastValidatedAt',
         'created_at' => 'createdAt',
         'updated_at' => 'updatedAt'
@@ -218,6 +222,7 @@ class Machine implements ModelInterface, ArrayAccess, \JsonSerializable
         'name' => 'setName',
         'status' => 'setStatus',
         'version' => 'setVersion',
+        'overridden_by_machine_id' => 'setOverriddenByMachineId',
         'last_validated_at' => 'setLastValidatedAt',
         'created_at' => 'setCreatedAt',
         'updated_at' => 'setUpdatedAt'
@@ -236,6 +241,7 @@ class Machine implements ModelInterface, ArrayAccess, \JsonSerializable
         'name' => 'getName',
         'status' => 'getStatus',
         'version' => 'getVersion',
+        'overridden_by_machine_id' => 'getOverriddenByMachineId',
         'last_validated_at' => 'getLastValidatedAt',
         'created_at' => 'getCreatedAt',
         'updated_at' => 'getUpdatedAt'
@@ -284,6 +290,7 @@ class Machine implements ModelInterface, ArrayAccess, \JsonSerializable
 
     public const STATUS_ACTIVE = 'active';
     public const STATUS_DEACTIVATED = 'deactivated';
+    public const STATUS_LOCKED = 'locked';
     public const STATUS_UNKNOWN_DEFAULT_OPEN_API = 'unknown_default_open_api';
 
     /**
@@ -296,6 +303,7 @@ class Machine implements ModelInterface, ArrayAccess, \JsonSerializable
         return [
             self::STATUS_ACTIVE,
             self::STATUS_DEACTIVATED,
+            self::STATUS_LOCKED,
             self::STATUS_UNKNOWN_DEFAULT_OPEN_API,
         ];
     }
@@ -322,6 +330,7 @@ class Machine implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('name', $data ?? [], null);
         $this->setIfExists('status', $data ?? [], null);
         $this->setIfExists('version', $data ?? [], null);
+        $this->setIfExists('overridden_by_machine_id', $data ?? [], null);
         $this->setIfExists('last_validated_at', $data ?? [], null);
         $this->setIfExists('created_at', $data ?? [], null);
         $this->setIfExists('updated_at', $data ?? [], null);
@@ -383,6 +392,9 @@ class Machine implements ModelInterface, ArrayAccess, \JsonSerializable
 
         if ($this->container['version'] === null && !$this->isNullableSetToNull('version')) {
             $invalidProperties[] = "'version' is required";
+        }
+        if ($this->container['overridden_by_machine_id'] === null && !$this->isNullableSetToNull('overridden_by_machine_id')) {
+            $invalidProperties[] = "'overridden_by_machine_id' is required";
         }
         if ($this->container['last_validated_at'] === null && !$this->isNullableSetToNull('last_validated_at')) {
             $invalidProperties[] = "'last_validated_at' is required";
@@ -570,7 +582,7 @@ class Machine implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets status
      *
-     * @param string $status Whether the machine counts as using the license.
+     * @param string $status Whether the machine counts as using the license. A `locked` machine doesn't, and its validations are refused with `machine_locked`: it overrode a machine that came back. See `validateKey`.
      *
      * @return self
      */
@@ -618,6 +630,40 @@ class Machine implements ModelInterface, ArrayAccess, \JsonSerializable
             }
         }
         $this->container['version'] = $version;
+
+        return $this;
+    }
+
+    /**
+     * Gets overridden_by_machine_id
+     *
+     * @return string|null
+     */
+    public function getOverriddenByMachineId()
+    {
+        return $this->container['overridden_by_machine_id'];
+    }
+
+    /**
+     * Sets overridden_by_machine_id
+     *
+     * @param string|null $overridden_by_machine_id For a machine deactivated or locked by automatic machine changes, the machine that took its place. Validating the key on a deactivated machine that has one takes its place back. `null` otherwise.
+     *
+     * @return self
+     */
+    public function setOverriddenByMachineId($overridden_by_machine_id)
+    {
+        if (is_null($overridden_by_machine_id)) {
+            array_push($this->openAPINullablesSetToNull, 'overridden_by_machine_id');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('overridden_by_machine_id', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['overridden_by_machine_id'] = $overridden_by_machine_id;
 
         return $this;
     }

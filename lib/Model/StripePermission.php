@@ -59,7 +59,8 @@ class StripePermission implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static $openAPITypes = [
         'resource' => 'string',
         'access' => 'string',
-        'reason' => 'string'
+        'reason' => 'string',
+        'optional' => 'bool'
     ];
 
     /**
@@ -72,7 +73,8 @@ class StripePermission implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static $openAPIFormats = [
         'resource' => null,
         'access' => null,
-        'reason' => null
+        'reason' => null,
+        'optional' => null
     ];
 
     /**
@@ -83,7 +85,8 @@ class StripePermission implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static array $openAPINullables = [
         'resource' => false,
         'access' => false,
-        'reason' => false
+        'reason' => false,
+        'optional' => false
     ];
 
     /**
@@ -174,7 +177,8 @@ class StripePermission implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static $attributeMap = [
         'resource' => 'resource',
         'access' => 'access',
-        'reason' => 'reason'
+        'reason' => 'reason',
+        'optional' => 'optional'
     ];
 
     /**
@@ -185,7 +189,8 @@ class StripePermission implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static $setters = [
         'resource' => 'setResource',
         'access' => 'setAccess',
-        'reason' => 'setReason'
+        'reason' => 'setReason',
+        'optional' => 'setOptional'
     ];
 
     /**
@@ -196,7 +201,8 @@ class StripePermission implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static $getters = [
         'resource' => 'getResource',
         'access' => 'getAccess',
-        'reason' => 'getReason'
+        'reason' => 'getReason',
+        'optional' => 'getOptional'
     ];
 
     /**
@@ -276,6 +282,7 @@ class StripePermission implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('resource', $data ?? [], null);
         $this->setIfExists('access', $data ?? [], null);
         $this->setIfExists('reason', $data ?? [], null);
+        $this->setIfExists('optional', $data ?? [], null);
     }
 
     /**
@@ -322,6 +329,9 @@ class StripePermission implements ModelInterface, ArrayAccess, \JsonSerializable
 
         if ($this->container['reason'] === null) {
             $invalidProperties[] = "'reason' can't be null";
+        }
+        if ($this->container['optional'] === null) {
+            $invalidProperties[] = "'optional' can't be null";
         }
         return $invalidProperties;
     }
@@ -419,6 +429,33 @@ class StripePermission implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable reason cannot be null');
         }
         $this->container['reason'] = $reason;
+
+        return $this;
+    }
+
+    /**
+     * Gets optional
+     *
+     * @return bool
+     */
+    public function getOptional()
+    {
+        return $this->container['optional'];
+    }
+
+    /**
+     * Sets optional
+     *
+     * @param bool $optional Whether the key can connect without it, losing what it's for, explained by `reason`.
+     *
+     * @return self
+     */
+    public function setOptional($optional)
+    {
+        if (is_null($optional)) {
+            throw new \InvalidArgumentException('non-nullable optional cannot be null');
+        }
+        $this->container['optional'] = $optional;
 
         return $this;
     }

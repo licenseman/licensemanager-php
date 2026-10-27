@@ -14,6 +14,10 @@ docs/Api/PortalApi.md
 docs/Api/ProductsApi.md
 docs/Api/ReleasesApi.md
 docs/Api/TokensApi.md
+docs/Model/CancelLicense.md
+docs/Model/CancellationReason.md
+docs/Model/CancellationStats.md
+docs/Model/CancellationStatsByReasonInner.md
 docs/Model/ConnectStripe.md
 docs/Model/CreateCustomer.md
 docs/Model/CreateIntegrationMapping.md
@@ -97,6 +101,7 @@ docs/Model/StripePermission.md
 docs/Model/StripePrice.md
 docs/Model/Token.md
 docs/Model/UpdateCustomer.md
+docs/Model/UpdateIntegration.md
 docs/Model/UpdateIntegrationMapping.md
 docs/Model/UpdateLicense.md
 docs/Model/UpdatePolicy.md
@@ -121,6 +126,10 @@ lib/ApiException.php
 lib/Configuration.php
 lib/FormDataProcessor.php
 lib/HeaderSelector.php
+lib/Model/CancelLicense.php
+lib/Model/CancellationReason.php
+lib/Model/CancellationStats.php
+lib/Model/CancellationStatsByReasonInner.php
 lib/Model/ConnectStripe.php
 lib/Model/CreateCustomer.php
 lib/Model/CreateIntegrationMapping.php
@@ -205,6 +214,7 @@ lib/Model/StripePermission.php
 lib/Model/StripePrice.php
 lib/Model/Token.php
 lib/Model/UpdateCustomer.php
+lib/Model/UpdateIntegration.php
 lib/Model/UpdateIntegrationMapping.php
 lib/Model/UpdateLicense.php
 lib/Model/UpdatePolicy.php
@@ -226,6 +236,10 @@ test/Api/PortalApiTest.php
 test/Api/ProductsApiTest.php
 test/Api/ReleasesApiTest.php
 test/Api/TokensApiTest.php
+test/Model/CancelLicenseTest.php
+test/Model/CancellationReasonTest.php
+test/Model/CancellationStatsByReasonInnerTest.php
+test/Model/CancellationStatsTest.php
 test/Model/ConnectStripeTest.php
 test/Model/CreateCustomerTest.php
 test/Model/CreateIntegrationMappingTest.php
@@ -310,6 +324,7 @@ test/Model/StripePriceTest.php
 test/Model/TokenTest.php
 test/Model/UpdateCustomerTest.php
 test/Model/UpdateIntegrationMappingTest.php
+test/Model/UpdateIntegrationTest.php
 test/Model/UpdateLicenseTest.php
 test/Model/UpdatePolicyTest.php
 test/Model/UpdateProductPortalTest.php

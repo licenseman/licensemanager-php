@@ -224,6 +224,51 @@ class LicenseTest extends TestCase
     }
 
     /**
+     * Test attribute "cancellable_until"
+     */
+    public function testPropertyCancellableUntil()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "canceled_at"
+     */
+    public function testPropertyCanceledAt()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "cancellation_reason"
+     */
+    public function testPropertyCancellationReason()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "cancellation_comment"
+     */
+    public function testPropertyCancellationComment()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "stripe_refund_id"
+     */
+    public function testPropertyStripeRefundId()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "updated_at"
      */
     public function testPropertyUpdatedAt()
