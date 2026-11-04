@@ -52,6 +52,7 @@ docs/Model/IntegrationMapping.md
 docs/Model/IntegrationMappingRecurring.md
 docs/Model/IntegrationStatus.md
 docs/Model/License.md
+docs/Model/LicenseCustomer.md
 docs/Model/LicenseList.md
 docs/Model/LicenseMaxVersion.md
 docs/Model/LicenseMaxVersionInput.md
@@ -173,6 +174,7 @@ lib/Model/IntegrationMapping.php
 lib/Model/IntegrationMappingRecurring.php
 lib/Model/IntegrationStatus.php
 lib/Model/License.php
+lib/Model/LicenseCustomer.php
 lib/Model/LicenseList.php
 lib/Model/LicenseMaxVersion.php
 lib/Model/LicenseMaxVersionInput.php
@@ -291,6 +293,7 @@ test/Model/IntegrationMappingRecurringTest.php
 test/Model/IntegrationMappingTest.php
 test/Model/IntegrationStatusTest.php
 test/Model/IntegrationTest.php
+test/Model/LicenseCustomerTest.php
 test/Model/LicenseListTest.php
 test/Model/LicenseMaxVersionInputTest.php
 test/Model/LicenseMaxVersionTest.php

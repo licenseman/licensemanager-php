@@ -61,6 +61,7 @@ class License implements ModelInterface, ArrayAccess, \JsonSerializable
         'product_id' => 'string',
         'policy_id' => 'string',
         'customer_id' => 'string',
+        'customer' => '\LicenseManager\Model\LicenseCustomer',
         'key' => 'string',
         'created_at' => '\DateTime',
         'expires_at' => '\DateTime',
@@ -94,6 +95,7 @@ class License implements ModelInterface, ArrayAccess, \JsonSerializable
         'product_id' => null,
         'policy_id' => null,
         'customer_id' => null,
+        'customer' => null,
         'key' => null,
         'created_at' => 'date-time',
         'expires_at' => 'date-time',
@@ -125,6 +127,7 @@ class License implements ModelInterface, ArrayAccess, \JsonSerializable
         'product_id' => false,
         'policy_id' => false,
         'customer_id' => false,
+        'customer' => false,
         'key' => false,
         'created_at' => false,
         'expires_at' => true,
@@ -236,6 +239,7 @@ class License implements ModelInterface, ArrayAccess, \JsonSerializable
         'product_id' => 'productId',
         'policy_id' => 'policyId',
         'customer_id' => 'customerId',
+        'customer' => 'customer',
         'key' => 'key',
         'created_at' => 'createdAt',
         'expires_at' => 'expiresAt',
@@ -267,6 +271,7 @@ class License implements ModelInterface, ArrayAccess, \JsonSerializable
         'product_id' => 'setProductId',
         'policy_id' => 'setPolicyId',
         'customer_id' => 'setCustomerId',
+        'customer' => 'setCustomer',
         'key' => 'setKey',
         'created_at' => 'setCreatedAt',
         'expires_at' => 'setExpiresAt',
@@ -298,6 +303,7 @@ class License implements ModelInterface, ArrayAccess, \JsonSerializable
         'product_id' => 'getProductId',
         'policy_id' => 'getPolicyId',
         'customer_id' => 'getCustomerId',
+        'customer' => 'getCustomer',
         'key' => 'getKey',
         'created_at' => 'getCreatedAt',
         'expires_at' => 'getExpiresAt',
@@ -380,6 +386,7 @@ class License implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('product_id', $data ?? [], null);
         $this->setIfExists('policy_id', $data ?? [], null);
         $this->setIfExists('customer_id', $data ?? [], null);
+        $this->setIfExists('customer', $data ?? [], null);
         $this->setIfExists('key', $data ?? [], null);
         $this->setIfExists('created_at', $data ?? [], null);
         $this->setIfExists('expires_at', $data ?? [], null);
@@ -439,6 +446,9 @@ class License implements ModelInterface, ArrayAccess, \JsonSerializable
         }
         if ($this->container['customer_id'] === null) {
             $invalidProperties[] = "'customer_id' can't be null";
+        }
+        if ($this->container['customer'] === null) {
+            $invalidProperties[] = "'customer' can't be null";
         }
         if ($this->container['key'] === null) {
             $invalidProperties[] = "'key' can't be null";
@@ -616,6 +626,33 @@ class License implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable customer_id cannot be null');
         }
         $this->container['customer_id'] = $customer_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets customer
+     *
+     * @return \LicenseManager\Model\LicenseCustomer
+     */
+    public function getCustomer()
+    {
+        return $this->container['customer'];
+    }
+
+    /**
+     * Sets customer
+     *
+     * @param \LicenseManager\Model\LicenseCustomer $customer customer
+     *
+     * @return self
+     */
+    public function setCustomer($customer)
+    {
+        if (is_null($customer)) {
+            throw new \InvalidArgumentException('non-nullable customer cannot be null');
+        }
+        $this->container['customer'] = $customer;
 
         return $this;
     }

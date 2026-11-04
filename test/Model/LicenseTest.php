@@ -116,6 +116,15 @@ class LicenseTest extends TestCase
     }
 
     /**
+     * Test attribute "customer"
+     */
+    public function testPropertyCustomer()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "key"
      */
     public function testPropertyKey()
