@@ -104,7 +104,7 @@ Every method is documented, with its parameters and responses, in the [`docs`](d
 | [`ReleasesApi`](docs/Api/ReleasesApi.md) | `listReleases`, `createRelease`, `getRelease`, `deleteRelease`, `updateRelease` |
 | [`TokensApi`](docs/Api/TokensApi.md) | `createCustomerToken`, `createLicenseToken`, `createMachineToken` |
 | [`EventsApi`](docs/Api/EventsApi.md) | `listPolicyEvents`, `listLicenseEvents` |
-| [`IntegrationsApi`](docs/Api/IntegrationsApi.md) | `getStripeIntegration`, `connectStripe`, `disconnectIntegration`, `updateIntegration`, `checkIntegration`, `listStripePrices`, `createStripeMapping`, `deleteStripeMapping`, `updateStripeMapping` |
+| [`IntegrationsApi`](docs/Api/IntegrationsApi.md) | `getStripeIntegration`, `connectStripe`, `disconnectIntegration`, `updateIntegration`, `checkIntegration`, `listStripePrices`, `createStripeMapping`, `deleteStripeMapping`, `updateStripeMapping`, `getSlackIntegration`, `authorizeSlack`, `deleteSlackConnection`, `updateSlackConnection`, `testSlackConnection` |
 
 ## Versioning
 

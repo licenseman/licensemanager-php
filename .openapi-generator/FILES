@@ -104,6 +104,9 @@ docs/Model/Revenue.md
 docs/Model/SendLicenseKeys.md
 docs/Model/SendPortalLink.md
 docs/Model/SigningKey.md
+docs/Model/SlackAuthorize.md
+docs/Model/SlackConnection.md
+docs/Model/SlackIntegration.md
 docs/Model/StripeIntegration.md
 docs/Model/StripePermission.md
 docs/Model/StripePrice.md
@@ -118,6 +121,7 @@ docs/Model/UpdatePolicy.md
 docs/Model/UpdateProduct.md
 docs/Model/UpdateProductPortal.md
 docs/Model/UpdateRelease.md
+docs/Model/UpdateSlackConnection.md
 docs/Model/ValidateKey.md
 docs/Model/ValidateKeyError.md
 docs/Model/ValidateKeyErrorError.md
@@ -227,6 +231,9 @@ lib/Model/Revenue.php
 lib/Model/SendLicenseKeys.php
 lib/Model/SendPortalLink.php
 lib/Model/SigningKey.php
+lib/Model/SlackAuthorize.php
+lib/Model/SlackConnection.php
+lib/Model/SlackIntegration.php
 lib/Model/StripeIntegration.php
 lib/Model/StripePermission.php
 lib/Model/StripePrice.php
@@ -241,6 +248,7 @@ lib/Model/UpdatePolicy.php
 lib/Model/UpdateProduct.php
 lib/Model/UpdateProductPortal.php
 lib/Model/UpdateRelease.php
+lib/Model/UpdateSlackConnection.php
 lib/Model/ValidateKey.php
 lib/Model/ValidateKeyError.php
 lib/Model/ValidateKeyErrorError.php
@@ -346,6 +354,9 @@ test/Model/RevenueTest.php
 test/Model/SendLicenseKeysTest.php
 test/Model/SendPortalLinkTest.php
 test/Model/SigningKeyTest.php
+test/Model/SlackAuthorizeTest.php
+test/Model/SlackConnectionTest.php
+test/Model/SlackIntegrationTest.php
 test/Model/StripeIntegrationTest.php
 test/Model/StripePermissionTest.php
 test/Model/StripePriceRecurringTest.php
@@ -360,6 +371,7 @@ test/Model/UpdatePolicyTest.php
 test/Model/UpdateProductPortalTest.php
 test/Model/UpdateProductTest.php
 test/Model/UpdateReleaseTest.php
+test/Model/UpdateSlackConnectionTest.php
 test/Model/ValidateKeyErrorErrorTest.php
 test/Model/ValidateKeyErrorTest.php
 test/Model/ValidateKeyTest.php

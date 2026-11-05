@@ -72,6 +72,18 @@ class IntegrationsApiTest extends TestCase
     }
 
     /**
+     * Test case for authorizeSlack
+     *
+     * Start connecting a Slack channel.
+     *
+     */
+    public function testAuthorizeSlack()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for checkIntegration
      *
      * Check an integration.
@@ -108,6 +120,18 @@ class IntegrationsApiTest extends TestCase
     }
 
     /**
+     * Test case for deleteSlackConnection
+     *
+     * Remove a Slack connection.
+     *
+     */
+    public function testDeleteSlackConnection()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for deleteStripeMapping
      *
      * Delete a mapping.
@@ -126,6 +150,18 @@ class IntegrationsApiTest extends TestCase
      *
      */
     public function testDisconnectIntegration()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for getSlackIntegration
+     *
+     * Get the Slack integration of a product.
+     *
+     */
+    public function testGetSlackIntegration()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
@@ -156,12 +192,36 @@ class IntegrationsApiTest extends TestCase
     }
 
     /**
+     * Test case for testSlackConnection
+     *
+     * Send a test message to a Slack channel.
+     *
+     */
+    public function testTestSlackConnection()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for updateIntegration
      *
      * Update an integration.
      *
      */
     public function testUpdateIntegration()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for updateSlackConnection
+     *
+     * Update a Slack connection.
+     *
+     */
+    public function testUpdateSlackConnection()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
