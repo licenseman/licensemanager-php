@@ -76,7 +76,7 @@ class License implements ModelInterface, ArrayAccess, \JsonSerializable
         'status' => '\LicenseManager\Model\LicenseStatus',
         'cancellable_until' => '\DateTime',
         'canceled_at' => '\DateTime',
-        'cancellation_reason' => '\LicenseManagerModelCancellationReasonString',
+        'cancellation_reason' => '\LicenseManager\Model\CancellationReason',
         'subscription' => '\LicenseManager\Model\LicenseSubscription',
         'cancellation_comment' => 'string',
         'stripe_refund_id' => 'string',
@@ -142,7 +142,7 @@ class License implements ModelInterface, ArrayAccess, \JsonSerializable
         'status' => false,
         'cancellable_until' => true,
         'canceled_at' => true,
-        'cancellation_reason' => false,
+        'cancellation_reason' => true,
         'subscription' => true,
         'cancellation_comment' => true,
         'stripe_refund_id' => true,
@@ -492,8 +492,8 @@ class License implements ModelInterface, ArrayAccess, \JsonSerializable
         if ($this->container['canceled_at'] === null && !$this->isNullableSetToNull('canceled_at')) {
             $invalidProperties[] = "'canceled_at' is required";
         }
-        if ($this->container['cancellation_reason'] === null) {
-            $invalidProperties[] = "'cancellation_reason' can't be null";
+        if ($this->container['cancellation_reason'] === null && !$this->isNullableSetToNull('cancellation_reason')) {
+            $invalidProperties[] = "'cancellation_reason' is required";
         }
         if ($this->container['subscription'] === null && !$this->isNullableSetToNull('subscription')) {
             $invalidProperties[] = "'subscription' is required";
@@ -1094,7 +1094,7 @@ class License implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets cancellation_reason
      *
-     * @return \LicenseManagerModelCancellationReasonString
+     * @return \LicenseManager\Model\CancellationReason|null
      */
     public function getCancellationReason()
     {
@@ -1104,14 +1104,21 @@ class License implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets cancellation_reason
      *
-     * @param \LicenseManagerModelCancellationReasonString $cancellation_reason cancellation_reason
+     * @param \LicenseManager\Model\CancellationReason|null $cancellation_reason Why the license was canceled. `null` when it wasn't.
      *
      * @return self
      */
     public function setCancellationReason($cancellation_reason)
     {
         if (is_null($cancellation_reason)) {
-            throw new \InvalidArgumentException('non-nullable cancellation_reason cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'cancellation_reason');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('cancellation_reason', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['cancellation_reason'] = $cancellation_reason;
 
