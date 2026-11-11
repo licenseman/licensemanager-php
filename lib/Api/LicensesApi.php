@@ -2304,6 +2304,7 @@ class LicensesApi
      * @param  string|null $key Only returns the license with this exact key, case included. Keys of test products start with &#x60;TEST-&#x60;. (optional)
      * @param  string|null $policy_id Only returns the licenses following this policy. (optional)
      * @param  string|null $machine_version Only returns the licenses with at least one active machine running this version of the product. (optional)
+     * @param  string|null $machine_platform Only returns the licenses with at least one active machine on this platform. (optional)
      * @param  \LicenseManagerModelLicenseStatus|null $status Only returns the licenses with this status. (optional)
      * @param  \DateTime|null $created_from Only returns the licenses created at or after this date. (optional)
      * @param  \DateTime|null $created_to Only returns the licenses created at or before this date. (optional)
@@ -2324,9 +2325,9 @@ class LicensesApi
      * @throws \InvalidArgumentException
      * @return \LicenseManager\Model\LicenseList|\LicenseManager\Model\Error|\LicenseManager\Model\Error|\LicenseManager\Model\Error|\LicenseManager\Model\Error|\LicenseManager\Model\Error|\LicenseManager\Model\Error
      */
-    public function listCustomerLicenses($customer_id, $page = 1, $page_size = 20, $sort = '-createdAt', $search = null, $key = null, $policy_id = null, $machine_version = null, $status = null, $created_from = null, $created_to = null, $last_activated_from = null, $last_activated_to = null, $never_activated = null, $expires_from = null, $expires_to = null, $never_expires = null, $currency = null, $price = null, $price_min = null, $price_max = null, $has_price = null, string $contentType = self::contentTypes['listCustomerLicenses'][0])
+    public function listCustomerLicenses($customer_id, $page = 1, $page_size = 20, $sort = '-createdAt', $search = null, $key = null, $policy_id = null, $machine_version = null, $machine_platform = null, $status = null, $created_from = null, $created_to = null, $last_activated_from = null, $last_activated_to = null, $never_activated = null, $expires_from = null, $expires_to = null, $never_expires = null, $currency = null, $price = null, $price_min = null, $price_max = null, $has_price = null, string $contentType = self::contentTypes['listCustomerLicenses'][0])
     {
-        list($response) = $this->listCustomerLicensesWithHttpInfo($customer_id, $page, $page_size, $sort, $search, $key, $policy_id, $machine_version, $status, $created_from, $created_to, $last_activated_from, $last_activated_to, $never_activated, $expires_from, $expires_to, $never_expires, $currency, $price, $price_min, $price_max, $has_price, $contentType);
+        list($response) = $this->listCustomerLicensesWithHttpInfo($customer_id, $page, $page_size, $sort, $search, $key, $policy_id, $machine_version, $machine_platform, $status, $created_from, $created_to, $last_activated_from, $last_activated_to, $never_activated, $expires_from, $expires_to, $never_expires, $currency, $price, $price_min, $price_max, $has_price, $contentType);
         return $response;
     }
 
@@ -2343,6 +2344,7 @@ class LicensesApi
      * @param  string|null $key Only returns the license with this exact key, case included. Keys of test products start with &#x60;TEST-&#x60;. (optional)
      * @param  string|null $policy_id Only returns the licenses following this policy. (optional)
      * @param  string|null $machine_version Only returns the licenses with at least one active machine running this version of the product. (optional)
+     * @param  string|null $machine_platform Only returns the licenses with at least one active machine on this platform. (optional)
      * @param  \LicenseManagerModelLicenseStatus|null $status Only returns the licenses with this status. (optional)
      * @param  \DateTime|null $created_from Only returns the licenses created at or after this date. (optional)
      * @param  \DateTime|null $created_to Only returns the licenses created at or before this date. (optional)
@@ -2363,9 +2365,9 @@ class LicensesApi
      * @throws \InvalidArgumentException
      * @return array of \LicenseManager\Model\LicenseList|\LicenseManager\Model\Error|\LicenseManager\Model\Error|\LicenseManager\Model\Error|\LicenseManager\Model\Error|\LicenseManager\Model\Error|\LicenseManager\Model\Error, HTTP status code, HTTP response headers (array of strings)
      */
-    public function listCustomerLicensesWithHttpInfo($customer_id, $page = 1, $page_size = 20, $sort = '-createdAt', $search = null, $key = null, $policy_id = null, $machine_version = null, $status = null, $created_from = null, $created_to = null, $last_activated_from = null, $last_activated_to = null, $never_activated = null, $expires_from = null, $expires_to = null, $never_expires = null, $currency = null, $price = null, $price_min = null, $price_max = null, $has_price = null, string $contentType = self::contentTypes['listCustomerLicenses'][0])
+    public function listCustomerLicensesWithHttpInfo($customer_id, $page = 1, $page_size = 20, $sort = '-createdAt', $search = null, $key = null, $policy_id = null, $machine_version = null, $machine_platform = null, $status = null, $created_from = null, $created_to = null, $last_activated_from = null, $last_activated_to = null, $never_activated = null, $expires_from = null, $expires_to = null, $never_expires = null, $currency = null, $price = null, $price_min = null, $price_max = null, $has_price = null, string $contentType = self::contentTypes['listCustomerLicenses'][0])
     {
-        $request = $this->listCustomerLicensesRequest($customer_id, $page, $page_size, $sort, $search, $key, $policy_id, $machine_version, $status, $created_from, $created_to, $last_activated_from, $last_activated_to, $never_activated, $expires_from, $expires_to, $never_expires, $currency, $price, $price_min, $price_max, $has_price, $contentType);
+        $request = $this->listCustomerLicensesRequest($customer_id, $page, $page_size, $sort, $search, $key, $policy_id, $machine_version, $machine_platform, $status, $created_from, $created_to, $last_activated_from, $last_activated_to, $never_activated, $expires_from, $expires_to, $never_expires, $currency, $price, $price_min, $price_max, $has_price, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -2533,6 +2535,7 @@ class LicensesApi
      * @param  string|null $key Only returns the license with this exact key, case included. Keys of test products start with &#x60;TEST-&#x60;. (optional)
      * @param  string|null $policy_id Only returns the licenses following this policy. (optional)
      * @param  string|null $machine_version Only returns the licenses with at least one active machine running this version of the product. (optional)
+     * @param  string|null $machine_platform Only returns the licenses with at least one active machine on this platform. (optional)
      * @param  \LicenseManagerModelLicenseStatus|null $status Only returns the licenses with this status. (optional)
      * @param  \DateTime|null $created_from Only returns the licenses created at or after this date. (optional)
      * @param  \DateTime|null $created_to Only returns the licenses created at or before this date. (optional)
@@ -2552,9 +2555,9 @@ class LicensesApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function listCustomerLicensesAsync($customer_id, $page = 1, $page_size = 20, $sort = '-createdAt', $search = null, $key = null, $policy_id = null, $machine_version = null, $status = null, $created_from = null, $created_to = null, $last_activated_from = null, $last_activated_to = null, $never_activated = null, $expires_from = null, $expires_to = null, $never_expires = null, $currency = null, $price = null, $price_min = null, $price_max = null, $has_price = null, string $contentType = self::contentTypes['listCustomerLicenses'][0])
+    public function listCustomerLicensesAsync($customer_id, $page = 1, $page_size = 20, $sort = '-createdAt', $search = null, $key = null, $policy_id = null, $machine_version = null, $machine_platform = null, $status = null, $created_from = null, $created_to = null, $last_activated_from = null, $last_activated_to = null, $never_activated = null, $expires_from = null, $expires_to = null, $never_expires = null, $currency = null, $price = null, $price_min = null, $price_max = null, $has_price = null, string $contentType = self::contentTypes['listCustomerLicenses'][0])
     {
-        return $this->listCustomerLicensesAsyncWithHttpInfo($customer_id, $page, $page_size, $sort, $search, $key, $policy_id, $machine_version, $status, $created_from, $created_to, $last_activated_from, $last_activated_to, $never_activated, $expires_from, $expires_to, $never_expires, $currency, $price, $price_min, $price_max, $has_price, $contentType)
+        return $this->listCustomerLicensesAsyncWithHttpInfo($customer_id, $page, $page_size, $sort, $search, $key, $policy_id, $machine_version, $machine_platform, $status, $created_from, $created_to, $last_activated_from, $last_activated_to, $never_activated, $expires_from, $expires_to, $never_expires, $currency, $price, $price_min, $price_max, $has_price, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -2575,6 +2578,7 @@ class LicensesApi
      * @param  string|null $key Only returns the license with this exact key, case included. Keys of test products start with &#x60;TEST-&#x60;. (optional)
      * @param  string|null $policy_id Only returns the licenses following this policy. (optional)
      * @param  string|null $machine_version Only returns the licenses with at least one active machine running this version of the product. (optional)
+     * @param  string|null $machine_platform Only returns the licenses with at least one active machine on this platform. (optional)
      * @param  \LicenseManagerModelLicenseStatus|null $status Only returns the licenses with this status. (optional)
      * @param  \DateTime|null $created_from Only returns the licenses created at or after this date. (optional)
      * @param  \DateTime|null $created_to Only returns the licenses created at or before this date. (optional)
@@ -2594,10 +2598,10 @@ class LicensesApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function listCustomerLicensesAsyncWithHttpInfo($customer_id, $page = 1, $page_size = 20, $sort = '-createdAt', $search = null, $key = null, $policy_id = null, $machine_version = null, $status = null, $created_from = null, $created_to = null, $last_activated_from = null, $last_activated_to = null, $never_activated = null, $expires_from = null, $expires_to = null, $never_expires = null, $currency = null, $price = null, $price_min = null, $price_max = null, $has_price = null, string $contentType = self::contentTypes['listCustomerLicenses'][0])
+    public function listCustomerLicensesAsyncWithHttpInfo($customer_id, $page = 1, $page_size = 20, $sort = '-createdAt', $search = null, $key = null, $policy_id = null, $machine_version = null, $machine_platform = null, $status = null, $created_from = null, $created_to = null, $last_activated_from = null, $last_activated_to = null, $never_activated = null, $expires_from = null, $expires_to = null, $never_expires = null, $currency = null, $price = null, $price_min = null, $price_max = null, $has_price = null, string $contentType = self::contentTypes['listCustomerLicenses'][0])
     {
         $returnType = '\LicenseManager\Model\LicenseList';
-        $request = $this->listCustomerLicensesRequest($customer_id, $page, $page_size, $sort, $search, $key, $policy_id, $machine_version, $status, $created_from, $created_to, $last_activated_from, $last_activated_to, $never_activated, $expires_from, $expires_to, $never_expires, $currency, $price, $price_min, $price_max, $has_price, $contentType);
+        $request = $this->listCustomerLicensesRequest($customer_id, $page, $page_size, $sort, $search, $key, $policy_id, $machine_version, $machine_platform, $status, $created_from, $created_to, $last_activated_from, $last_activated_to, $never_activated, $expires_from, $expires_to, $never_expires, $currency, $price, $price_min, $price_max, $has_price, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -2646,6 +2650,7 @@ class LicensesApi
      * @param  string|null $key Only returns the license with this exact key, case included. Keys of test products start with &#x60;TEST-&#x60;. (optional)
      * @param  string|null $policy_id Only returns the licenses following this policy. (optional)
      * @param  string|null $machine_version Only returns the licenses with at least one active machine running this version of the product. (optional)
+     * @param  string|null $machine_platform Only returns the licenses with at least one active machine on this platform. (optional)
      * @param  \LicenseManagerModelLicenseStatus|null $status Only returns the licenses with this status. (optional)
      * @param  \DateTime|null $created_from Only returns the licenses created at or after this date. (optional)
      * @param  \DateTime|null $created_to Only returns the licenses created at or before this date. (optional)
@@ -2665,7 +2670,7 @@ class LicensesApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function listCustomerLicensesRequest($customer_id, $page = 1, $page_size = 20, $sort = '-createdAt', $search = null, $key = null, $policy_id = null, $machine_version = null, $status = null, $created_from = null, $created_to = null, $last_activated_from = null, $last_activated_to = null, $never_activated = null, $expires_from = null, $expires_to = null, $never_expires = null, $currency = null, $price = null, $price_min = null, $price_max = null, $has_price = null, string $contentType = self::contentTypes['listCustomerLicenses'][0])
+    public function listCustomerLicensesRequest($customer_id, $page = 1, $page_size = 20, $sort = '-createdAt', $search = null, $key = null, $policy_id = null, $machine_version = null, $machine_platform = null, $status = null, $created_from = null, $created_to = null, $last_activated_from = null, $last_activated_to = null, $never_activated = null, $expires_from = null, $expires_to = null, $never_expires = null, $currency = null, $price = null, $price_min = null, $price_max = null, $has_price = null, string $contentType = self::contentTypes['listCustomerLicenses'][0])
     {
 
         // verify the required parameter 'customer_id' is set
@@ -2694,6 +2699,7 @@ class LicensesApi
             throw new \InvalidArgumentException('invalid length for "$search" when calling LicensesApi.listCustomerLicenses, must be bigger than or equal to 1.');
         }
         
+
 
 
 
@@ -2777,6 +2783,15 @@ class LicensesApi
         $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
             $machine_version,
             'machineVersion', // param base name
+            'string', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $machine_platform,
+            'machinePlatform', // param base name
             'string', // openApiType
             'form', // style
             true, // explode
@@ -3000,6 +3015,7 @@ class LicensesApi
      * @param  string|null $policy_id Only returns the licenses following this policy. (optional)
      * @param  string|null $customer_id Only returns the licenses of this customer. (optional)
      * @param  string|null $machine_version Only returns the licenses with at least one active machine running this version of the product. (optional)
+     * @param  string|null $machine_platform Only returns the licenses with at least one active machine on this platform. (optional)
      * @param  \LicenseManagerModelLicenseStatus|null $status Only returns the licenses with this status. (optional)
      * @param  \DateTime|null $created_from Only returns the licenses created at or after this date. (optional)
      * @param  \DateTime|null $created_to Only returns the licenses created at or before this date. (optional)
@@ -3020,9 +3036,9 @@ class LicensesApi
      * @throws \InvalidArgumentException
      * @return \LicenseManager\Model\LicenseList|\LicenseManager\Model\Error|\LicenseManager\Model\Error|\LicenseManager\Model\Error|\LicenseManager\Model\Error|\LicenseManager\Model\Error|\LicenseManager\Model\Error
      */
-    public function listLicenses($product_id, $page = 1, $page_size = 20, $sort = '-createdAt', $search = null, $key = null, $policy_id = null, $customer_id = null, $machine_version = null, $status = null, $created_from = null, $created_to = null, $last_activated_from = null, $last_activated_to = null, $never_activated = null, $expires_from = null, $expires_to = null, $never_expires = null, $currency = null, $price = null, $price_min = null, $price_max = null, $has_price = null, string $contentType = self::contentTypes['listLicenses'][0])
+    public function listLicenses($product_id, $page = 1, $page_size = 20, $sort = '-createdAt', $search = null, $key = null, $policy_id = null, $customer_id = null, $machine_version = null, $machine_platform = null, $status = null, $created_from = null, $created_to = null, $last_activated_from = null, $last_activated_to = null, $never_activated = null, $expires_from = null, $expires_to = null, $never_expires = null, $currency = null, $price = null, $price_min = null, $price_max = null, $has_price = null, string $contentType = self::contentTypes['listLicenses'][0])
     {
-        list($response) = $this->listLicensesWithHttpInfo($product_id, $page, $page_size, $sort, $search, $key, $policy_id, $customer_id, $machine_version, $status, $created_from, $created_to, $last_activated_from, $last_activated_to, $never_activated, $expires_from, $expires_to, $never_expires, $currency, $price, $price_min, $price_max, $has_price, $contentType);
+        list($response) = $this->listLicensesWithHttpInfo($product_id, $page, $page_size, $sort, $search, $key, $policy_id, $customer_id, $machine_version, $machine_platform, $status, $created_from, $created_to, $last_activated_from, $last_activated_to, $never_activated, $expires_from, $expires_to, $never_expires, $currency, $price, $price_min, $price_max, $has_price, $contentType);
         return $response;
     }
 
@@ -3040,6 +3056,7 @@ class LicensesApi
      * @param  string|null $policy_id Only returns the licenses following this policy. (optional)
      * @param  string|null $customer_id Only returns the licenses of this customer. (optional)
      * @param  string|null $machine_version Only returns the licenses with at least one active machine running this version of the product. (optional)
+     * @param  string|null $machine_platform Only returns the licenses with at least one active machine on this platform. (optional)
      * @param  \LicenseManagerModelLicenseStatus|null $status Only returns the licenses with this status. (optional)
      * @param  \DateTime|null $created_from Only returns the licenses created at or after this date. (optional)
      * @param  \DateTime|null $created_to Only returns the licenses created at or before this date. (optional)
@@ -3060,9 +3077,9 @@ class LicensesApi
      * @throws \InvalidArgumentException
      * @return array of \LicenseManager\Model\LicenseList|\LicenseManager\Model\Error|\LicenseManager\Model\Error|\LicenseManager\Model\Error|\LicenseManager\Model\Error|\LicenseManager\Model\Error|\LicenseManager\Model\Error, HTTP status code, HTTP response headers (array of strings)
      */
-    public function listLicensesWithHttpInfo($product_id, $page = 1, $page_size = 20, $sort = '-createdAt', $search = null, $key = null, $policy_id = null, $customer_id = null, $machine_version = null, $status = null, $created_from = null, $created_to = null, $last_activated_from = null, $last_activated_to = null, $never_activated = null, $expires_from = null, $expires_to = null, $never_expires = null, $currency = null, $price = null, $price_min = null, $price_max = null, $has_price = null, string $contentType = self::contentTypes['listLicenses'][0])
+    public function listLicensesWithHttpInfo($product_id, $page = 1, $page_size = 20, $sort = '-createdAt', $search = null, $key = null, $policy_id = null, $customer_id = null, $machine_version = null, $machine_platform = null, $status = null, $created_from = null, $created_to = null, $last_activated_from = null, $last_activated_to = null, $never_activated = null, $expires_from = null, $expires_to = null, $never_expires = null, $currency = null, $price = null, $price_min = null, $price_max = null, $has_price = null, string $contentType = self::contentTypes['listLicenses'][0])
     {
-        $request = $this->listLicensesRequest($product_id, $page, $page_size, $sort, $search, $key, $policy_id, $customer_id, $machine_version, $status, $created_from, $created_to, $last_activated_from, $last_activated_to, $never_activated, $expires_from, $expires_to, $never_expires, $currency, $price, $price_min, $price_max, $has_price, $contentType);
+        $request = $this->listLicensesRequest($product_id, $page, $page_size, $sort, $search, $key, $policy_id, $customer_id, $machine_version, $machine_platform, $status, $created_from, $created_to, $last_activated_from, $last_activated_to, $never_activated, $expires_from, $expires_to, $never_expires, $currency, $price, $price_min, $price_max, $has_price, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -3231,6 +3248,7 @@ class LicensesApi
      * @param  string|null $policy_id Only returns the licenses following this policy. (optional)
      * @param  string|null $customer_id Only returns the licenses of this customer. (optional)
      * @param  string|null $machine_version Only returns the licenses with at least one active machine running this version of the product. (optional)
+     * @param  string|null $machine_platform Only returns the licenses with at least one active machine on this platform. (optional)
      * @param  \LicenseManagerModelLicenseStatus|null $status Only returns the licenses with this status. (optional)
      * @param  \DateTime|null $created_from Only returns the licenses created at or after this date. (optional)
      * @param  \DateTime|null $created_to Only returns the licenses created at or before this date. (optional)
@@ -3250,9 +3268,9 @@ class LicensesApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function listLicensesAsync($product_id, $page = 1, $page_size = 20, $sort = '-createdAt', $search = null, $key = null, $policy_id = null, $customer_id = null, $machine_version = null, $status = null, $created_from = null, $created_to = null, $last_activated_from = null, $last_activated_to = null, $never_activated = null, $expires_from = null, $expires_to = null, $never_expires = null, $currency = null, $price = null, $price_min = null, $price_max = null, $has_price = null, string $contentType = self::contentTypes['listLicenses'][0])
+    public function listLicensesAsync($product_id, $page = 1, $page_size = 20, $sort = '-createdAt', $search = null, $key = null, $policy_id = null, $customer_id = null, $machine_version = null, $machine_platform = null, $status = null, $created_from = null, $created_to = null, $last_activated_from = null, $last_activated_to = null, $never_activated = null, $expires_from = null, $expires_to = null, $never_expires = null, $currency = null, $price = null, $price_min = null, $price_max = null, $has_price = null, string $contentType = self::contentTypes['listLicenses'][0])
     {
-        return $this->listLicensesAsyncWithHttpInfo($product_id, $page, $page_size, $sort, $search, $key, $policy_id, $customer_id, $machine_version, $status, $created_from, $created_to, $last_activated_from, $last_activated_to, $never_activated, $expires_from, $expires_to, $never_expires, $currency, $price, $price_min, $price_max, $has_price, $contentType)
+        return $this->listLicensesAsyncWithHttpInfo($product_id, $page, $page_size, $sort, $search, $key, $policy_id, $customer_id, $machine_version, $machine_platform, $status, $created_from, $created_to, $last_activated_from, $last_activated_to, $never_activated, $expires_from, $expires_to, $never_expires, $currency, $price, $price_min, $price_max, $has_price, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -3274,6 +3292,7 @@ class LicensesApi
      * @param  string|null $policy_id Only returns the licenses following this policy. (optional)
      * @param  string|null $customer_id Only returns the licenses of this customer. (optional)
      * @param  string|null $machine_version Only returns the licenses with at least one active machine running this version of the product. (optional)
+     * @param  string|null $machine_platform Only returns the licenses with at least one active machine on this platform. (optional)
      * @param  \LicenseManagerModelLicenseStatus|null $status Only returns the licenses with this status. (optional)
      * @param  \DateTime|null $created_from Only returns the licenses created at or after this date. (optional)
      * @param  \DateTime|null $created_to Only returns the licenses created at or before this date. (optional)
@@ -3293,10 +3312,10 @@ class LicensesApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function listLicensesAsyncWithHttpInfo($product_id, $page = 1, $page_size = 20, $sort = '-createdAt', $search = null, $key = null, $policy_id = null, $customer_id = null, $machine_version = null, $status = null, $created_from = null, $created_to = null, $last_activated_from = null, $last_activated_to = null, $never_activated = null, $expires_from = null, $expires_to = null, $never_expires = null, $currency = null, $price = null, $price_min = null, $price_max = null, $has_price = null, string $contentType = self::contentTypes['listLicenses'][0])
+    public function listLicensesAsyncWithHttpInfo($product_id, $page = 1, $page_size = 20, $sort = '-createdAt', $search = null, $key = null, $policy_id = null, $customer_id = null, $machine_version = null, $machine_platform = null, $status = null, $created_from = null, $created_to = null, $last_activated_from = null, $last_activated_to = null, $never_activated = null, $expires_from = null, $expires_to = null, $never_expires = null, $currency = null, $price = null, $price_min = null, $price_max = null, $has_price = null, string $contentType = self::contentTypes['listLicenses'][0])
     {
         $returnType = '\LicenseManager\Model\LicenseList';
-        $request = $this->listLicensesRequest($product_id, $page, $page_size, $sort, $search, $key, $policy_id, $customer_id, $machine_version, $status, $created_from, $created_to, $last_activated_from, $last_activated_to, $never_activated, $expires_from, $expires_to, $never_expires, $currency, $price, $price_min, $price_max, $has_price, $contentType);
+        $request = $this->listLicensesRequest($product_id, $page, $page_size, $sort, $search, $key, $policy_id, $customer_id, $machine_version, $machine_platform, $status, $created_from, $created_to, $last_activated_from, $last_activated_to, $never_activated, $expires_from, $expires_to, $never_expires, $currency, $price, $price_min, $price_max, $has_price, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -3346,6 +3365,7 @@ class LicensesApi
      * @param  string|null $policy_id Only returns the licenses following this policy. (optional)
      * @param  string|null $customer_id Only returns the licenses of this customer. (optional)
      * @param  string|null $machine_version Only returns the licenses with at least one active machine running this version of the product. (optional)
+     * @param  string|null $machine_platform Only returns the licenses with at least one active machine on this platform. (optional)
      * @param  \LicenseManagerModelLicenseStatus|null $status Only returns the licenses with this status. (optional)
      * @param  \DateTime|null $created_from Only returns the licenses created at or after this date. (optional)
      * @param  \DateTime|null $created_to Only returns the licenses created at or before this date. (optional)
@@ -3365,7 +3385,7 @@ class LicensesApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function listLicensesRequest($product_id, $page = 1, $page_size = 20, $sort = '-createdAt', $search = null, $key = null, $policy_id = null, $customer_id = null, $machine_version = null, $status = null, $created_from = null, $created_to = null, $last_activated_from = null, $last_activated_to = null, $never_activated = null, $expires_from = null, $expires_to = null, $never_expires = null, $currency = null, $price = null, $price_min = null, $price_max = null, $has_price = null, string $contentType = self::contentTypes['listLicenses'][0])
+    public function listLicensesRequest($product_id, $page = 1, $page_size = 20, $sort = '-createdAt', $search = null, $key = null, $policy_id = null, $customer_id = null, $machine_version = null, $machine_platform = null, $status = null, $created_from = null, $created_to = null, $last_activated_from = null, $last_activated_to = null, $never_activated = null, $expires_from = null, $expires_to = null, $never_expires = null, $currency = null, $price = null, $price_min = null, $price_max = null, $has_price = null, string $contentType = self::contentTypes['listLicenses'][0])
     {
 
         // verify the required parameter 'product_id' is set
@@ -3394,6 +3414,7 @@ class LicensesApi
             throw new \InvalidArgumentException('invalid length for "$search" when calling LicensesApi.listLicenses, must be bigger than or equal to 1.');
         }
         
+
 
 
 
@@ -3487,6 +3508,15 @@ class LicensesApi
         $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
             $machine_version,
             'machineVersion', // param base name
+            'string', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $machine_platform,
+            'machinePlatform', // param base name
             'string', // openApiType
             'form', // style
             true, // explode

@@ -400,7 +400,7 @@ This endpoint does not need any parameter.
 ## `listCustomerLicenses()`
 
 ```php
-listCustomerLicenses($customer_id, $page, $page_size, $sort, $search, $key, $policy_id, $machine_version, $status, $created_from, $created_to, $last_activated_from, $last_activated_to, $never_activated, $expires_from, $expires_to, $never_expires, $currency, $price, $price_min, $price_max, $has_price): \LicenseManager\Model\LicenseList
+listCustomerLicenses($customer_id, $page, $page_size, $sort, $search, $key, $policy_id, $machine_version, $machine_platform, $status, $created_from, $created_to, $last_activated_from, $last_activated_to, $never_activated, $expires_from, $expires_to, $never_expires, $currency, $price, $price_min, $price_max, $has_price): \LicenseManager\Model\LicenseList
 ```
 
 List the licenses of a customer
@@ -437,6 +437,7 @@ $search = X9ZPA; // string | Case-insensitive text the key or the email of the c
 $key = 7KQ2M-X9ZPA-H4TRC-WN6EY-B3JDF; // string | Only returns the license with this exact key, case included. Keys of test products start with `TEST-`.
 $policy_id = p4Rt8LmQ; // string | Only returns the licenses following this policy.
 $machine_version = 2.3.1; // string | Only returns the licenses with at least one active machine running this version of the product.
+$machine_platform = macOS 15.1; // string | Only returns the licenses with at least one active machine on this platform.
 $status = new \LicenseManager\Model\\LicenseManagerModelLicenseStatus(); // \LicenseManagerModelLicenseStatus | Only returns the licenses with this status.
 $created_from = 2026-01-01T00:00:00.000Z; // \DateTime | Only returns the licenses created at or after this date.
 $created_to = 2026-02-01T00:00:00.000Z; // \DateTime | Only returns the licenses created at or before this date.
@@ -453,7 +454,7 @@ $price_max = 49.99; // float | Only returns the licenses paid at most this amoun
 $has_price = true; // string | `true` only returns the licenses with a price, `false` only the ones without.
 
 try {
-    $result = $apiInstance->listCustomerLicenses($customer_id, $page, $page_size, $sort, $search, $key, $policy_id, $machine_version, $status, $created_from, $created_to, $last_activated_from, $last_activated_to, $never_activated, $expires_from, $expires_to, $never_expires, $currency, $price, $price_min, $price_max, $has_price);
+    $result = $apiInstance->listCustomerLicenses($customer_id, $page, $page_size, $sort, $search, $key, $policy_id, $machine_version, $machine_platform, $status, $created_from, $created_to, $last_activated_from, $last_activated_to, $never_activated, $expires_from, $expires_to, $never_expires, $currency, $price, $price_min, $price_max, $has_price);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling LicensesApi->listCustomerLicenses: ', $e->getMessage(), PHP_EOL;
@@ -472,6 +473,7 @@ try {
 | **key** | **string**| Only returns the license with this exact key, case included. Keys of test products start with &#x60;TEST-&#x60;. | [optional] |
 | **policy_id** | **string**| Only returns the licenses following this policy. | [optional] |
 | **machine_version** | **string**| Only returns the licenses with at least one active machine running this version of the product. | [optional] |
+| **machine_platform** | **string**| Only returns the licenses with at least one active machine on this platform. | [optional] |
 | **status** | [**\LicenseManagerModelLicenseStatus**](../Model/.md)| Only returns the licenses with this status. | [optional] |
 | **created_from** | **\DateTime**| Only returns the licenses created at or after this date. | [optional] |
 | **created_to** | **\DateTime**| Only returns the licenses created at or before this date. | [optional] |
@@ -507,7 +509,7 @@ try {
 ## `listLicenses()`
 
 ```php
-listLicenses($product_id, $page, $page_size, $sort, $search, $key, $policy_id, $customer_id, $machine_version, $status, $created_from, $created_to, $last_activated_from, $last_activated_to, $never_activated, $expires_from, $expires_to, $never_expires, $currency, $price, $price_min, $price_max, $has_price): \LicenseManager\Model\LicenseList
+listLicenses($product_id, $page, $page_size, $sort, $search, $key, $policy_id, $customer_id, $machine_version, $machine_platform, $status, $created_from, $created_to, $last_activated_from, $last_activated_to, $never_activated, $expires_from, $expires_to, $never_expires, $currency, $price, $price_min, $price_max, $has_price): \LicenseManager\Model\LicenseList
 ```
 
 List the licenses of a product
@@ -542,6 +544,7 @@ $key = 7KQ2M-X9ZPA-H4TRC-WN6EY-B3JDF; // string | Only returns the license with 
 $policy_id = p4Rt8LmQ; // string | Only returns the licenses following this policy.
 $customer_id = c9Wd3RtE; // string | Only returns the licenses of this customer.
 $machine_version = 2.3.1; // string | Only returns the licenses with at least one active machine running this version of the product.
+$machine_platform = macOS 15.1; // string | Only returns the licenses with at least one active machine on this platform.
 $status = new \LicenseManager\Model\\LicenseManagerModelLicenseStatus(); // \LicenseManagerModelLicenseStatus | Only returns the licenses with this status.
 $created_from = 2026-01-01T00:00:00.000Z; // \DateTime | Only returns the licenses created at or after this date.
 $created_to = 2026-02-01T00:00:00.000Z; // \DateTime | Only returns the licenses created at or before this date.
@@ -558,7 +561,7 @@ $price_max = 49.99; // float | Only returns the licenses paid at most this amoun
 $has_price = true; // string | `true` only returns the licenses with a price, `false` only the ones without.
 
 try {
-    $result = $apiInstance->listLicenses($product_id, $page, $page_size, $sort, $search, $key, $policy_id, $customer_id, $machine_version, $status, $created_from, $created_to, $last_activated_from, $last_activated_to, $never_activated, $expires_from, $expires_to, $never_expires, $currency, $price, $price_min, $price_max, $has_price);
+    $result = $apiInstance->listLicenses($product_id, $page, $page_size, $sort, $search, $key, $policy_id, $customer_id, $machine_version, $machine_platform, $status, $created_from, $created_to, $last_activated_from, $last_activated_to, $never_activated, $expires_from, $expires_to, $never_expires, $currency, $price, $price_min, $price_max, $has_price);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling LicensesApi->listLicenses: ', $e->getMessage(), PHP_EOL;
@@ -578,6 +581,7 @@ try {
 | **policy_id** | **string**| Only returns the licenses following this policy. | [optional] |
 | **customer_id** | **string**| Only returns the licenses of this customer. | [optional] |
 | **machine_version** | **string**| Only returns the licenses with at least one active machine running this version of the product. | [optional] |
+| **machine_platform** | **string**| Only returns the licenses with at least one active machine on this platform. | [optional] |
 | **status** | [**\LicenseManagerModelLicenseStatus**](../Model/.md)| Only returns the licenses with this status. | [optional] |
 | **created_from** | **\DateTime**| Only returns the licenses created at or after this date. | [optional] |
 | **created_to** | **\DateTime**| Only returns the licenses created at or before this date. | [optional] |
