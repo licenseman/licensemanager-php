@@ -80,7 +80,13 @@ class IntegrationsApi
         'checkIntegration' => [
             'application/json',
         ],
+        'connectPaddle' => [
+            'application/json',
+        ],
         'connectStripe' => [
+            'application/json',
+        ],
+        'createPaddleMapping' => [
             'application/json',
         ],
         'createStripeMapping' => [
@@ -95,10 +101,16 @@ class IntegrationsApi
         'disconnectIntegration' => [
             'application/json',
         ],
+        'getPaddleIntegration' => [
+            'application/json',
+        ],
         'getSlackIntegration' => [
             'application/json',
         ],
         'getStripeIntegration' => [
+            'application/json',
+        ],
+        'listPaddlePrices' => [
             'application/json',
         ],
         'listStripePrices' => [
@@ -929,6 +941,418 @@ class IntegrationsApi
     }
 
     /**
+     * Operation connectPaddle
+     *
+     * Connect Paddle
+     *
+     * @param  string $product_id product_id (required)
+     * @param  \LicenseManager\Model\ConnectPaddle $connect_paddle connect_paddle (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['connectPaddle'] to see the possible values for this operation
+     *
+     * @throws \LicenseManager\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return \LicenseManager\Model\PaddleIntegration|\LicenseManager\Model\Error|\LicenseManager\Model\Error|\LicenseManager\Model\Error|\LicenseManager\Model\Error|\LicenseManager\Model\Error|\LicenseManager\Model\Error|\LicenseManager\Model\Error|\LicenseManager\Model\Error
+     */
+    public function connectPaddle($product_id, $connect_paddle, string $contentType = self::contentTypes['connectPaddle'][0])
+    {
+        list($response) = $this->connectPaddleWithHttpInfo($product_id, $connect_paddle, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation connectPaddleWithHttpInfo
+     *
+     * Connect Paddle
+     *
+     * @param  string $product_id (required)
+     * @param  \LicenseManager\Model\ConnectPaddle $connect_paddle (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['connectPaddle'] to see the possible values for this operation
+     *
+     * @throws \LicenseManager\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return array of \LicenseManager\Model\PaddleIntegration|\LicenseManager\Model\Error|\LicenseManager\Model\Error|\LicenseManager\Model\Error|\LicenseManager\Model\Error|\LicenseManager\Model\Error|\LicenseManager\Model\Error|\LicenseManager\Model\Error|\LicenseManager\Model\Error, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function connectPaddleWithHttpInfo($product_id, $connect_paddle, string $contentType = self::contentTypes['connectPaddle'][0])
+    {
+        $request = $this->connectPaddleRequest($product_id, $connect_paddle, $contentType);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+
+            switch($statusCode) {
+                case 200:
+                    return $this->handleResponseWithDataType(
+                        '\LicenseManager\Model\PaddleIntegration',
+                        $request,
+                        $response,
+                    );
+                case 401:
+                    return $this->handleResponseWithDataType(
+                        '\LicenseManager\Model\Error',
+                        $request,
+                        $response,
+                    );
+                case 402:
+                    return $this->handleResponseWithDataType(
+                        '\LicenseManager\Model\Error',
+                        $request,
+                        $response,
+                    );
+                case 403:
+                    return $this->handleResponseWithDataType(
+                        '\LicenseManager\Model\Error',
+                        $request,
+                        $response,
+                    );
+                case 404:
+                    return $this->handleResponseWithDataType(
+                        '\LicenseManager\Model\Error',
+                        $request,
+                        $response,
+                    );
+                case 409:
+                    return $this->handleResponseWithDataType(
+                        '\LicenseManager\Model\Error',
+                        $request,
+                        $response,
+                    );
+                case 422:
+                    return $this->handleResponseWithDataType(
+                        '\LicenseManager\Model\Error',
+                        $request,
+                        $response,
+                    );
+                case 429:
+                    return $this->handleResponseWithDataType(
+                        '\LicenseManager\Model\Error',
+                        $request,
+                        $response,
+                    );
+                case 502:
+                    return $this->handleResponseWithDataType(
+                        '\LicenseManager\Model\Error',
+                        $request,
+                        $response,
+                    );
+            }
+
+            
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            return $this->handleResponseWithDataType(
+                '\LicenseManager\Model\PaddleIntegration',
+                $request,
+                $response,
+            );
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\LicenseManager\Model\PaddleIntegration',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 401:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\LicenseManager\Model\Error',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 402:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\LicenseManager\Model\Error',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 403:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\LicenseManager\Model\Error',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 404:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\LicenseManager\Model\Error',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 409:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\LicenseManager\Model\Error',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 422:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\LicenseManager\Model\Error',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 429:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\LicenseManager\Model\Error',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 502:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\LicenseManager\Model\Error',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+            }
+        
+
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation connectPaddleAsync
+     *
+     * Connect Paddle
+     *
+     * @param  string $product_id (required)
+     * @param  \LicenseManager\Model\ConnectPaddle $connect_paddle (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['connectPaddle'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function connectPaddleAsync($product_id, $connect_paddle, string $contentType = self::contentTypes['connectPaddle'][0])
+    {
+        return $this->connectPaddleAsyncWithHttpInfo($product_id, $connect_paddle, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation connectPaddleAsyncWithHttpInfo
+     *
+     * Connect Paddle
+     *
+     * @param  string $product_id (required)
+     * @param  \LicenseManager\Model\ConnectPaddle $connect_paddle (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['connectPaddle'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function connectPaddleAsyncWithHttpInfo($product_id, $connect_paddle, string $contentType = self::contentTypes['connectPaddle'][0])
+    {
+        $returnType = '\LicenseManager\Model\PaddleIntegration';
+        $request = $this->connectPaddleRequest($product_id, $connect_paddle, $contentType);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'connectPaddle'
+     *
+     * @param  string $product_id (required)
+     * @param  \LicenseManager\Model\ConnectPaddle $connect_paddle (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['connectPaddle'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function connectPaddleRequest($product_id, $connect_paddle, string $contentType = self::contentTypes['connectPaddle'][0])
+    {
+
+        // verify the required parameter 'product_id' is set
+        if ($product_id === null || (is_array($product_id) && count($product_id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $product_id when calling connectPaddle'
+            );
+        }
+
+        // verify the required parameter 'connect_paddle' is set
+        if ($connect_paddle === null || (is_array($connect_paddle) && count($connect_paddle) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $connect_paddle when calling connectPaddle'
+            );
+        }
+
+
+        $resourcePath = '/v1/products/{productId}/integrations/paddle';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
+
+        // path params
+        if ($product_id !== null) {
+            $resourcePath = str_replace(
+                '{productId}',
+                ObjectSerializer::toPathValue($product_id),
+                $resourcePath
+            );
+        }
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (isset($connect_paddle)) {
+            if (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the body
+                try {
+                    $httpBody = json_encode(ObjectSerializer::sanitizeForSerialization($connect_paddle), JSON_THROW_ON_ERROR);
+                } catch (\JsonException $e) {
+                    throw new \InvalidArgumentException('json_encode error: ' . $e->getMessage(), 0, $e);
+                }
+            } else {
+                $httpBody = $connect_paddle;
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                try {
+                    $httpBody = json_encode($formParams, JSON_THROW_ON_ERROR);
+                } catch (\JsonException $e) {
+                    throw new \InvalidArgumentException('json_encode error: ' . $e->getMessage(), 0, $e);
+                }
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('x-api-key');
+        if ($apiKey !== null) {
+            $headers['x-api-key'] = $apiKey;
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'PUT',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
      * Operation connectStripe
      *
      * Connect Stripe
@@ -1334,6 +1758,418 @@ class IntegrationsApi
         $query = ObjectSerializer::buildQuery($queryParams);
         return new Request(
             'PUT',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation createPaddleMapping
+     *
+     * Map a Paddle price to a policy
+     *
+     * @param  string $product_id product_id (required)
+     * @param  \LicenseManager\Model\CreatePaddleMapping $create_paddle_mapping create_paddle_mapping (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createPaddleMapping'] to see the possible values for this operation
+     *
+     * @throws \LicenseManager\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return \LicenseManager\Model\IntegrationMapping|\LicenseManager\Model\Error|\LicenseManager\Model\Error|\LicenseManager\Model\Error|\LicenseManager\Model\Error|\LicenseManager\Model\Error|\LicenseManager\Model\Error|\LicenseManager\Model\Error|\LicenseManager\Model\Error
+     */
+    public function createPaddleMapping($product_id, $create_paddle_mapping, string $contentType = self::contentTypes['createPaddleMapping'][0])
+    {
+        list($response) = $this->createPaddleMappingWithHttpInfo($product_id, $create_paddle_mapping, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation createPaddleMappingWithHttpInfo
+     *
+     * Map a Paddle price to a policy
+     *
+     * @param  string $product_id (required)
+     * @param  \LicenseManager\Model\CreatePaddleMapping $create_paddle_mapping (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createPaddleMapping'] to see the possible values for this operation
+     *
+     * @throws \LicenseManager\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return array of \LicenseManager\Model\IntegrationMapping|\LicenseManager\Model\Error|\LicenseManager\Model\Error|\LicenseManager\Model\Error|\LicenseManager\Model\Error|\LicenseManager\Model\Error|\LicenseManager\Model\Error|\LicenseManager\Model\Error|\LicenseManager\Model\Error, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function createPaddleMappingWithHttpInfo($product_id, $create_paddle_mapping, string $contentType = self::contentTypes['createPaddleMapping'][0])
+    {
+        $request = $this->createPaddleMappingRequest($product_id, $create_paddle_mapping, $contentType);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+
+            switch($statusCode) {
+                case 201:
+                    return $this->handleResponseWithDataType(
+                        '\LicenseManager\Model\IntegrationMapping',
+                        $request,
+                        $response,
+                    );
+                case 401:
+                    return $this->handleResponseWithDataType(
+                        '\LicenseManager\Model\Error',
+                        $request,
+                        $response,
+                    );
+                case 402:
+                    return $this->handleResponseWithDataType(
+                        '\LicenseManager\Model\Error',
+                        $request,
+                        $response,
+                    );
+                case 403:
+                    return $this->handleResponseWithDataType(
+                        '\LicenseManager\Model\Error',
+                        $request,
+                        $response,
+                    );
+                case 404:
+                    return $this->handleResponseWithDataType(
+                        '\LicenseManager\Model\Error',
+                        $request,
+                        $response,
+                    );
+                case 409:
+                    return $this->handleResponseWithDataType(
+                        '\LicenseManager\Model\Error',
+                        $request,
+                        $response,
+                    );
+                case 422:
+                    return $this->handleResponseWithDataType(
+                        '\LicenseManager\Model\Error',
+                        $request,
+                        $response,
+                    );
+                case 429:
+                    return $this->handleResponseWithDataType(
+                        '\LicenseManager\Model\Error',
+                        $request,
+                        $response,
+                    );
+                case 502:
+                    return $this->handleResponseWithDataType(
+                        '\LicenseManager\Model\Error',
+                        $request,
+                        $response,
+                    );
+            }
+
+            
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            return $this->handleResponseWithDataType(
+                '\LicenseManager\Model\IntegrationMapping',
+                $request,
+                $response,
+            );
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 201:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\LicenseManager\Model\IntegrationMapping',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 401:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\LicenseManager\Model\Error',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 402:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\LicenseManager\Model\Error',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 403:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\LicenseManager\Model\Error',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 404:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\LicenseManager\Model\Error',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 409:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\LicenseManager\Model\Error',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 422:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\LicenseManager\Model\Error',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 429:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\LicenseManager\Model\Error',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 502:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\LicenseManager\Model\Error',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+            }
+        
+
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation createPaddleMappingAsync
+     *
+     * Map a Paddle price to a policy
+     *
+     * @param  string $product_id (required)
+     * @param  \LicenseManager\Model\CreatePaddleMapping $create_paddle_mapping (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createPaddleMapping'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function createPaddleMappingAsync($product_id, $create_paddle_mapping, string $contentType = self::contentTypes['createPaddleMapping'][0])
+    {
+        return $this->createPaddleMappingAsyncWithHttpInfo($product_id, $create_paddle_mapping, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation createPaddleMappingAsyncWithHttpInfo
+     *
+     * Map a Paddle price to a policy
+     *
+     * @param  string $product_id (required)
+     * @param  \LicenseManager\Model\CreatePaddleMapping $create_paddle_mapping (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createPaddleMapping'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function createPaddleMappingAsyncWithHttpInfo($product_id, $create_paddle_mapping, string $contentType = self::contentTypes['createPaddleMapping'][0])
+    {
+        $returnType = '\LicenseManager\Model\IntegrationMapping';
+        $request = $this->createPaddleMappingRequest($product_id, $create_paddle_mapping, $contentType);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'createPaddleMapping'
+     *
+     * @param  string $product_id (required)
+     * @param  \LicenseManager\Model\CreatePaddleMapping $create_paddle_mapping (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['createPaddleMapping'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function createPaddleMappingRequest($product_id, $create_paddle_mapping, string $contentType = self::contentTypes['createPaddleMapping'][0])
+    {
+
+        // verify the required parameter 'product_id' is set
+        if ($product_id === null || (is_array($product_id) && count($product_id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $product_id when calling createPaddleMapping'
+            );
+        }
+
+        // verify the required parameter 'create_paddle_mapping' is set
+        if ($create_paddle_mapping === null || (is_array($create_paddle_mapping) && count($create_paddle_mapping) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $create_paddle_mapping when calling createPaddleMapping'
+            );
+        }
+
+
+        $resourcePath = '/v1/products/{productId}/integrations/paddle/mappings';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
+
+        // path params
+        if ($product_id !== null) {
+            $resourcePath = str_replace(
+                '{productId}',
+                ObjectSerializer::toPathValue($product_id),
+                $resourcePath
+            );
+        }
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (isset($create_paddle_mapping)) {
+            if (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the body
+                try {
+                    $httpBody = json_encode(ObjectSerializer::sanitizeForSerialization($create_paddle_mapping), JSON_THROW_ON_ERROR);
+                } catch (\JsonException $e) {
+                    throw new \InvalidArgumentException('json_encode error: ' . $e->getMessage(), 0, $e);
+                }
+            } else {
+                $httpBody = $create_paddle_mapping;
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                try {
+                    $httpBody = json_encode($formParams, JSON_THROW_ON_ERROR);
+                } catch (\JsonException $e) {
+                    throw new \InvalidArgumentException('json_encode error: ' . $e->getMessage(), 0, $e);
+                }
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('x-api-key');
+        if ($apiKey !== null) {
+            $headers['x-api-key'] = $apiKey;
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'POST',
             $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
             $headers,
             $httpBody
@@ -2586,6 +3422,367 @@ class IntegrationsApi
     }
 
     /**
+     * Operation getPaddleIntegration
+     *
+     * Get the Paddle integration of a product
+     *
+     * @param  string $product_id product_id (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getPaddleIntegration'] to see the possible values for this operation
+     *
+     * @throws \LicenseManager\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return \LicenseManager\Model\PaddleIntegration|\LicenseManager\Model\Error|\LicenseManager\Model\Error|\LicenseManager\Model\Error|\LicenseManager\Model\Error|\LicenseManager\Model\Error|\LicenseManager\Model\Error
+     */
+    public function getPaddleIntegration($product_id, string $contentType = self::contentTypes['getPaddleIntegration'][0])
+    {
+        list($response) = $this->getPaddleIntegrationWithHttpInfo($product_id, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation getPaddleIntegrationWithHttpInfo
+     *
+     * Get the Paddle integration of a product
+     *
+     * @param  string $product_id (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getPaddleIntegration'] to see the possible values for this operation
+     *
+     * @throws \LicenseManager\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return array of \LicenseManager\Model\PaddleIntegration|\LicenseManager\Model\Error|\LicenseManager\Model\Error|\LicenseManager\Model\Error|\LicenseManager\Model\Error|\LicenseManager\Model\Error|\LicenseManager\Model\Error, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function getPaddleIntegrationWithHttpInfo($product_id, string $contentType = self::contentTypes['getPaddleIntegration'][0])
+    {
+        $request = $this->getPaddleIntegrationRequest($product_id, $contentType);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+
+            switch($statusCode) {
+                case 200:
+                    return $this->handleResponseWithDataType(
+                        '\LicenseManager\Model\PaddleIntegration',
+                        $request,
+                        $response,
+                    );
+                case 401:
+                    return $this->handleResponseWithDataType(
+                        '\LicenseManager\Model\Error',
+                        $request,
+                        $response,
+                    );
+                case 402:
+                    return $this->handleResponseWithDataType(
+                        '\LicenseManager\Model\Error',
+                        $request,
+                        $response,
+                    );
+                case 403:
+                    return $this->handleResponseWithDataType(
+                        '\LicenseManager\Model\Error',
+                        $request,
+                        $response,
+                    );
+                case 404:
+                    return $this->handleResponseWithDataType(
+                        '\LicenseManager\Model\Error',
+                        $request,
+                        $response,
+                    );
+                case 422:
+                    return $this->handleResponseWithDataType(
+                        '\LicenseManager\Model\Error',
+                        $request,
+                        $response,
+                    );
+                case 429:
+                    return $this->handleResponseWithDataType(
+                        '\LicenseManager\Model\Error',
+                        $request,
+                        $response,
+                    );
+            }
+
+            
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            return $this->handleResponseWithDataType(
+                '\LicenseManager\Model\PaddleIntegration',
+                $request,
+                $response,
+            );
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\LicenseManager\Model\PaddleIntegration',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 401:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\LicenseManager\Model\Error',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 402:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\LicenseManager\Model\Error',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 403:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\LicenseManager\Model\Error',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 404:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\LicenseManager\Model\Error',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 422:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\LicenseManager\Model\Error',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 429:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\LicenseManager\Model\Error',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+            }
+        
+
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation getPaddleIntegrationAsync
+     *
+     * Get the Paddle integration of a product
+     *
+     * @param  string $product_id (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getPaddleIntegration'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getPaddleIntegrationAsync($product_id, string $contentType = self::contentTypes['getPaddleIntegration'][0])
+    {
+        return $this->getPaddleIntegrationAsyncWithHttpInfo($product_id, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation getPaddleIntegrationAsyncWithHttpInfo
+     *
+     * Get the Paddle integration of a product
+     *
+     * @param  string $product_id (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getPaddleIntegration'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getPaddleIntegrationAsyncWithHttpInfo($product_id, string $contentType = self::contentTypes['getPaddleIntegration'][0])
+    {
+        $returnType = '\LicenseManager\Model\PaddleIntegration';
+        $request = $this->getPaddleIntegrationRequest($product_id, $contentType);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'getPaddleIntegration'
+     *
+     * @param  string $product_id (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getPaddleIntegration'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function getPaddleIntegrationRequest($product_id, string $contentType = self::contentTypes['getPaddleIntegration'][0])
+    {
+
+        // verify the required parameter 'product_id' is set
+        if ($product_id === null || (is_array($product_id) && count($product_id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $product_id when calling getPaddleIntegration'
+            );
+        }
+
+
+        $resourcePath = '/v1/products/{productId}/integrations/paddle';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
+
+        // path params
+        if ($product_id !== null) {
+            $resourcePath = str_replace(
+                '{productId}',
+                ObjectSerializer::toPathValue($product_id),
+                $resourcePath
+            );
+        }
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                try {
+                    $httpBody = json_encode($formParams, JSON_THROW_ON_ERROR);
+                } catch (\JsonException $e) {
+                    throw new \InvalidArgumentException('json_encode error: ' . $e->getMessage(), 0, $e);
+                }
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('x-api-key');
+        if ($apiKey !== null) {
+            $headers['x-api-key'] = $apiKey;
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'GET',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
      * Operation getSlackIntegration
      *
      * Get the Slack integration of a product
@@ -3240,6 +4437,381 @@ class IntegrationsApi
             $resourcePath = str_replace(
                 '{productId}',
                 ObjectSerializer::toPathValue($product_id),
+                $resourcePath
+            );
+        }
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                try {
+                    $httpBody = json_encode($formParams, JSON_THROW_ON_ERROR);
+                } catch (\JsonException $e) {
+                    throw new \InvalidArgumentException('json_encode error: ' . $e->getMessage(), 0, $e);
+                }
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('x-api-key');
+        if ($apiKey !== null) {
+            $headers['x-api-key'] = $apiKey;
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'GET',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation listPaddlePrices
+     *
+     * List the Paddle prices of an integration
+     *
+     * @param  string $id id (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listPaddlePrices'] to see the possible values for this operation
+     *
+     * @throws \LicenseManager\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return \LicenseManager\Model\ListPaddlePrices200Response|\LicenseManager\Model\Error|\LicenseManager\Model\Error|\LicenseManager\Model\Error|\LicenseManager\Model\Error|\LicenseManager\Model\Error|\LicenseManager\Model\Error|\LicenseManager\Model\Error
+     */
+    public function listPaddlePrices($id, string $contentType = self::contentTypes['listPaddlePrices'][0])
+    {
+        list($response) = $this->listPaddlePricesWithHttpInfo($id, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation listPaddlePricesWithHttpInfo
+     *
+     * List the Paddle prices of an integration
+     *
+     * @param  string $id (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listPaddlePrices'] to see the possible values for this operation
+     *
+     * @throws \LicenseManager\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return array of \LicenseManager\Model\ListPaddlePrices200Response|\LicenseManager\Model\Error|\LicenseManager\Model\Error|\LicenseManager\Model\Error|\LicenseManager\Model\Error|\LicenseManager\Model\Error|\LicenseManager\Model\Error|\LicenseManager\Model\Error, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function listPaddlePricesWithHttpInfo($id, string $contentType = self::contentTypes['listPaddlePrices'][0])
+    {
+        $request = $this->listPaddlePricesRequest($id, $contentType);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+
+            switch($statusCode) {
+                case 200:
+                    return $this->handleResponseWithDataType(
+                        '\LicenseManager\Model\ListPaddlePrices200Response',
+                        $request,
+                        $response,
+                    );
+                case 401:
+                    return $this->handleResponseWithDataType(
+                        '\LicenseManager\Model\Error',
+                        $request,
+                        $response,
+                    );
+                case 402:
+                    return $this->handleResponseWithDataType(
+                        '\LicenseManager\Model\Error',
+                        $request,
+                        $response,
+                    );
+                case 403:
+                    return $this->handleResponseWithDataType(
+                        '\LicenseManager\Model\Error',
+                        $request,
+                        $response,
+                    );
+                case 404:
+                    return $this->handleResponseWithDataType(
+                        '\LicenseManager\Model\Error',
+                        $request,
+                        $response,
+                    );
+                case 422:
+                    return $this->handleResponseWithDataType(
+                        '\LicenseManager\Model\Error',
+                        $request,
+                        $response,
+                    );
+                case 429:
+                    return $this->handleResponseWithDataType(
+                        '\LicenseManager\Model\Error',
+                        $request,
+                        $response,
+                    );
+                case 502:
+                    return $this->handleResponseWithDataType(
+                        '\LicenseManager\Model\Error',
+                        $request,
+                        $response,
+                    );
+            }
+
+            
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            return $this->handleResponseWithDataType(
+                '\LicenseManager\Model\ListPaddlePrices200Response',
+                $request,
+                $response,
+            );
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\LicenseManager\Model\ListPaddlePrices200Response',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 401:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\LicenseManager\Model\Error',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 402:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\LicenseManager\Model\Error',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 403:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\LicenseManager\Model\Error',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 404:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\LicenseManager\Model\Error',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 422:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\LicenseManager\Model\Error',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 429:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\LicenseManager\Model\Error',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 502:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\LicenseManager\Model\Error',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+            }
+        
+
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation listPaddlePricesAsync
+     *
+     * List the Paddle prices of an integration
+     *
+     * @param  string $id (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listPaddlePrices'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function listPaddlePricesAsync($id, string $contentType = self::contentTypes['listPaddlePrices'][0])
+    {
+        return $this->listPaddlePricesAsyncWithHttpInfo($id, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation listPaddlePricesAsyncWithHttpInfo
+     *
+     * List the Paddle prices of an integration
+     *
+     * @param  string $id (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listPaddlePrices'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function listPaddlePricesAsyncWithHttpInfo($id, string $contentType = self::contentTypes['listPaddlePrices'][0])
+    {
+        $returnType = '\LicenseManager\Model\ListPaddlePrices200Response';
+        $request = $this->listPaddlePricesRequest($id, $contentType);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'listPaddlePrices'
+     *
+     * @param  string $id (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['listPaddlePrices'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function listPaddlePricesRequest($id, string $contentType = self::contentTypes['listPaddlePrices'][0])
+    {
+
+        // verify the required parameter 'id' is set
+        if ($id === null || (is_array($id) && count($id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $id when calling listPaddlePrices'
+            );
+        }
+
+
+        $resourcePath = '/v1/integrations/{id}/paddle/prices';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
+
+        // path params
+        if ($id !== null) {
+            $resourcePath = str_replace(
+                '{id}',
+                ObjectSerializer::toPathValue($id),
                 $resourcePath
             );
         }

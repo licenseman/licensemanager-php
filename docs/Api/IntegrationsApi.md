@@ -8,13 +8,17 @@ All URIs are relative to https://api.licensemanager.dev, except if the operation
 | ------------- | ------------- | ------------- |
 | [**authorizeSlack()**](IntegrationsApi.md#authorizeSlack) | **POST** /v1/products/{productId}/integrations/slack/authorize | Start connecting a Slack channel |
 | [**checkIntegration()**](IntegrationsApi.md#checkIntegration) | **POST** /v1/integrations/{id}/check | Check an integration |
+| [**connectPaddle()**](IntegrationsApi.md#connectPaddle) | **PUT** /v1/products/{productId}/integrations/paddle | Connect Paddle |
 | [**connectStripe()**](IntegrationsApi.md#connectStripe) | **PUT** /v1/products/{productId}/integrations/stripe | Connect Stripe |
+| [**createPaddleMapping()**](IntegrationsApi.md#createPaddleMapping) | **POST** /v1/products/{productId}/integrations/paddle/mappings | Map a Paddle price to a policy |
 | [**createStripeMapping()**](IntegrationsApi.md#createStripeMapping) | **POST** /v1/products/{productId}/integrations/stripe/mappings | Map a Stripe price to a policy |
 | [**deleteSlackConnection()**](IntegrationsApi.md#deleteSlackConnection) | **DELETE** /v1/slack-connections/{id} | Remove a Slack connection |
 | [**deleteStripeMapping()**](IntegrationsApi.md#deleteStripeMapping) | **DELETE** /v1/integration-mappings/{id} | Delete a mapping |
 | [**disconnectIntegration()**](IntegrationsApi.md#disconnectIntegration) | **DELETE** /v1/integrations/{id} | Disconnect an integration |
+| [**getPaddleIntegration()**](IntegrationsApi.md#getPaddleIntegration) | **GET** /v1/products/{productId}/integrations/paddle | Get the Paddle integration of a product |
 | [**getSlackIntegration()**](IntegrationsApi.md#getSlackIntegration) | **GET** /v1/products/{productId}/integrations/slack | Get the Slack integration of a product |
 | [**getStripeIntegration()**](IntegrationsApi.md#getStripeIntegration) | **GET** /v1/products/{productId}/integrations/stripe | Get the Stripe integration of a product |
+| [**listPaddlePrices()**](IntegrationsApi.md#listPaddlePrices) | **GET** /v1/integrations/{id}/paddle/prices | List the Paddle prices of an integration |
 | [**listStripePrices()**](IntegrationsApi.md#listStripePrices) | **GET** /v1/integrations/{id}/stripe/prices | List the Stripe prices of an integration |
 | [**testSlackConnection()**](IntegrationsApi.md#testSlackConnection) | **POST** /v1/slack-connections/{id}/test | Send a test message to a Slack channel |
 | [**updateIntegration()**](IntegrationsApi.md#updateIntegration) | **PATCH** /v1/integrations/{id} | Update an integration |
@@ -146,6 +150,70 @@ try {
 [[Back to Model list]](../../README.md#models)
 [[Back to README]](../../README.md)
 
+## `connectPaddle()`
+
+```php
+connectPaddle($product_id, $connect_paddle): \LicenseManager\Model\PaddleIntegration
+```
+
+Connect Paddle
+
+Connects the Paddle Billing account of the API key for the organization's products of the product's mode, or replaces the key of the existing connection. Checks the key works and has the required permissions, then creates a notification destination on the account, telling the app about payments. Doesn't accept tokens: only API keys and sessions.  **Required role permission**: `integration:create` when called with a session, granted by the member's role. API keys aren't limited by roles.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: apiKey
+$config = LicenseManager\Configuration::getDefaultConfiguration()->setApiKey('x-api-key', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = LicenseManager\Configuration::getDefaultConfiguration()->setApiKeyPrefix('x-api-key', 'Bearer');
+
+
+$apiInstance = new LicenseManager\Api\IntegrationsApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$product_id = x7Kp2QaZ; // string
+$connect_paddle = new \LicenseManager\Model\ConnectPaddle(); // \LicenseManager\Model\ConnectPaddle
+
+try {
+    $result = $apiInstance->connectPaddle($product_id, $connect_paddle);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling IntegrationsApi->connectPaddle: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **product_id** | **string**|  | |
+| **connect_paddle** | [**\LicenseManager\Model\ConnectPaddle**](../Model/ConnectPaddle.md)|  | |
+
+### Return type
+
+[**\LicenseManager\Model\PaddleIntegration**](../Model/PaddleIntegration.md)
+
+### Authorization
+
+[apiKey](../../README.md#apiKey)
+
+### HTTP request headers
+
+- **Content-Type**: `application/json`
+- **Accept**: `application/json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
 ## `connectStripe()`
 
 ```php
@@ -196,6 +264,70 @@ try {
 ### Return type
 
 [**\LicenseManager\Model\StripeIntegration**](../Model/StripeIntegration.md)
+
+### Authorization
+
+[apiKey](../../README.md#apiKey)
+
+### HTTP request headers
+
+- **Content-Type**: `application/json`
+- **Accept**: `application/json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `createPaddleMapping()`
+
+```php
+createPaddleMapping($product_id, $create_paddle_mapping): \LicenseManager\Model\IntegrationMapping
+```
+
+Map a Paddle price to a policy
+
+Paying the price then creates licenses of the product with the policy: one per unit bought, or one per subscription for a recurring price. Doesn't accept tokens: only API keys and sessions.  **Required role permission**: `integration:update` when called with a session, granted by the member's role. API keys aren't limited by roles.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: apiKey
+$config = LicenseManager\Configuration::getDefaultConfiguration()->setApiKey('x-api-key', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = LicenseManager\Configuration::getDefaultConfiguration()->setApiKeyPrefix('x-api-key', 'Bearer');
+
+
+$apiInstance = new LicenseManager\Api\IntegrationsApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$product_id = x7Kp2QaZ; // string
+$create_paddle_mapping = new \LicenseManager\Model\CreatePaddleMapping(); // \LicenseManager\Model\CreatePaddleMapping
+
+try {
+    $result = $apiInstance->createPaddleMapping($product_id, $create_paddle_mapping);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling IntegrationsApi->createPaddleMapping: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **product_id** | **string**|  | |
+| **create_paddle_mapping** | [**\LicenseManager\Model\CreatePaddleMapping**](../Model/CreatePaddleMapping.md)|  | |
+
+### Return type
+
+[**\LicenseManager\Model\IntegrationMapping**](../Model/IntegrationMapping.md)
 
 ### Authorization
 
@@ -457,6 +589,68 @@ void (empty response body)
 [[Back to Model list]](../../README.md#models)
 [[Back to README]](../../README.md)
 
+## `getPaddleIntegration()`
+
+```php
+getPaddleIntegration($product_id): \LicenseManager\Model\PaddleIntegration
+```
+
+Get the Paddle integration of a product
+
+The organization connects one Paddle Billing account for its live products, and one sandbox account for its test products. Its mappings tell which Paddle prices create licenses of the product. Doesn't accept tokens: only API keys and sessions.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: apiKey
+$config = LicenseManager\Configuration::getDefaultConfiguration()->setApiKey('x-api-key', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = LicenseManager\Configuration::getDefaultConfiguration()->setApiKeyPrefix('x-api-key', 'Bearer');
+
+
+$apiInstance = new LicenseManager\Api\IntegrationsApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$product_id = x7Kp2QaZ; // string
+
+try {
+    $result = $apiInstance->getPaddleIntegration($product_id);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling IntegrationsApi->getPaddleIntegration: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **product_id** | **string**|  | |
+
+### Return type
+
+[**\LicenseManager\Model\PaddleIntegration**](../Model/PaddleIntegration.md)
+
+### Authorization
+
+[apiKey](../../README.md#apiKey)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
 ## `getSlackIntegration()`
 
 ```php
@@ -567,6 +761,68 @@ try {
 ### Return type
 
 [**\LicenseManager\Model\StripeIntegration**](../Model/StripeIntegration.md)
+
+### Authorization
+
+[apiKey](../../README.md#apiKey)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `listPaddlePrices()`
+
+```php
+listPaddlePrices($id): \LicenseManager\Model\ListPaddlePrices200Response
+```
+
+List the Paddle prices of an integration
+
+Active catalog prices of active products of the Paddle account, the ones that can be mapped, up to 500. Doesn't accept tokens: only API keys and sessions.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: apiKey
+$config = LicenseManager\Configuration::getDefaultConfiguration()->setApiKey('x-api-key', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = LicenseManager\Configuration::getDefaultConfiguration()->setApiKeyPrefix('x-api-key', 'Bearer');
+
+
+$apiInstance = new LicenseManager\Api\IntegrationsApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$id = i8Fz4QnRt; // string
+
+try {
+    $result = $apiInstance->listPaddlePrices($id);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling IntegrationsApi->listPaddlePrices: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **id** | **string**|  | |
+
+### Return type
+
+[**\LicenseManager\Model\ListPaddlePrices200Response**](../Model/ListPaddlePrices200Response.md)
 
 ### Authorization
 

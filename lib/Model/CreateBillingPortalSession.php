@@ -302,7 +302,7 @@ class CreateBillingPortalSession implements ModelInterface, ArrayAccess, \JsonSe
     /**
      * Sets return_url
      *
-     * @param string|null $return_url Where the Stripe customer portal links back to: a page of the customer portal, or of one of the product's `returnDomains`. The customer portal of the product by default.
+     * @param string|null $return_url Where the Stripe customer portal links back to: a page of the customer portal, or of one of the product's `returnDomains`. The customer portal of the product by default. Paddle's customer portal has no link back: ignored for Paddle customers.
      *
      * @return self
      */

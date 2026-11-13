@@ -305,7 +305,7 @@ class BillingPortalSession implements ModelInterface, ArrayAccess, \JsonSerializ
     /**
      * Sets url
      *
-     * @param string $url Link to the Stripe customer portal, to open right away: it expires shortly.
+     * @param string $url Link to the Stripe or Paddle customer portal, to open right away: it expires shortly.
      *
      * @return self
      */

@@ -288,6 +288,7 @@ class EventActor implements ModelInterface, ArrayAccess, \JsonSerializable
     public const TOKEN_TYPE_MACHINE = 'machine';
     public const TOKEN_TYPE_UNKNOWN_DEFAULT_OPEN_API = 'unknown_default_open_api';
     public const PROVIDER_STRIPE = 'stripe';
+    public const PROVIDER_PADDLE = 'paddle';
     public const PROVIDER_UNKNOWN_DEFAULT_OPEN_API = 'unknown_default_open_api';
 
     /**
@@ -331,6 +332,7 @@ class EventActor implements ModelInterface, ArrayAccess, \JsonSerializable
     {
         return [
             self::PROVIDER_STRIPE,
+            self::PROVIDER_PADDLE,
             self::PROVIDER_UNKNOWN_DEFAULT_OPEN_API,
         ];
     }

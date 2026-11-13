@@ -67,6 +67,7 @@ class License implements ModelInterface, ArrayAccess, \JsonSerializable
         'expires_at' => '\DateTime',
         'meta' => 'array<string,mixed>',
         'stripe_payment_intent_id' => 'string',
+        'paddle_transaction_id' => 'string',
         'max_machines' => 'int',
         'max_offline_duration_seconds' => 'int',
         'active_machine_count' => 'int',
@@ -80,6 +81,8 @@ class License implements ModelInterface, ArrayAccess, \JsonSerializable
         'subscription' => '\LicenseManager\Model\LicenseSubscription',
         'cancellation_comment' => 'string',
         'stripe_refund_id' => 'string',
+        'paddle_adjustment_id' => 'string',
+        'paddle_refund_status' => 'string',
         'updated_at' => '\DateTime'
     ];
 
@@ -101,6 +104,7 @@ class License implements ModelInterface, ArrayAccess, \JsonSerializable
         'expires_at' => 'date-time',
         'meta' => null,
         'stripe_payment_intent_id' => null,
+        'paddle_transaction_id' => null,
         'max_machines' => null,
         'max_offline_duration_seconds' => null,
         'active_machine_count' => null,
@@ -114,6 +118,8 @@ class License implements ModelInterface, ArrayAccess, \JsonSerializable
         'subscription' => null,
         'cancellation_comment' => null,
         'stripe_refund_id' => null,
+        'paddle_adjustment_id' => null,
+        'paddle_refund_status' => null,
         'updated_at' => 'date-time'
     ];
 
@@ -133,6 +139,7 @@ class License implements ModelInterface, ArrayAccess, \JsonSerializable
         'expires_at' => true,
         'meta' => true,
         'stripe_payment_intent_id' => true,
+        'paddle_transaction_id' => true,
         'max_machines' => true,
         'max_offline_duration_seconds' => false,
         'active_machine_count' => false,
@@ -146,6 +153,8 @@ class License implements ModelInterface, ArrayAccess, \JsonSerializable
         'subscription' => true,
         'cancellation_comment' => true,
         'stripe_refund_id' => true,
+        'paddle_adjustment_id' => true,
+        'paddle_refund_status' => true,
         'updated_at' => false
     ];
 
@@ -245,6 +254,7 @@ class License implements ModelInterface, ArrayAccess, \JsonSerializable
         'expires_at' => 'expiresAt',
         'meta' => 'meta',
         'stripe_payment_intent_id' => 'stripePaymentIntentId',
+        'paddle_transaction_id' => 'paddleTransactionId',
         'max_machines' => 'maxMachines',
         'max_offline_duration_seconds' => 'maxOfflineDurationSeconds',
         'active_machine_count' => 'activeMachineCount',
@@ -258,6 +268,8 @@ class License implements ModelInterface, ArrayAccess, \JsonSerializable
         'subscription' => 'subscription',
         'cancellation_comment' => 'cancellationComment',
         'stripe_refund_id' => 'stripeRefundId',
+        'paddle_adjustment_id' => 'paddleAdjustmentId',
+        'paddle_refund_status' => 'paddleRefundStatus',
         'updated_at' => 'updatedAt'
     ];
 
@@ -277,6 +289,7 @@ class License implements ModelInterface, ArrayAccess, \JsonSerializable
         'expires_at' => 'setExpiresAt',
         'meta' => 'setMeta',
         'stripe_payment_intent_id' => 'setStripePaymentIntentId',
+        'paddle_transaction_id' => 'setPaddleTransactionId',
         'max_machines' => 'setMaxMachines',
         'max_offline_duration_seconds' => 'setMaxOfflineDurationSeconds',
         'active_machine_count' => 'setActiveMachineCount',
@@ -290,6 +303,8 @@ class License implements ModelInterface, ArrayAccess, \JsonSerializable
         'subscription' => 'setSubscription',
         'cancellation_comment' => 'setCancellationComment',
         'stripe_refund_id' => 'setStripeRefundId',
+        'paddle_adjustment_id' => 'setPaddleAdjustmentId',
+        'paddle_refund_status' => 'setPaddleRefundStatus',
         'updated_at' => 'setUpdatedAt'
     ];
 
@@ -309,6 +324,7 @@ class License implements ModelInterface, ArrayAccess, \JsonSerializable
         'expires_at' => 'getExpiresAt',
         'meta' => 'getMeta',
         'stripe_payment_intent_id' => 'getStripePaymentIntentId',
+        'paddle_transaction_id' => 'getPaddleTransactionId',
         'max_machines' => 'getMaxMachines',
         'max_offline_duration_seconds' => 'getMaxOfflineDurationSeconds',
         'active_machine_count' => 'getActiveMachineCount',
@@ -322,6 +338,8 @@ class License implements ModelInterface, ArrayAccess, \JsonSerializable
         'subscription' => 'getSubscription',
         'cancellation_comment' => 'getCancellationComment',
         'stripe_refund_id' => 'getStripeRefundId',
+        'paddle_adjustment_id' => 'getPaddleAdjustmentId',
+        'paddle_refund_status' => 'getPaddleRefundStatus',
         'updated_at' => 'getUpdatedAt'
     ];
 
@@ -366,6 +384,25 @@ class License implements ModelInterface, ArrayAccess, \JsonSerializable
         return self::$openAPIModelName;
     }
 
+    public const PADDLE_REFUND_STATUS_PENDING_APPROVAL = 'pending_approval';
+    public const PADDLE_REFUND_STATUS_APPROVED = 'approved';
+    public const PADDLE_REFUND_STATUS_REJECTED = 'rejected';
+    public const PADDLE_REFUND_STATUS_UNKNOWN_DEFAULT_OPEN_API = 'unknown_default_open_api';
+
+    /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getPaddleRefundStatusAllowableValues()
+    {
+        return [
+            self::PADDLE_REFUND_STATUS_PENDING_APPROVAL,
+            self::PADDLE_REFUND_STATUS_APPROVED,
+            self::PADDLE_REFUND_STATUS_REJECTED,
+            self::PADDLE_REFUND_STATUS_UNKNOWN_DEFAULT_OPEN_API,
+        ];
+    }
 
     /**
      * Associative array for storing property values
@@ -392,6 +429,7 @@ class License implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('expires_at', $data ?? [], null);
         $this->setIfExists('meta', $data ?? [], null);
         $this->setIfExists('stripe_payment_intent_id', $data ?? [], null);
+        $this->setIfExists('paddle_transaction_id', $data ?? [], null);
         $this->setIfExists('max_machines', $data ?? [], null);
         $this->setIfExists('max_offline_duration_seconds', $data ?? [], null);
         $this->setIfExists('active_machine_count', $data ?? [], null);
@@ -405,6 +443,8 @@ class License implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('subscription', $data ?? [], null);
         $this->setIfExists('cancellation_comment', $data ?? [], null);
         $this->setIfExists('stripe_refund_id', $data ?? [], null);
+        $this->setIfExists('paddle_adjustment_id', $data ?? [], null);
+        $this->setIfExists('paddle_refund_status', $data ?? [], null);
         $this->setIfExists('updated_at', $data ?? [], null);
     }
 
@@ -465,6 +505,9 @@ class License implements ModelInterface, ArrayAccess, \JsonSerializable
         if ($this->container['stripe_payment_intent_id'] === null && !$this->isNullableSetToNull('stripe_payment_intent_id')) {
             $invalidProperties[] = "'stripe_payment_intent_id' is required";
         }
+        if ($this->container['paddle_transaction_id'] === null && !$this->isNullableSetToNull('paddle_transaction_id')) {
+            $invalidProperties[] = "'paddle_transaction_id' is required";
+        }
         if ($this->container['max_machines'] === null && !$this->isNullableSetToNull('max_machines')) {
             $invalidProperties[] = "'max_machines' is required";
         }
@@ -504,6 +547,21 @@ class License implements ModelInterface, ArrayAccess, \JsonSerializable
         if ($this->container['stripe_refund_id'] === null && !$this->isNullableSetToNull('stripe_refund_id')) {
             $invalidProperties[] = "'stripe_refund_id' is required";
         }
+        if ($this->container['paddle_adjustment_id'] === null && !$this->isNullableSetToNull('paddle_adjustment_id')) {
+            $invalidProperties[] = "'paddle_adjustment_id' is required";
+        }
+        if ($this->container['paddle_refund_status'] === null && !$this->isNullableSetToNull('paddle_refund_status')) {
+            $invalidProperties[] = "'paddle_refund_status' is required";
+        }
+        $allowedValues = $this->getPaddleRefundStatusAllowableValues();
+        if (!is_null($this->container['paddle_refund_status']) && !in_array($this->container['paddle_refund_status'], $allowedValues, true)) {
+            $invalidProperties[] = sprintf(
+                "invalid value '%s' for 'paddle_refund_status', must be one of '%s'",
+                $this->container['paddle_refund_status'],
+                implode("', '", $allowedValues)
+            );
+        }
+
         if ($this->container['updated_at'] === null) {
             $invalidProperties[] = "'updated_at' can't be null";
         }
@@ -809,6 +867,40 @@ class License implements ModelInterface, ArrayAccess, \JsonSerializable
             }
         }
         $this->container['stripe_payment_intent_id'] = $stripe_payment_intent_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets paddle_transaction_id
+     *
+     * @return string|null
+     */
+    public function getPaddleTransactionId()
+    {
+        return $this->container['paddle_transaction_id'];
+    }
+
+    /**
+     * Sets paddle_transaction_id
+     *
+     * @param string|null $paddle_transaction_id Id of the Paddle transaction that paid the license, when it was bought through the Paddle integration. `null` otherwise.
+     *
+     * @return self
+     */
+    public function setPaddleTransactionId($paddle_transaction_id)
+    {
+        if (is_null($paddle_transaction_id)) {
+            array_push($this->openAPINullablesSetToNull, 'paddle_transaction_id');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('paddle_transaction_id', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['paddle_transaction_id'] = $paddle_transaction_id;
 
         return $this;
     }
@@ -1223,6 +1315,78 @@ class License implements ModelInterface, ArrayAccess, \JsonSerializable
             }
         }
         $this->container['stripe_refund_id'] = $stripe_refund_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets paddle_adjustment_id
+     *
+     * @return string|null
+     */
+    public function getPaddleAdjustmentId()
+    {
+        return $this->container['paddle_adjustment_id'];
+    }
+
+    /**
+     * Sets paddle_adjustment_id
+     *
+     * @param string|null $paddle_adjustment_id Id of the Paddle refund adjustment of the license's transaction once it was canceled, through the Paddle integration. `null` otherwise.
+     *
+     * @return self
+     */
+    public function setPaddleAdjustmentId($paddle_adjustment_id)
+    {
+        if (is_null($paddle_adjustment_id)) {
+            array_push($this->openAPINullablesSetToNull, 'paddle_adjustment_id');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('paddle_adjustment_id', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['paddle_adjustment_id'] = $paddle_adjustment_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets paddle_refund_status
+     *
+     * @return string|null
+     */
+    public function getPaddleRefundStatus()
+    {
+        return $this->container['paddle_refund_status'];
+    }
+
+    /**
+     * Sets paddle_refund_status
+     *
+     * @param string|null $paddle_refund_status Outcome of the Paddle refund: `pending_approval` while Paddle reviews it, then `approved` or `rejected`. `null` without a Paddle refund.
+     *
+     * @return self
+     */
+    public function setPaddleRefundStatus($paddle_refund_status)
+    {
+        if (is_null($paddle_refund_status)) {
+            array_push($this->openAPINullablesSetToNull, 'paddle_refund_status');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('paddle_refund_status', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $allowedValues = $this->getPaddleRefundStatusAllowableValues();
+        if (!is_null($paddle_refund_status) && !in_array($paddle_refund_status, $allowedValues, true)) {
+            $paddle_refund_status = self::PADDLE_REFUND_STATUS_UNKNOWN_DEFAULT_OPEN_API;
+        }
+        $this->container['paddle_refund_status'] = $paddle_refund_status;
 
         return $this;
     }

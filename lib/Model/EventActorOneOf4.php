@@ -243,6 +243,7 @@ class EventActorOneOf4 implements ModelInterface, ArrayAccess, \JsonSerializable
     public const TYPE_INTEGRATION = 'integration';
     public const TYPE_UNKNOWN_DEFAULT_OPEN_API = 'unknown_default_open_api';
     public const PROVIDER_STRIPE = 'stripe';
+    public const PROVIDER_PADDLE = 'paddle';
     public const PROVIDER_UNKNOWN_DEFAULT_OPEN_API = 'unknown_default_open_api';
 
     /**
@@ -267,6 +268,7 @@ class EventActorOneOf4 implements ModelInterface, ArrayAccess, \JsonSerializable
     {
         return [
             self::PROVIDER_STRIPE,
+            self::PROVIDER_PADDLE,
             self::PROVIDER_UNKNOWN_DEFAULT_OPEN_API,
         ];
     }

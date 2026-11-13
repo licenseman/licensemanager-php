@@ -96,12 +96,36 @@ class IntegrationsApiTest extends TestCase
     }
 
     /**
+     * Test case for connectPaddle
+     *
+     * Connect Paddle.
+     *
+     */
+    public function testConnectPaddle()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for connectStripe
      *
      * Connect Stripe.
      *
      */
     public function testConnectStripe()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for createPaddleMapping
+     *
+     * Map a Paddle price to a policy.
+     *
+     */
+    public function testCreatePaddleMapping()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
@@ -156,6 +180,18 @@ class IntegrationsApiTest extends TestCase
     }
 
     /**
+     * Test case for getPaddleIntegration
+     *
+     * Get the Paddle integration of a product.
+     *
+     */
+    public function testGetPaddleIntegration()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for getSlackIntegration
      *
      * Get the Slack integration of a product.
@@ -174,6 +210,18 @@ class IntegrationsApiTest extends TestCase
      *
      */
     public function testGetStripeIntegration()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test case for listPaddlePrices
+     *
+     * List the Paddle prices of an integration.
+     *
+     */
+    public function testListPaddlePrices()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

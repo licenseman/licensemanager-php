@@ -319,6 +319,7 @@ class Integration implements ModelInterface, ArrayAccess, \JsonSerializable
     }
 
     public const PROVIDER_STRIPE = 'stripe';
+    public const PROVIDER_PADDLE = 'paddle';
     public const PROVIDER_UNKNOWN_DEFAULT_OPEN_API = 'unknown_default_open_api';
 
     /**
@@ -330,6 +331,7 @@ class Integration implements ModelInterface, ArrayAccess, \JsonSerializable
     {
         return [
             self::PROVIDER_STRIPE,
+            self::PROVIDER_PADDLE,
             self::PROVIDER_UNKNOWN_DEFAULT_OPEN_API,
         ];
     }
@@ -564,7 +566,7 @@ class Integration implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets account_name
      *
-     * @param string|null $account_name Name of the Stripe account, `null` when the API key can't read it.
+     * @param string|null $account_name Name of the Stripe account, `null` when the API key can't read it, and for Paddle, whose API doesn't give it.
      *
      * @return self
      */
@@ -625,7 +627,7 @@ class Integration implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets webhook_url
      *
-     * @param string $webhook_url URL of the webhook endpoint created on the Stripe account.
+     * @param string $webhook_url URL of the webhook endpoint created on the Stripe account, or of the notification destination created on the Paddle account.
      *
      * @return self
      */
@@ -781,7 +783,7 @@ class Integration implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets auto_refund
      *
-     * @param bool $auto_refund Whether canceling a license bought through Stripe refunds its payment. On by default, always off when `canRefund` is false.
+     * @param bool $auto_refund Whether canceling a license bought through the integration refunds its payment. On by default, always off when `canRefund` is false.
      *
      * @return self
      */
@@ -808,7 +810,7 @@ class Integration implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets can_refund
      *
-     * @param bool $can_refund Whether the API key has the optional Refunds: Write permission, checked when connecting and every day. Without it, canceled licenses aren't refunded: refund their payments from Stripe.
+     * @param bool $can_refund Whether the API key has the optional refund permission (Stripe: Refunds: Write, Paddle: Adjustments: Write), checked when connecting and every day. Without it, canceled licenses aren't refunded: refund their payments from the provider.
      *
      * @return self
      */
@@ -835,7 +837,7 @@ class Integration implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets can_manage_subscriptions
      *
-     * @param bool $can_manage_subscriptions Whether the API key has the optional Subscriptions: Write permission, checked when connecting and every day. Without it, subscription licenses can't be canceled from the app: cancel their subscriptions from Stripe.
+     * @param bool $can_manage_subscriptions Whether the API key has the optional Subscriptions: Write permission, checked when connecting and every day. Without it, subscription licenses can't be canceled from the app: cancel their subscriptions from the provider.
      *
      * @return self
      */
@@ -862,7 +864,7 @@ class Integration implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets can_billing_portal
      *
-     * @param bool $can_billing_portal Whether the API key has the optional Customer portal: Write permission, checked when connecting and every day. Without it, the license portal doesn't link to the Stripe customer portal.
+     * @param bool $can_billing_portal Whether the API key has the optional customer portal permission (Stripe: Customer portal: Write, Paddle: Customer portal sessions: Write), checked when connecting and every day. Without it, the license portal doesn't link to the provider's customer portal.
      *
      * @return self
      */
@@ -889,7 +891,7 @@ class Integration implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets subscription_grace_days
      *
-     * @param int $subscription_grace_days Days a subscription license stays valid after its period ends while its renewal is unpaid, as Stripe retries the payment. 7 by default.
+     * @param int $subscription_grace_days Days a subscription license stays valid after its period ends while its renewal is unpaid, as the provider retries the payment. 7 by default.
      *
      * @return self
      */

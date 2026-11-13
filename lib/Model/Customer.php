@@ -63,6 +63,7 @@ class Customer implements ModelInterface, ArrayAccess, \JsonSerializable
         'name' => 'string',
         'license_count' => 'int',
         'stripe_customer_id' => 'string',
+        'paddle_customer_id' => 'string',
         'created_at' => '\DateTime'
     ];
 
@@ -80,6 +81,7 @@ class Customer implements ModelInterface, ArrayAccess, \JsonSerializable
         'name' => null,
         'license_count' => null,
         'stripe_customer_id' => null,
+        'paddle_customer_id' => null,
         'created_at' => 'date-time'
     ];
 
@@ -95,6 +97,7 @@ class Customer implements ModelInterface, ArrayAccess, \JsonSerializable
         'name' => true,
         'license_count' => false,
         'stripe_customer_id' => true,
+        'paddle_customer_id' => true,
         'created_at' => false
     ];
 
@@ -190,6 +193,7 @@ class Customer implements ModelInterface, ArrayAccess, \JsonSerializable
         'name' => 'name',
         'license_count' => 'licenseCount',
         'stripe_customer_id' => 'stripeCustomerId',
+        'paddle_customer_id' => 'paddleCustomerId',
         'created_at' => 'createdAt'
     ];
 
@@ -205,6 +209,7 @@ class Customer implements ModelInterface, ArrayAccess, \JsonSerializable
         'name' => 'setName',
         'license_count' => 'setLicenseCount',
         'stripe_customer_id' => 'setStripeCustomerId',
+        'paddle_customer_id' => 'setPaddleCustomerId',
         'created_at' => 'setCreatedAt'
     ];
 
@@ -220,6 +225,7 @@ class Customer implements ModelInterface, ArrayAccess, \JsonSerializable
         'name' => 'getName',
         'license_count' => 'getLicenseCount',
         'stripe_customer_id' => 'getStripeCustomerId',
+        'paddle_customer_id' => 'getPaddleCustomerId',
         'created_at' => 'getCreatedAt'
     ];
 
@@ -286,6 +292,7 @@ class Customer implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('name', $data ?? [], null);
         $this->setIfExists('license_count', $data ?? [], null);
         $this->setIfExists('stripe_customer_id', $data ?? [], null);
+        $this->setIfExists('paddle_customer_id', $data ?? [], null);
         $this->setIfExists('created_at', $data ?? [], null);
     }
 
@@ -333,6 +340,9 @@ class Customer implements ModelInterface, ArrayAccess, \JsonSerializable
         }
         if ($this->container['stripe_customer_id'] === null && !$this->isNullableSetToNull('stripe_customer_id')) {
             $invalidProperties[] = "'stripe_customer_id' is required";
+        }
+        if ($this->container['paddle_customer_id'] === null && !$this->isNullableSetToNull('paddle_customer_id')) {
+            $invalidProperties[] = "'paddle_customer_id' is required";
         }
         if ($this->container['created_at'] === null) {
             $invalidProperties[] = "'created_at' can't be null";
@@ -524,6 +534,40 @@ class Customer implements ModelInterface, ArrayAccess, \JsonSerializable
             }
         }
         $this->container['stripe_customer_id'] = $stripe_customer_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets paddle_customer_id
+     *
+     * @return string|null
+     */
+    public function getPaddleCustomerId()
+    {
+        return $this->container['paddle_customer_id'];
+    }
+
+    /**
+     * Sets paddle_customer_id
+     *
+     * @param string|null $paddle_customer_id Id of the Paddle customer, when the customer bought licenses through the Paddle integration. `null` otherwise.
+     *
+     * @return self
+     */
+    public function setPaddleCustomerId($paddle_customer_id)
+    {
+        if (is_null($paddle_customer_id)) {
+            array_push($this->openAPINullablesSetToNull, 'paddle_customer_id');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('paddle_customer_id', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['paddle_customer_id'] = $paddle_customer_id;
 
         return $this;
     }

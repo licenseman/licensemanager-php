@@ -19,11 +19,13 @@ docs/Model/CancelLicense.md
 docs/Model/CancellationReason.md
 docs/Model/CancellationStats.md
 docs/Model/CancellationStatsByReasonInner.md
+docs/Model/ConnectPaddle.md
 docs/Model/ConnectStripe.md
 docs/Model/CreateBillingPortalSession.md
 docs/Model/CreateCustomer.md
 docs/Model/CreateIntegrationMapping.md
 docs/Model/CreateLicense.md
+docs/Model/CreatePaddleMapping.md
 docs/Model/CreatePolicy.md
 docs/Model/CreatePortalLink.md
 docs/Model/CreateProduct.md
@@ -62,6 +64,7 @@ docs/Model/LicenseStatsActivationsByVersionInner.md
 docs/Model/LicenseStatus.md
 docs/Model/LicenseSubscription.md
 docs/Model/LicenseToken.md
+docs/Model/ListPaddlePrices200Response.md
 docs/Model/ListPolicyEventsTypeParameter.md
 docs/Model/ListStripePrices200Response.md
 docs/Model/LockMaxVersion.md
@@ -74,6 +77,9 @@ docs/Model/MachineList.md
 docs/Model/Mrr.md
 docs/Model/MrrByIntervalInner.md
 docs/Model/MrrByPolicyInner.md
+docs/Model/PaddleIntegration.md
+docs/Model/PaddlePermission.md
+docs/Model/PaddlePrice.md
 docs/Model/Pagination.md
 docs/Model/Policy.md
 docs/Model/PolicyDuration.md
@@ -145,11 +151,13 @@ lib/Model/CancelLicense.php
 lib/Model/CancellationReason.php
 lib/Model/CancellationStats.php
 lib/Model/CancellationStatsByReasonInner.php
+lib/Model/ConnectPaddle.php
 lib/Model/ConnectStripe.php
 lib/Model/CreateBillingPortalSession.php
 lib/Model/CreateCustomer.php
 lib/Model/CreateIntegrationMapping.php
 lib/Model/CreateLicense.php
+lib/Model/CreatePaddleMapping.php
 lib/Model/CreatePolicy.php
 lib/Model/CreatePortalLink.php
 lib/Model/CreateProduct.php
@@ -188,6 +196,7 @@ lib/Model/LicenseStatsActivationsByVersionInner.php
 lib/Model/LicenseStatus.php
 lib/Model/LicenseSubscription.php
 lib/Model/LicenseToken.php
+lib/Model/ListPaddlePrices200Response.php
 lib/Model/ListPolicyEventsTypeParameter.php
 lib/Model/ListStripePrices200Response.php
 lib/Model/LockMaxVersion.php
@@ -201,6 +210,9 @@ lib/Model/ModelInterface.php
 lib/Model/Mrr.php
 lib/Model/MrrByIntervalInner.php
 lib/Model/MrrByPolicyInner.php
+lib/Model/PaddleIntegration.php
+lib/Model/PaddlePermission.php
+lib/Model/PaddlePrice.php
 lib/Model/Pagination.php
 lib/Model/Policy.php
 lib/Model/PolicyDuration.php
@@ -269,11 +281,13 @@ test/Model/CancelLicenseTest.php
 test/Model/CancellationReasonTest.php
 test/Model/CancellationStatsByReasonInnerTest.php
 test/Model/CancellationStatsTest.php
+test/Model/ConnectPaddleTest.php
 test/Model/ConnectStripeTest.php
 test/Model/CreateBillingPortalSessionTest.php
 test/Model/CreateCustomerTest.php
 test/Model/CreateIntegrationMappingTest.php
 test/Model/CreateLicenseTest.php
+test/Model/CreatePaddleMappingTest.php
 test/Model/CreatePolicyTest.php
 test/Model/CreatePortalLinkTest.php
 test/Model/CreateProductTest.php
@@ -312,6 +326,7 @@ test/Model/LicenseStatusTest.php
 test/Model/LicenseSubscriptionTest.php
 test/Model/LicenseTest.php
 test/Model/LicenseTokenTest.php
+test/Model/ListPaddlePrices200ResponseTest.php
 test/Model/ListPolicyEventsTypeParameterTest.php
 test/Model/ListStripePrices200ResponseTest.php
 test/Model/LockMaxVersionMajorAfterOneOf1Test.php
@@ -324,6 +339,9 @@ test/Model/MachineTest.php
 test/Model/MrrByIntervalInnerTest.php
 test/Model/MrrByPolicyInnerTest.php
 test/Model/MrrTest.php
+test/Model/PaddleIntegrationTest.php
+test/Model/PaddlePermissionTest.php
+test/Model/PaddlePriceTest.php
 test/Model/PaginationTest.php
 test/Model/PolicyDurationTest.php
 test/Model/PolicyListTest.php

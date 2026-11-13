@@ -635,7 +635,7 @@ class SlackConnection implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets events
      *
-     * @param string[] $events Notifications the channel gets: `purchased` (a license bought through Stripe), `renewed` (a subscription renewal paid), `payment_failed` (a subscription payment failed) and `canceled` (a license canceled, or its subscription ended).
+     * @param string[] $events Notifications the channel gets: `purchased` (a license bought through Stripe or Paddle), `renewed` (a subscription renewal paid), `payment_failed` (a subscription payment failed) and `canceled` (a license canceled, or its subscription ended).
      *
      * @return self
      */

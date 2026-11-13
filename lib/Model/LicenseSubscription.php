@@ -35,7 +35,7 @@ use \LicenseManager\ObjectSerializer;
  * LicenseSubscription Class Doc Comment
  *
  * @category Class
- * @description The Stripe subscription keeping the license valid, &#x60;null&#x60; when it isn&#39;t a subscription license. The license expires when it stops being paid, includes every update, and can&#39;t be canceled during a money back guarantee.
+ * @description The Stripe or Paddle subscription keeping the license valid, &#x60;null&#x60; when it isn&#39;t a subscription license. The license expires when it stops being paid, includes every update, and can&#39;t be canceled during a money back guarantee.
  * @package  LicenseManager
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
@@ -58,6 +58,8 @@ class LicenseSubscription implements ModelInterface, ArrayAccess, \JsonSerializa
      * @var string[]
      */
     protected static $openAPITypes = [
+        'provider' => 'string',
+        'external_id' => 'string',
         'stripe_subscription_id' => 'string',
         'status' => 'string',
         'interval' => 'string',
@@ -77,6 +79,8 @@ class LicenseSubscription implements ModelInterface, ArrayAccess, \JsonSerializa
      * @psalm-var array<string, string|null>
      */
     protected static $openAPIFormats = [
+        'provider' => null,
+        'external_id' => null,
         'stripe_subscription_id' => null,
         'status' => null,
         'interval' => null,
@@ -94,6 +98,8 @@ class LicenseSubscription implements ModelInterface, ArrayAccess, \JsonSerializa
      * @var boolean[]
      */
     protected static array $openAPINullables = [
+        'provider' => false,
+        'external_id' => false,
         'stripe_subscription_id' => false,
         'status' => false,
         'interval' => false,
@@ -191,6 +197,8 @@ class LicenseSubscription implements ModelInterface, ArrayAccess, \JsonSerializa
      * @var string[]
      */
     protected static $attributeMap = [
+        'provider' => 'provider',
+        'external_id' => 'externalId',
         'stripe_subscription_id' => 'stripeSubscriptionId',
         'status' => 'status',
         'interval' => 'interval',
@@ -208,6 +216,8 @@ class LicenseSubscription implements ModelInterface, ArrayAccess, \JsonSerializa
      * @var string[]
      */
     protected static $setters = [
+        'provider' => 'setProvider',
+        'external_id' => 'setExternalId',
         'stripe_subscription_id' => 'setStripeSubscriptionId',
         'status' => 'setStatus',
         'interval' => 'setInterval',
@@ -225,6 +235,8 @@ class LicenseSubscription implements ModelInterface, ArrayAccess, \JsonSerializa
      * @var string[]
      */
     protected static $getters = [
+        'provider' => 'getProvider',
+        'external_id' => 'getExternalId',
         'stripe_subscription_id' => 'getStripeSubscriptionId',
         'status' => 'getStatus',
         'interval' => 'getInterval',
@@ -277,11 +289,28 @@ class LicenseSubscription implements ModelInterface, ArrayAccess, \JsonSerializa
         return self::$openAPIModelName;
     }
 
+    public const PROVIDER_STRIPE = 'stripe';
+    public const PROVIDER_PADDLE = 'paddle';
+    public const PROVIDER_UNKNOWN_DEFAULT_OPEN_API = 'unknown_default_open_api';
     public const INTERVAL_DAY = 'day';
     public const INTERVAL_WEEK = 'week';
     public const INTERVAL_MONTH = 'month';
     public const INTERVAL_YEAR = 'year';
     public const INTERVAL_UNKNOWN_DEFAULT_OPEN_API = 'unknown_default_open_api';
+
+    /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getProviderAllowableValues()
+    {
+        return [
+            self::PROVIDER_STRIPE,
+            self::PROVIDER_PADDLE,
+            self::PROVIDER_UNKNOWN_DEFAULT_OPEN_API,
+        ];
+    }
 
     /**
      * Gets allowable values of the enum
@@ -314,6 +343,8 @@ class LicenseSubscription implements ModelInterface, ArrayAccess, \JsonSerializa
      */
     public function __construct(?array $data = null)
     {
+        $this->setIfExists('provider', $data ?? [], null);
+        $this->setIfExists('external_id', $data ?? [], null);
         $this->setIfExists('stripe_subscription_id', $data ?? [], null);
         $this->setIfExists('status', $data ?? [], null);
         $this->setIfExists('interval', $data ?? [], null);
@@ -352,6 +383,21 @@ class LicenseSubscription implements ModelInterface, ArrayAccess, \JsonSerializa
     {
         $invalidProperties = [];
 
+        if ($this->container['provider'] === null) {
+            $invalidProperties[] = "'provider' can't be null";
+        }
+        $allowedValues = $this->getProviderAllowableValues();
+        if (!is_null($this->container['provider']) && !in_array($this->container['provider'], $allowedValues, true)) {
+            $invalidProperties[] = sprintf(
+                "invalid value '%s' for 'provider', must be one of '%s'",
+                $this->container['provider'],
+                implode("', '", $allowedValues)
+            );
+        }
+
+        if ($this->container['external_id'] === null) {
+            $invalidProperties[] = "'external_id' can't be null";
+        }
         if ($this->container['stripe_subscription_id'] === null) {
             $invalidProperties[] = "'stripe_subscription_id' can't be null";
         }
@@ -404,9 +450,68 @@ class LicenseSubscription implements ModelInterface, ArrayAccess, \JsonSerializa
 
 
     /**
+     * Gets provider
+     *
+     * @return string
+     */
+    public function getProvider()
+    {
+        return $this->container['provider'];
+    }
+
+    /**
+     * Sets provider
+     *
+     * @param string $provider Provider of the subscription.
+     *
+     * @return self
+     */
+    public function setProvider($provider)
+    {
+        if (is_null($provider)) {
+            throw new \InvalidArgumentException('non-nullable provider cannot be null');
+        }
+        $allowedValues = $this->getProviderAllowableValues();
+        if (!in_array($provider, $allowedValues, true)) {
+            $provider = self::PROVIDER_UNKNOWN_DEFAULT_OPEN_API;
+        }
+        $this->container['provider'] = $provider;
+
+        return $this;
+    }
+
+    /**
+     * Gets external_id
+     *
+     * @return string
+     */
+    public function getExternalId()
+    {
+        return $this->container['external_id'];
+    }
+
+    /**
+     * Sets external_id
+     *
+     * @param string $external_id Id of the subscription in the provider: `sub_…` in Stripe and in Paddle.
+     *
+     * @return self
+     */
+    public function setExternalId($external_id)
+    {
+        if (is_null($external_id)) {
+            throw new \InvalidArgumentException('non-nullable external_id cannot be null');
+        }
+        $this->container['external_id'] = $external_id;
+
+        return $this;
+    }
+
+    /**
      * Gets stripe_subscription_id
      *
      * @return string
+     * @deprecated
      */
     public function getStripeSubscriptionId()
     {
@@ -416,9 +521,10 @@ class LicenseSubscription implements ModelInterface, ArrayAccess, \JsonSerializa
     /**
      * Sets stripe_subscription_id
      *
-     * @param string $stripe_subscription_id stripe_subscription_id
+     * @param string $stripe_subscription_id Deprecated: use `externalId`, which it equals.
      *
      * @return self
+     * @deprecated
      */
     public function setStripeSubscriptionId($stripe_subscription_id)
     {
@@ -443,7 +549,7 @@ class LicenseSubscription implements ModelInterface, ArrayAccess, \JsonSerializa
     /**
      * Sets status
      *
-     * @param string $status Status of the subscription in Stripe: `active`, `trialing`, `past_due` while a failed payment is retried, `canceled`, `unpaid`, `paused`, `incomplete` or `incomplete_expired`.
+     * @param string $status Status of the subscription in the provider. Stripe: `active`, `trialing`, `past_due` while a failed payment is retried, `canceled`, `unpaid`, `paused`, `incomplete` or `incomplete_expired`. Paddle: `active`, `trialing`, `past_due`, `paused` or `canceled`.
      *
      * @return self
      */

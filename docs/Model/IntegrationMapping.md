@@ -6,11 +6,14 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **string** |  |
 **integration_id** | **string** |  |
+**provider** | **string** |  |
 **product_id** | **string** |  |
 **policy_id** | **string** |  |
-**stripe_product_id** | **string** |  |
-**stripe_price_id** | **string** |  |
-**product_name** | **string** | Name of the Stripe product when it was mapped. |
+**external_product_id** | **string** | Id of the product in the provider: &#x60;prod_…&#x60; in Stripe, &#x60;pro_…&#x60; in Paddle. |
+**external_price_id** | **string** | Id of the price in the provider: &#x60;price_…&#x60; in Stripe, &#x60;pri_…&#x60; in Paddle. |
+**stripe_product_id** | **string** | Deprecated: use &#x60;externalProductId&#x60;, which it equals. |
+**stripe_price_id** | **string** | Deprecated: use &#x60;externalPriceId&#x60;, which it equals. |
+**product_name** | **string** | Name of the provider&#39;s product when it was mapped. |
 **price** | [**\LicenseManager\Model\Price**](Price.md) |  |
 **recurring** | [**\LicenseManager\Model\IntegrationMappingRecurring**](IntegrationMappingRecurring.md) |  |
 **status** | **string** | &#x60;error&#x60; when the price can no longer be paid, explained by &#x60;statusReason&#x60;. |

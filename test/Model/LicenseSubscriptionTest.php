@@ -34,7 +34,7 @@ use PHPUnit\Framework\TestCase;
  * LicenseSubscriptionTest Class Doc Comment
  *
  * @category    Class
- * @description The Stripe subscription keeping the license valid, &#x60;null&#x60; when it isn&#39;t a subscription license. The license expires when it stops being paid, includes every update, and can&#39;t be canceled during a money back guarantee.
+ * @description The Stripe or Paddle subscription keeping the license valid, &#x60;null&#x60; when it isn&#39;t a subscription license. The license expires when it stops being paid, includes every update, and can&#39;t be canceled during a money back guarantee.
  * @package     LicenseManager
  * @author      OpenAPI Generator team
  * @link        https://openapi-generator.tech
@@ -74,6 +74,24 @@ class LicenseSubscriptionTest extends TestCase
      * Test "LicenseSubscription"
      */
     public function testLicenseSubscription()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "provider"
+     */
+    public function testPropertyProvider()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "external_id"
+     */
+    public function testPropertyExternalId()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

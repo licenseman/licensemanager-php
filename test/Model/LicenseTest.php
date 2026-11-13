@@ -170,6 +170,15 @@ class LicenseTest extends TestCase
     }
 
     /**
+     * Test attribute "paddle_transaction_id"
+     */
+    public function testPropertyPaddleTransactionId()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "max_machines"
      */
     public function testPropertyMaxMachines()
@@ -281,6 +290,24 @@ class LicenseTest extends TestCase
      * Test attribute "stripe_refund_id"
      */
     public function testPropertyStripeRefundId()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "paddle_adjustment_id"
+     */
+    public function testPropertyPaddleAdjustmentId()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "paddle_refund_status"
+     */
+    public function testPropertyPaddleRefundStatus()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

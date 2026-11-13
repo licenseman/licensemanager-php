@@ -134,6 +134,15 @@ class CustomerTest extends TestCase
     }
 
     /**
+     * Test attribute "paddle_customer_id"
+     */
+    public function testPropertyPaddleCustomerId()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "created_at"
      */
     public function testPropertyCreatedAt()

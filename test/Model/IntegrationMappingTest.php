@@ -98,6 +98,15 @@ class IntegrationMappingTest extends TestCase
     }
 
     /**
+     * Test attribute "provider"
+     */
+    public function testPropertyProvider()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "product_id"
      */
     public function testPropertyProductId()
@@ -110,6 +119,24 @@ class IntegrationMappingTest extends TestCase
      * Test attribute "policy_id"
      */
     public function testPropertyPolicyId()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "external_product_id"
+     */
+    public function testPropertyExternalProductId()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "external_price_id"
+     */
+    public function testPropertyExternalPriceId()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

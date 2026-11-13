@@ -59,8 +59,11 @@ class IntegrationMapping implements ModelInterface, ArrayAccess, \JsonSerializab
     protected static $openAPITypes = [
         'id' => 'string',
         'integration_id' => 'string',
+        'provider' => 'string',
         'product_id' => 'string',
         'policy_id' => 'string',
+        'external_product_id' => 'string',
+        'external_price_id' => 'string',
         'stripe_product_id' => 'string',
         'stripe_price_id' => 'string',
         'product_name' => 'string',
@@ -81,8 +84,11 @@ class IntegrationMapping implements ModelInterface, ArrayAccess, \JsonSerializab
     protected static $openAPIFormats = [
         'id' => null,
         'integration_id' => null,
+        'provider' => null,
         'product_id' => null,
         'policy_id' => null,
+        'external_product_id' => null,
+        'external_price_id' => null,
         'stripe_product_id' => null,
         'stripe_price_id' => null,
         'product_name' => null,
@@ -101,8 +107,11 @@ class IntegrationMapping implements ModelInterface, ArrayAccess, \JsonSerializab
     protected static array $openAPINullables = [
         'id' => false,
         'integration_id' => false,
+        'provider' => false,
         'product_id' => false,
         'policy_id' => false,
+        'external_product_id' => false,
+        'external_price_id' => false,
         'stripe_product_id' => false,
         'stripe_price_id' => false,
         'product_name' => false,
@@ -201,8 +210,11 @@ class IntegrationMapping implements ModelInterface, ArrayAccess, \JsonSerializab
     protected static $attributeMap = [
         'id' => 'id',
         'integration_id' => 'integrationId',
+        'provider' => 'provider',
         'product_id' => 'productId',
         'policy_id' => 'policyId',
+        'external_product_id' => 'externalProductId',
+        'external_price_id' => 'externalPriceId',
         'stripe_product_id' => 'stripeProductId',
         'stripe_price_id' => 'stripePriceId',
         'product_name' => 'productName',
@@ -221,8 +233,11 @@ class IntegrationMapping implements ModelInterface, ArrayAccess, \JsonSerializab
     protected static $setters = [
         'id' => 'setId',
         'integration_id' => 'setIntegrationId',
+        'provider' => 'setProvider',
         'product_id' => 'setProductId',
         'policy_id' => 'setPolicyId',
+        'external_product_id' => 'setExternalProductId',
+        'external_price_id' => 'setExternalPriceId',
         'stripe_product_id' => 'setStripeProductId',
         'stripe_price_id' => 'setStripePriceId',
         'product_name' => 'setProductName',
@@ -241,8 +256,11 @@ class IntegrationMapping implements ModelInterface, ArrayAccess, \JsonSerializab
     protected static $getters = [
         'id' => 'getId',
         'integration_id' => 'getIntegrationId',
+        'provider' => 'getProvider',
         'product_id' => 'getProductId',
         'policy_id' => 'getPolicyId',
+        'external_product_id' => 'getExternalProductId',
+        'external_price_id' => 'getExternalPriceId',
         'stripe_product_id' => 'getStripeProductId',
         'stripe_price_id' => 'getStripePriceId',
         'product_name' => 'getProductName',
@@ -294,9 +312,26 @@ class IntegrationMapping implements ModelInterface, ArrayAccess, \JsonSerializab
         return self::$openAPIModelName;
     }
 
+    public const PROVIDER_STRIPE = 'stripe';
+    public const PROVIDER_PADDLE = 'paddle';
+    public const PROVIDER_UNKNOWN_DEFAULT_OPEN_API = 'unknown_default_open_api';
     public const STATUS_ACTIVE = 'active';
     public const STATUS_ERROR = 'error';
     public const STATUS_UNKNOWN_DEFAULT_OPEN_API = 'unknown_default_open_api';
+
+    /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getProviderAllowableValues()
+    {
+        return [
+            self::PROVIDER_STRIPE,
+            self::PROVIDER_PADDLE,
+            self::PROVIDER_UNKNOWN_DEFAULT_OPEN_API,
+        ];
+    }
 
     /**
      * Gets allowable values of the enum
@@ -329,8 +364,11 @@ class IntegrationMapping implements ModelInterface, ArrayAccess, \JsonSerializab
     {
         $this->setIfExists('id', $data ?? [], null);
         $this->setIfExists('integration_id', $data ?? [], null);
+        $this->setIfExists('provider', $data ?? [], null);
         $this->setIfExists('product_id', $data ?? [], null);
         $this->setIfExists('policy_id', $data ?? [], null);
+        $this->setIfExists('external_product_id', $data ?? [], null);
+        $this->setIfExists('external_price_id', $data ?? [], null);
         $this->setIfExists('stripe_product_id', $data ?? [], null);
         $this->setIfExists('stripe_price_id', $data ?? [], null);
         $this->setIfExists('product_name', $data ?? [], null);
@@ -374,11 +412,29 @@ class IntegrationMapping implements ModelInterface, ArrayAccess, \JsonSerializab
         if ($this->container['integration_id'] === null) {
             $invalidProperties[] = "'integration_id' can't be null";
         }
+        if ($this->container['provider'] === null) {
+            $invalidProperties[] = "'provider' can't be null";
+        }
+        $allowedValues = $this->getProviderAllowableValues();
+        if (!is_null($this->container['provider']) && !in_array($this->container['provider'], $allowedValues, true)) {
+            $invalidProperties[] = sprintf(
+                "invalid value '%s' for 'provider', must be one of '%s'",
+                $this->container['provider'],
+                implode("', '", $allowedValues)
+            );
+        }
+
         if ($this->container['product_id'] === null) {
             $invalidProperties[] = "'product_id' can't be null";
         }
         if ($this->container['policy_id'] === null) {
             $invalidProperties[] = "'policy_id' can't be null";
+        }
+        if ($this->container['external_product_id'] === null) {
+            $invalidProperties[] = "'external_product_id' can't be null";
+        }
+        if ($this->container['external_price_id'] === null) {
+            $invalidProperties[] = "'external_price_id' can't be null";
         }
         if ($this->container['stripe_product_id'] === null) {
             $invalidProperties[] = "'stripe_product_id' can't be null";
@@ -483,6 +539,37 @@ class IntegrationMapping implements ModelInterface, ArrayAccess, \JsonSerializab
     }
 
     /**
+     * Gets provider
+     *
+     * @return string
+     */
+    public function getProvider()
+    {
+        return $this->container['provider'];
+    }
+
+    /**
+     * Sets provider
+     *
+     * @param string $provider provider
+     *
+     * @return self
+     */
+    public function setProvider($provider)
+    {
+        if (is_null($provider)) {
+            throw new \InvalidArgumentException('non-nullable provider cannot be null');
+        }
+        $allowedValues = $this->getProviderAllowableValues();
+        if (!in_array($provider, $allowedValues, true)) {
+            $provider = self::PROVIDER_UNKNOWN_DEFAULT_OPEN_API;
+        }
+        $this->container['provider'] = $provider;
+
+        return $this;
+    }
+
+    /**
      * Gets product_id
      *
      * @return string
@@ -537,9 +624,64 @@ class IntegrationMapping implements ModelInterface, ArrayAccess, \JsonSerializab
     }
 
     /**
+     * Gets external_product_id
+     *
+     * @return string
+     */
+    public function getExternalProductId()
+    {
+        return $this->container['external_product_id'];
+    }
+
+    /**
+     * Sets external_product_id
+     *
+     * @param string $external_product_id Id of the product in the provider: `prod_…` in Stripe, `pro_…` in Paddle.
+     *
+     * @return self
+     */
+    public function setExternalProductId($external_product_id)
+    {
+        if (is_null($external_product_id)) {
+            throw new \InvalidArgumentException('non-nullable external_product_id cannot be null');
+        }
+        $this->container['external_product_id'] = $external_product_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets external_price_id
+     *
+     * @return string
+     */
+    public function getExternalPriceId()
+    {
+        return $this->container['external_price_id'];
+    }
+
+    /**
+     * Sets external_price_id
+     *
+     * @param string $external_price_id Id of the price in the provider: `price_…` in Stripe, `pri_…` in Paddle.
+     *
+     * @return self
+     */
+    public function setExternalPriceId($external_price_id)
+    {
+        if (is_null($external_price_id)) {
+            throw new \InvalidArgumentException('non-nullable external_price_id cannot be null');
+        }
+        $this->container['external_price_id'] = $external_price_id;
+
+        return $this;
+    }
+
+    /**
      * Gets stripe_product_id
      *
      * @return string
+     * @deprecated
      */
     public function getStripeProductId()
     {
@@ -549,9 +691,10 @@ class IntegrationMapping implements ModelInterface, ArrayAccess, \JsonSerializab
     /**
      * Sets stripe_product_id
      *
-     * @param string $stripe_product_id stripe_product_id
+     * @param string $stripe_product_id Deprecated: use `externalProductId`, which it equals.
      *
      * @return self
+     * @deprecated
      */
     public function setStripeProductId($stripe_product_id)
     {
@@ -567,6 +710,7 @@ class IntegrationMapping implements ModelInterface, ArrayAccess, \JsonSerializab
      * Gets stripe_price_id
      *
      * @return string
+     * @deprecated
      */
     public function getStripePriceId()
     {
@@ -576,9 +720,10 @@ class IntegrationMapping implements ModelInterface, ArrayAccess, \JsonSerializab
     /**
      * Sets stripe_price_id
      *
-     * @param string $stripe_price_id stripe_price_id
+     * @param string $stripe_price_id Deprecated: use `externalPriceId`, which it equals.
      *
      * @return self
+     * @deprecated
      */
     public function setStripePriceId($stripe_price_id)
     {
@@ -603,7 +748,7 @@ class IntegrationMapping implements ModelInterface, ArrayAccess, \JsonSerializab
     /**
      * Sets product_name
      *
-     * @param string $product_name Name of the Stripe product when it was mapped.
+     * @param string $product_name Name of the provider's product when it was mapped.
      *
      * @return self
      */
