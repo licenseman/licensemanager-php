@@ -65,7 +65,10 @@ class Event implements ModelInterface, ArrayAccess, \JsonSerializable
         'license_id' => 'string',
         'machine_id' => 'string',
         'machine' => '\LicenseManager\Model\EventMachine',
-        'actor' => '\LicenseManager\Model\EventActor'
+        'actor' => '\LicenseManager\Model\EventActor',
+        'country' => 'string',
+        'latitude' => 'float',
+        'longitude' => 'float'
     ];
 
     /**
@@ -84,7 +87,10 @@ class Event implements ModelInterface, ArrayAccess, \JsonSerializable
         'license_id' => null,
         'machine_id' => null,
         'machine' => null,
-        'actor' => null
+        'actor' => null,
+        'country' => null,
+        'latitude' => null,
+        'longitude' => null
     ];
 
     /**
@@ -101,7 +107,10 @@ class Event implements ModelInterface, ArrayAccess, \JsonSerializable
         'license_id' => true,
         'machine_id' => true,
         'machine' => true,
-        'actor' => true
+        'actor' => true,
+        'country' => true,
+        'latitude' => true,
+        'longitude' => true
     ];
 
     /**
@@ -198,7 +207,10 @@ class Event implements ModelInterface, ArrayAccess, \JsonSerializable
         'license_id' => 'licenseId',
         'machine_id' => 'machineId',
         'machine' => 'machine',
-        'actor' => 'actor'
+        'actor' => 'actor',
+        'country' => 'country',
+        'latitude' => 'latitude',
+        'longitude' => 'longitude'
     ];
 
     /**
@@ -215,7 +227,10 @@ class Event implements ModelInterface, ArrayAccess, \JsonSerializable
         'license_id' => 'setLicenseId',
         'machine_id' => 'setMachineId',
         'machine' => 'setMachine',
-        'actor' => 'setActor'
+        'actor' => 'setActor',
+        'country' => 'setCountry',
+        'latitude' => 'setLatitude',
+        'longitude' => 'setLongitude'
     ];
 
     /**
@@ -232,7 +247,10 @@ class Event implements ModelInterface, ArrayAccess, \JsonSerializable
         'license_id' => 'getLicenseId',
         'machine_id' => 'getMachineId',
         'machine' => 'getMachine',
-        'actor' => 'getActor'
+        'actor' => 'getActor',
+        'country' => 'getCountry',
+        'latitude' => 'getLatitude',
+        'longitude' => 'getLongitude'
     ];
 
     /**
@@ -301,6 +319,9 @@ class Event implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('machine_id', $data ?? [], null);
         $this->setIfExists('machine', $data ?? [], null);
         $this->setIfExists('actor', $data ?? [], null);
+        $this->setIfExists('country', $data ?? [], null);
+        $this->setIfExists('latitude', $data ?? [], null);
+        $this->setIfExists('longitude', $data ?? [], null);
     }
 
     /**
@@ -356,6 +377,15 @@ class Event implements ModelInterface, ArrayAccess, \JsonSerializable
         }
         if ($this->container['actor'] === null && !$this->isNullableSetToNull('actor')) {
             $invalidProperties[] = "'actor' is required";
+        }
+        if ($this->container['country'] === null && !$this->isNullableSetToNull('country')) {
+            $invalidProperties[] = "'country' is required";
+        }
+        if ($this->container['latitude'] === null && !$this->isNullableSetToNull('latitude')) {
+            $invalidProperties[] = "'latitude' is required";
+        }
+        if ($this->container['longitude'] === null && !$this->isNullableSetToNull('longitude')) {
+            $invalidProperties[] = "'longitude' is required";
         }
         return $invalidProperties;
     }
@@ -646,6 +676,108 @@ class Event implements ModelInterface, ArrayAccess, \JsonSerializable
             }
         }
         $this->container['actor'] = $actor;
+
+        return $this;
+    }
+
+    /**
+     * Gets country
+     *
+     * @return string|null
+     */
+    public function getCountry()
+    {
+        return $this->container['country'];
+    }
+
+    /**
+     * Sets country
+     *
+     * @param string|null $country ISO 3166-1 alpha-2 code of the country of the IP address the request came from, for `license.validated` and `license.validation_failed` events. `null` until it's looked up, shortly after, or when it can't be.
+     *
+     * @return self
+     */
+    public function setCountry($country)
+    {
+        if (is_null($country)) {
+            array_push($this->openAPINullablesSetToNull, 'country');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('country', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['country'] = $country;
+
+        return $this;
+    }
+
+    /**
+     * Gets latitude
+     *
+     * @return float|null
+     */
+    public function getLatitude()
+    {
+        return $this->container['latitude'];
+    }
+
+    /**
+     * Sets latitude
+     *
+     * @param float|null $latitude Approximate latitude of the IP address the request came from, for `license.validated` and `license.validation_failed` events. `null` until it's looked up, shortly after, or when it can't be.
+     *
+     * @return self
+     */
+    public function setLatitude($latitude)
+    {
+        if (is_null($latitude)) {
+            array_push($this->openAPINullablesSetToNull, 'latitude');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('latitude', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['latitude'] = $latitude;
+
+        return $this;
+    }
+
+    /**
+     * Gets longitude
+     *
+     * @return float|null
+     */
+    public function getLongitude()
+    {
+        return $this->container['longitude'];
+    }
+
+    /**
+     * Sets longitude
+     *
+     * @param float|null $longitude Approximate longitude of the IP address the request came from, for `license.validated` and `license.validation_failed` events. `null` until it's looked up, shortly after, or when it can't be.
+     *
+     * @return self
+     */
+    public function setLongitude($longitude)
+    {
+        if (is_null($longitude)) {
+            array_push($this->openAPINullablesSetToNull, 'longitude');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('longitude', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['longitude'] = $longitude;
 
         return $this;
     }

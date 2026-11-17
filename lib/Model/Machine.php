@@ -66,6 +66,9 @@ class Machine implements ModelInterface, ArrayAccess, \JsonSerializable
         'version' => 'string',
         'overridden_by_machine_id' => 'string',
         'last_validated_at' => '\DateTime',
+        'country' => 'string',
+        'latitude' => 'float',
+        'longitude' => 'float',
         'created_at' => '\DateTime',
         'updated_at' => '\DateTime'
     ];
@@ -87,6 +90,9 @@ class Machine implements ModelInterface, ArrayAccess, \JsonSerializable
         'version' => null,
         'overridden_by_machine_id' => null,
         'last_validated_at' => 'date-time',
+        'country' => null,
+        'latitude' => null,
+        'longitude' => null,
         'created_at' => 'date-time',
         'updated_at' => 'date-time'
     ];
@@ -106,6 +112,9 @@ class Machine implements ModelInterface, ArrayAccess, \JsonSerializable
         'version' => true,
         'overridden_by_machine_id' => true,
         'last_validated_at' => true,
+        'country' => true,
+        'latitude' => true,
+        'longitude' => true,
         'created_at' => false,
         'updated_at' => false
     ];
@@ -205,6 +214,9 @@ class Machine implements ModelInterface, ArrayAccess, \JsonSerializable
         'version' => 'version',
         'overridden_by_machine_id' => 'overriddenByMachineId',
         'last_validated_at' => 'lastValidatedAt',
+        'country' => 'country',
+        'latitude' => 'latitude',
+        'longitude' => 'longitude',
         'created_at' => 'createdAt',
         'updated_at' => 'updatedAt'
     ];
@@ -224,6 +236,9 @@ class Machine implements ModelInterface, ArrayAccess, \JsonSerializable
         'version' => 'setVersion',
         'overridden_by_machine_id' => 'setOverriddenByMachineId',
         'last_validated_at' => 'setLastValidatedAt',
+        'country' => 'setCountry',
+        'latitude' => 'setLatitude',
+        'longitude' => 'setLongitude',
         'created_at' => 'setCreatedAt',
         'updated_at' => 'setUpdatedAt'
     ];
@@ -243,6 +258,9 @@ class Machine implements ModelInterface, ArrayAccess, \JsonSerializable
         'version' => 'getVersion',
         'overridden_by_machine_id' => 'getOverriddenByMachineId',
         'last_validated_at' => 'getLastValidatedAt',
+        'country' => 'getCountry',
+        'latitude' => 'getLatitude',
+        'longitude' => 'getLongitude',
         'created_at' => 'getCreatedAt',
         'updated_at' => 'getUpdatedAt'
     ];
@@ -332,6 +350,9 @@ class Machine implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('version', $data ?? [], null);
         $this->setIfExists('overridden_by_machine_id', $data ?? [], null);
         $this->setIfExists('last_validated_at', $data ?? [], null);
+        $this->setIfExists('country', $data ?? [], null);
+        $this->setIfExists('latitude', $data ?? [], null);
+        $this->setIfExists('longitude', $data ?? [], null);
         $this->setIfExists('created_at', $data ?? [], null);
         $this->setIfExists('updated_at', $data ?? [], null);
     }
@@ -398,6 +419,15 @@ class Machine implements ModelInterface, ArrayAccess, \JsonSerializable
         }
         if ($this->container['last_validated_at'] === null && !$this->isNullableSetToNull('last_validated_at')) {
             $invalidProperties[] = "'last_validated_at' is required";
+        }
+        if ($this->container['country'] === null && !$this->isNullableSetToNull('country')) {
+            $invalidProperties[] = "'country' is required";
+        }
+        if ($this->container['latitude'] === null && !$this->isNullableSetToNull('latitude')) {
+            $invalidProperties[] = "'latitude' is required";
+        }
+        if ($this->container['longitude'] === null && !$this->isNullableSetToNull('longitude')) {
+            $invalidProperties[] = "'longitude' is required";
         }
         if ($this->container['created_at'] === null) {
             $invalidProperties[] = "'created_at' can't be null";
@@ -698,6 +728,108 @@ class Machine implements ModelInterface, ArrayAccess, \JsonSerializable
             }
         }
         $this->container['last_validated_at'] = $last_validated_at;
+
+        return $this;
+    }
+
+    /**
+     * Gets country
+     *
+     * @return string|null
+     */
+    public function getCountry()
+    {
+        return $this->container['country'];
+    }
+
+    /**
+     * Sets country
+     *
+     * @param string|null $country ISO 3166-1 alpha-2 code of the country of the IP address the license was last successfully validated from on the machine. `null` until it's looked up, shortly after, or when it can't be.
+     *
+     * @return self
+     */
+    public function setCountry($country)
+    {
+        if (is_null($country)) {
+            array_push($this->openAPINullablesSetToNull, 'country');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('country', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['country'] = $country;
+
+        return $this;
+    }
+
+    /**
+     * Gets latitude
+     *
+     * @return float|null
+     */
+    public function getLatitude()
+    {
+        return $this->container['latitude'];
+    }
+
+    /**
+     * Sets latitude
+     *
+     * @param float|null $latitude Approximate latitude of the IP address the license was last successfully validated from on the machine. `null` until it's looked up, shortly after, or when it can't be.
+     *
+     * @return self
+     */
+    public function setLatitude($latitude)
+    {
+        if (is_null($latitude)) {
+            array_push($this->openAPINullablesSetToNull, 'latitude');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('latitude', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['latitude'] = $latitude;
+
+        return $this;
+    }
+
+    /**
+     * Gets longitude
+     *
+     * @return float|null
+     */
+    public function getLongitude()
+    {
+        return $this->container['longitude'];
+    }
+
+    /**
+     * Sets longitude
+     *
+     * @param float|null $longitude Approximate longitude of the IP address the license was last successfully validated from on the machine. `null` until it's looked up, shortly after, or when it can't be.
+     *
+     * @return self
+     */
+    public function setLongitude($longitude)
+    {
+        if (is_null($longitude)) {
+            array_push($this->openAPINullablesSetToNull, 'longitude');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('longitude', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['longitude'] = $longitude;
 
         return $this;
     }

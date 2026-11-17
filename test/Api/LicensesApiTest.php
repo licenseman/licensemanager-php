@@ -144,6 +144,18 @@ class LicensesApiTest extends TestCase
     }
 
     /**
+     * Test case for importLicenses
+     *
+     * Import licenses.
+     *
+     */
+    public function testImportLicenses()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test case for listCustomerLicenses
      *
      * List the licenses of a customer.

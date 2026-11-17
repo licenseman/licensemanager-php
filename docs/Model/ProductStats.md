@@ -25,5 +25,6 @@ Name | Type | Description | Notes
 **activations_by_version** | [**\LicenseManager\Model\ProductStatsActivationsByVersionInner[]**](ProductStatsActivationsByVersionInner.md) | Successful activations of the licenses of the product each day, per version of the application, from the most recent one. |
 **active_machines_by_version** | [**\LicenseManager\Model\ProductStatsActiveMachinesByVersionInner[]**](ProductStatsActiveMachinesByVersionInner.md) | Number of active machines running each version of the application, from the most recent one. |
 **active_machines_by_platform** | [**\LicenseManager\Model\ProductStatsActiveMachinesByPlatformInner[]**](ProductStatsActiveMachinesByPlatformInner.md) | Number of active machines on each platform, from the one with the most machines. |
+**active_machines_by_country** | [**\LicenseManager\Model\ProductStatsActiveMachinesByCountryInner[]**](ProductStatsActiveMachinesByCountryInner.md) | Number of active machines in each country, from the one with the most machines. |
 
 [[Back to Model list]](../../README.md#models) [[Back to API list]](../../README.md#endpoints) [[Back to README]](../../README.md)

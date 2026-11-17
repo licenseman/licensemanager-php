@@ -77,7 +77,8 @@ class ProductStats implements ModelInterface, ArrayAccess, \JsonSerializable
         'revenue' => '\LicenseManager\Model\Revenue[]',
         'activations_by_version' => '\LicenseManager\Model\ProductStatsActivationsByVersionInner[]',
         'active_machines_by_version' => '\LicenseManager\Model\ProductStatsActiveMachinesByVersionInner[]',
-        'active_machines_by_platform' => '\LicenseManager\Model\ProductStatsActiveMachinesByPlatformInner[]'
+        'active_machines_by_platform' => '\LicenseManager\Model\ProductStatsActiveMachinesByPlatformInner[]',
+        'active_machines_by_country' => '\LicenseManager\Model\ProductStatsActiveMachinesByCountryInner[]'
     ];
 
     /**
@@ -108,7 +109,8 @@ class ProductStats implements ModelInterface, ArrayAccess, \JsonSerializable
         'revenue' => null,
         'activations_by_version' => null,
         'active_machines_by_version' => null,
-        'active_machines_by_platform' => null
+        'active_machines_by_platform' => null,
+        'active_machines_by_country' => null
     ];
 
     /**
@@ -137,7 +139,8 @@ class ProductStats implements ModelInterface, ArrayAccess, \JsonSerializable
         'revenue' => false,
         'activations_by_version' => false,
         'active_machines_by_version' => false,
-        'active_machines_by_platform' => false
+        'active_machines_by_platform' => false,
+        'active_machines_by_country' => false
     ];
 
     /**
@@ -246,7 +249,8 @@ class ProductStats implements ModelInterface, ArrayAccess, \JsonSerializable
         'revenue' => 'revenue',
         'activations_by_version' => 'activationsByVersion',
         'active_machines_by_version' => 'activeMachinesByVersion',
-        'active_machines_by_platform' => 'activeMachinesByPlatform'
+        'active_machines_by_platform' => 'activeMachinesByPlatform',
+        'active_machines_by_country' => 'activeMachinesByCountry'
     ];
 
     /**
@@ -275,7 +279,8 @@ class ProductStats implements ModelInterface, ArrayAccess, \JsonSerializable
         'revenue' => 'setRevenue',
         'activations_by_version' => 'setActivationsByVersion',
         'active_machines_by_version' => 'setActiveMachinesByVersion',
-        'active_machines_by_platform' => 'setActiveMachinesByPlatform'
+        'active_machines_by_platform' => 'setActiveMachinesByPlatform',
+        'active_machines_by_country' => 'setActiveMachinesByCountry'
     ];
 
     /**
@@ -304,7 +309,8 @@ class ProductStats implements ModelInterface, ArrayAccess, \JsonSerializable
         'revenue' => 'getRevenue',
         'activations_by_version' => 'getActivationsByVersion',
         'active_machines_by_version' => 'getActiveMachinesByVersion',
-        'active_machines_by_platform' => 'getActiveMachinesByPlatform'
+        'active_machines_by_platform' => 'getActiveMachinesByPlatform',
+        'active_machines_by_country' => 'getActiveMachinesByCountry'
     ];
 
     /**
@@ -385,6 +391,7 @@ class ProductStats implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('activations_by_version', $data ?? [], null);
         $this->setIfExists('active_machines_by_version', $data ?? [], null);
         $this->setIfExists('active_machines_by_platform', $data ?? [], null);
+        $this->setIfExists('active_machines_by_country', $data ?? [], null);
     }
 
     /**
@@ -476,6 +483,9 @@ class ProductStats implements ModelInterface, ArrayAccess, \JsonSerializable
         }
         if ($this->container['active_machines_by_platform'] === null) {
             $invalidProperties[] = "'active_machines_by_platform' can't be null";
+        }
+        if ($this->container['active_machines_by_country'] === null) {
+            $invalidProperties[] = "'active_machines_by_country' can't be null";
         }
         return $invalidProperties;
     }
@@ -1069,6 +1079,33 @@ class ProductStats implements ModelInterface, ArrayAccess, \JsonSerializable
             throw new \InvalidArgumentException('non-nullable active_machines_by_platform cannot be null');
         }
         $this->container['active_machines_by_platform'] = $active_machines_by_platform;
+
+        return $this;
+    }
+
+    /**
+     * Gets active_machines_by_country
+     *
+     * @return \LicenseManager\Model\ProductStatsActiveMachinesByCountryInner[]
+     */
+    public function getActiveMachinesByCountry()
+    {
+        return $this->container['active_machines_by_country'];
+    }
+
+    /**
+     * Sets active_machines_by_country
+     *
+     * @param \LicenseManager\Model\ProductStatsActiveMachinesByCountryInner[] $active_machines_by_country Number of active machines in each country, from the one with the most machines.
+     *
+     * @return self
+     */
+    public function setActiveMachinesByCountry($active_machines_by_country)
+    {
+        if (is_null($active_machines_by_country)) {
+            throw new \InvalidArgumentException('non-nullable active_machines_by_country cannot be null');
+        }
+        $this->container['active_machines_by_country'] = $active_machines_by_country;
 
         return $this;
     }

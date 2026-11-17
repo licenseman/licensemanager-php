@@ -12,6 +12,7 @@ All URIs are relative to https://api.licensemanager.dev, except if the operation
 | [**getLicense()**](LicensesApi.md#getLicense) | **GET** /v1/licenses/{id} | Get a license |
 | [**getLicenseStats()**](LicensesApi.md#getLicenseStats) | **GET** /v1/licenses/{id}/stats | Get the stats of a license |
 | [**getSigningKey()**](LicensesApi.md#getSigningKey) | **GET** /v1/signing-key | Get the organization&#39;s signing key |
+| [**importLicenses()**](LicensesApi.md#importLicenses) | **POST** /v1/products/{productId}/licenses/import | Import licenses |
 | [**listCustomerLicenses()**](LicensesApi.md#listCustomerLicenses) | **GET** /v1/customers/{customerId}/licenses | List the licenses of a customer |
 | [**listLicenses()**](LicensesApi.md#listLicenses) | **GET** /v1/products/{productId}/licenses | List the licenses of a product |
 | [**sendLicenseKeys()**](LicensesApi.md#sendLicenseKeys) | **POST** /v1/licenses/send-keys | Email license keys to their customers |
@@ -391,6 +392,70 @@ This endpoint does not need any parameter.
 ### HTTP request headers
 
 - **Content-Type**: Not defined
+- **Accept**: `application/json`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `importLicenses()`
+
+```php
+importLicenses($product_id, $import_licenses): \LicenseManager\Model\ImportLicensesResult
+```
+
+Import licenses
+
+Creates up to 500 licenses with their current keys, like when moving from another license manager or Lemon Squeezy, in one request. Each license is created like with `createLicense`, which describes the defaults, and never emails its key. The licenses are imported one by one: one that fails doesn't stop the others, and the response tells the result of each.  A key already used by a license of the product is skipped, so an interrupted import can be sent again.  With a `subscription`, the license is kept valid by the Stripe or Paddle subscription, rather than one created by its next payment.  **Required role permission**: `license:create` when called with a session, granted by the member's role. API keys aren't limited by roles.
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+// Configure API key authorization: apiKey
+$config = LicenseManager\Configuration::getDefaultConfiguration()->setApiKey('x-api-key', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = LicenseManager\Configuration::getDefaultConfiguration()->setApiKeyPrefix('x-api-key', 'Bearer');
+
+
+$apiInstance = new LicenseManager\Api\LicensesApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$product_id = x7Kp2QaZ; // string
+$import_licenses = new \LicenseManager\Model\ImportLicenses(); // \LicenseManager\Model\ImportLicenses
+
+try {
+    $result = $apiInstance->importLicenses($product_id, $import_licenses);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling LicensesApi->importLicenses: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **product_id** | **string**|  | |
+| **import_licenses** | [**\LicenseManager\Model\ImportLicenses**](../Model/ImportLicenses.md)|  | |
+
+### Return type
+
+[**\LicenseManager\Model\ImportLicensesResult**](../Model/ImportLicensesResult.md)
+
+### Authorization
+
+[apiKey](../../README.md#apiKey)
+
+### HTTP request headers
+
+- **Content-Type**: `application/json`
 - **Accept**: `application/json`
 
 [[Back to top]](#) [[Back to API list]](../../README.md#endpoints)

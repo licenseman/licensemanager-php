@@ -49,6 +49,12 @@ docs/Model/EventList.md
 docs/Model/EventMachine.md
 docs/Model/EventType.md
 docs/Model/FixedMaxVersion.md
+docs/Model/ImportLicense.md
+docs/Model/ImportLicenseResult.md
+docs/Model/ImportLicenseResultError.md
+docs/Model/ImportLicenseSubscription.md
+docs/Model/ImportLicenses.md
+docs/Model/ImportLicensesResult.md
 docs/Model/Integration.md
 docs/Model/IntegrationMapping.md
 docs/Model/IntegrationMappingRecurring.md
@@ -100,6 +106,7 @@ docs/Model/Product.md
 docs/Model/ProductList.md
 docs/Model/ProductStats.md
 docs/Model/ProductStatsActivationsByVersionInner.md
+docs/Model/ProductStatsActiveMachinesByCountryInner.md
 docs/Model/ProductStatsActiveMachinesByPlatformInner.md
 docs/Model/ProductStatsActiveMachinesByVersionInner.md
 docs/Model/ProductStatsNewLicensesByPolicyInner.md
@@ -181,6 +188,12 @@ lib/Model/EventList.php
 lib/Model/EventMachine.php
 lib/Model/EventType.php
 lib/Model/FixedMaxVersion.php
+lib/Model/ImportLicense.php
+lib/Model/ImportLicenseResult.php
+lib/Model/ImportLicenseResultError.php
+lib/Model/ImportLicenseSubscription.php
+lib/Model/ImportLicenses.php
+lib/Model/ImportLicensesResult.php
 lib/Model/Integration.php
 lib/Model/IntegrationMapping.php
 lib/Model/IntegrationMappingRecurring.php
@@ -233,6 +246,7 @@ lib/Model/Product.php
 lib/Model/ProductList.php
 lib/Model/ProductStats.php
 lib/Model/ProductStatsActivationsByVersionInner.php
+lib/Model/ProductStatsActiveMachinesByCountryInner.php
 lib/Model/ProductStatsActiveMachinesByPlatformInner.php
 lib/Model/ProductStatsActiveMachinesByVersionInner.php
 lib/Model/ProductStatsNewLicensesByPolicyInner.php
@@ -311,6 +325,12 @@ test/Model/EventMachineTest.php
 test/Model/EventTest.php
 test/Model/EventTypeTest.php
 test/Model/FixedMaxVersionTest.php
+test/Model/ImportLicenseResultErrorTest.php
+test/Model/ImportLicenseResultTest.php
+test/Model/ImportLicenseSubscriptionTest.php
+test/Model/ImportLicenseTest.php
+test/Model/ImportLicensesResultTest.php
+test/Model/ImportLicensesTest.php
 test/Model/IntegrationMappingRecurringTest.php
 test/Model/IntegrationMappingTest.php
 test/Model/IntegrationStatusTest.php
@@ -360,6 +380,7 @@ test/Model/PriceInputTest.php
 test/Model/PriceTest.php
 test/Model/ProductListTest.php
 test/Model/ProductStatsActivationsByVersionInnerTest.php
+test/Model/ProductStatsActiveMachinesByCountryInnerTest.php
 test/Model/ProductStatsActiveMachinesByPlatformInnerTest.php
 test/Model/ProductStatsActiveMachinesByVersionInnerTest.php
 test/Model/ProductStatsNewLicensesByPolicyInnerTest.php

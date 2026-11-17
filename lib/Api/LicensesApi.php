@@ -92,6 +92,9 @@ class LicensesApi
         'getSigningKey' => [
             'application/json',
         ],
+        'importLicenses' => [
+            'application/json',
+        ],
         'listCustomerLicenses' => [
             'application/json',
         ],
@@ -2285,6 +2288,390 @@ class LicensesApi
         $query = ObjectSerializer::buildQuery($queryParams);
         return new Request(
             'GET',
+            $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation importLicenses
+     *
+     * Import licenses
+     *
+     * @param  string $product_id product_id (required)
+     * @param  \LicenseManager\Model\ImportLicenses $import_licenses import_licenses (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['importLicenses'] to see the possible values for this operation
+     *
+     * @throws \LicenseManager\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return \LicenseManager\Model\ImportLicensesResult|\LicenseManager\Model\Error|\LicenseManager\Model\Error|\LicenseManager\Model\Error|\LicenseManager\Model\Error|\LicenseManager\Model\Error|\LicenseManager\Model\Error
+     */
+    public function importLicenses($product_id, $import_licenses, string $contentType = self::contentTypes['importLicenses'][0])
+    {
+        list($response) = $this->importLicensesWithHttpInfo($product_id, $import_licenses, $contentType);
+        return $response;
+    }
+
+    /**
+     * Operation importLicensesWithHttpInfo
+     *
+     * Import licenses
+     *
+     * @param  string $product_id (required)
+     * @param  \LicenseManager\Model\ImportLicenses $import_licenses (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['importLicenses'] to see the possible values for this operation
+     *
+     * @throws \LicenseManager\ApiException on non-2xx response or if the response body is not in the expected format
+     * @throws \InvalidArgumentException
+     * @return array of \LicenseManager\Model\ImportLicensesResult|\LicenseManager\Model\Error|\LicenseManager\Model\Error|\LicenseManager\Model\Error|\LicenseManager\Model\Error|\LicenseManager\Model\Error|\LicenseManager\Model\Error, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function importLicensesWithHttpInfo($product_id, $import_licenses, string $contentType = self::contentTypes['importLicenses'][0])
+    {
+        $request = $this->importLicensesRequest($product_id, $import_licenses, $contentType);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            } catch (ConnectException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    null,
+                    null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+
+            switch($statusCode) {
+                case 200:
+                    return $this->handleResponseWithDataType(
+                        '\LicenseManager\Model\ImportLicensesResult',
+                        $request,
+                        $response,
+                    );
+                case 401:
+                    return $this->handleResponseWithDataType(
+                        '\LicenseManager\Model\Error',
+                        $request,
+                        $response,
+                    );
+                case 402:
+                    return $this->handleResponseWithDataType(
+                        '\LicenseManager\Model\Error',
+                        $request,
+                        $response,
+                    );
+                case 403:
+                    return $this->handleResponseWithDataType(
+                        '\LicenseManager\Model\Error',
+                        $request,
+                        $response,
+                    );
+                case 404:
+                    return $this->handleResponseWithDataType(
+                        '\LicenseManager\Model\Error',
+                        $request,
+                        $response,
+                    );
+                case 422:
+                    return $this->handleResponseWithDataType(
+                        '\LicenseManager\Model\Error',
+                        $request,
+                        $response,
+                    );
+                case 429:
+                    return $this->handleResponseWithDataType(
+                        '\LicenseManager\Model\Error',
+                        $request,
+                        $response,
+                    );
+            }
+
+            
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            return $this->handleResponseWithDataType(
+                '\LicenseManager\Model\ImportLicensesResult',
+                $request,
+                $response,
+            );
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\LicenseManager\Model\ImportLicensesResult',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 401:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\LicenseManager\Model\Error',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 402:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\LicenseManager\Model\Error',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 403:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\LicenseManager\Model\Error',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 404:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\LicenseManager\Model\Error',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 422:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\LicenseManager\Model\Error',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+                case 429:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\LicenseManager\Model\Error',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    throw $e;
+            }
+        
+
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation importLicensesAsync
+     *
+     * Import licenses
+     *
+     * @param  string $product_id (required)
+     * @param  \LicenseManager\Model\ImportLicenses $import_licenses (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['importLicenses'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function importLicensesAsync($product_id, $import_licenses, string $contentType = self::contentTypes['importLicenses'][0])
+    {
+        return $this->importLicensesAsyncWithHttpInfo($product_id, $import_licenses, $contentType)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation importLicensesAsyncWithHttpInfo
+     *
+     * Import licenses
+     *
+     * @param  string $product_id (required)
+     * @param  \LicenseManager\Model\ImportLicenses $import_licenses (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['importLicenses'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function importLicensesAsyncWithHttpInfo($product_id, $import_licenses, string $contentType = self::contentTypes['importLicenses'][0])
+    {
+        $returnType = '\LicenseManager\Model\ImportLicensesResult';
+        $request = $this->importLicensesRequest($product_id, $import_licenses, $contentType);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'importLicenses'
+     *
+     * @param  string $product_id (required)
+     * @param  \LicenseManager\Model\ImportLicenses $import_licenses (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['importLicenses'] to see the possible values for this operation
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function importLicensesRequest($product_id, $import_licenses, string $contentType = self::contentTypes['importLicenses'][0])
+    {
+
+        // verify the required parameter 'product_id' is set
+        if ($product_id === null || (is_array($product_id) && count($product_id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $product_id when calling importLicenses'
+            );
+        }
+
+        // verify the required parameter 'import_licenses' is set
+        if ($import_licenses === null || (is_array($import_licenses) && count($import_licenses) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $import_licenses when calling importLicenses'
+            );
+        }
+
+
+        $resourcePath = '/v1/products/{productId}/licenses/import';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
+
+        // path params
+        if ($product_id !== null) {
+            $resourcePath = str_replace(
+                '{productId}',
+                ObjectSerializer::toPathValue($product_id),
+                $resourcePath
+            );
+        }
+
+
+        $headers = $this->headerSelector->selectHeaders(
+            ['application/json', ],
+            $contentType,
+            $multipart
+        );
+
+        // for model (json/xml)
+        if (isset($import_licenses)) {
+            if (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the body
+                try {
+                    $httpBody = json_encode(ObjectSerializer::sanitizeForSerialization($import_licenses), JSON_THROW_ON_ERROR);
+                } catch (\JsonException $e) {
+                    throw new \InvalidArgumentException('json_encode error: ' . $e->getMessage(), 0, $e);
+                }
+            } else {
+                $httpBody = $import_licenses;
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
+                # if Content-Type contains "application/json", json_encode the form parameters
+                try {
+                    $httpBody = json_encode($formParams, JSON_THROW_ON_ERROR);
+                } catch (\JsonException $e) {
+                    throw new \InvalidArgumentException('json_encode error: ' . $e->getMessage(), 0, $e);
+                }
+            } else {
+                // for HTTP post (form)
+                $httpBody = ObjectSerializer::buildQuery($formParams);
+            }
+        }
+
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('x-api-key');
+        if ($apiKey !== null) {
+            $headers['x-api-key'] = $apiKey;
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $operationHost = $this->config->getHost();
+        $query = ObjectSerializer::buildQuery($queryParams);
+        return new Request(
+            'POST',
             $operationHost . $resourcePath . ($query ? "?{$query}" : ''),
             $headers,
             $httpBody

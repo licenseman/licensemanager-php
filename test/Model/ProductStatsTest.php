@@ -267,4 +267,13 @@ class ProductStatsTest extends TestCase
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
+
+    /**
+     * Test attribute "active_machines_by_country"
+     */
+    public function testPropertyActiveMachinesByCountry()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
 }

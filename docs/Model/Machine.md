@@ -13,6 +13,9 @@ Name | Type | Description | Notes
 **version** | **string** | Version of the application last validated on the machine. |
 **overridden_by_machine_id** | **string** | For a machine deactivated or locked by automatic machine changes, the machine that took its place. Validating the key on a deactivated machine that has one takes its place back. &#x60;null&#x60; otherwise. |
 **last_validated_at** | **\DateTime** | When the license was last validated on the machine. |
+**country** | **string** | ISO 3166-1 alpha-2 code of the country of the IP address the license was last successfully validated from on the machine. &#x60;null&#x60; until it&#39;s looked up, shortly after, or when it can&#39;t be. |
+**latitude** | **float** | Approximate latitude of the IP address the license was last successfully validated from on the machine. &#x60;null&#x60; until it&#39;s looked up, shortly after, or when it can&#39;t be. |
+**longitude** | **float** | Approximate longitude of the IP address the license was last successfully validated from on the machine. &#x60;null&#x60; until it&#39;s looked up, shortly after, or when it can&#39;t be. |
 **created_at** | **\DateTime** |  |
 **updated_at** | **\DateTime** |  |
 
