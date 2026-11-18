@@ -107,15 +107,6 @@ class PortalSettingsTest extends TestCase
     }
 
     /**
-     * Test attribute "return_url"
-     */
-    public function testPropertyReturnUrl()
-    {
-        // TODO: implement
-        self::markTestIncomplete('Not implemented');
-    }
-
-    /**
      * Test attribute "return_domains"
      */
     public function testPropertyReturnDomains()

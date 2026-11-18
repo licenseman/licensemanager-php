@@ -60,7 +60,6 @@ class PortalSettings implements ModelInterface, ArrayAccess, \JsonSerializable
         'enabled' => 'bool',
         'brand_color' => 'string',
         'accent_color' => 'string',
-        'return_url' => 'string',
         'return_domains' => 'string[]'
     ];
 
@@ -75,7 +74,6 @@ class PortalSettings implements ModelInterface, ArrayAccess, \JsonSerializable
         'enabled' => null,
         'brand_color' => null,
         'accent_color' => null,
-        'return_url' => 'uri',
         'return_domains' => null
     ];
 
@@ -88,7 +86,6 @@ class PortalSettings implements ModelInterface, ArrayAccess, \JsonSerializable
         'enabled' => false,
         'brand_color' => true,
         'accent_color' => true,
-        'return_url' => true,
         'return_domains' => false
     ];
 
@@ -181,7 +178,6 @@ class PortalSettings implements ModelInterface, ArrayAccess, \JsonSerializable
         'enabled' => 'enabled',
         'brand_color' => 'brandColor',
         'accent_color' => 'accentColor',
-        'return_url' => 'returnUrl',
         'return_domains' => 'returnDomains'
     ];
 
@@ -194,7 +190,6 @@ class PortalSettings implements ModelInterface, ArrayAccess, \JsonSerializable
         'enabled' => 'setEnabled',
         'brand_color' => 'setBrandColor',
         'accent_color' => 'setAccentColor',
-        'return_url' => 'setReturnUrl',
         'return_domains' => 'setReturnDomains'
     ];
 
@@ -207,7 +202,6 @@ class PortalSettings implements ModelInterface, ArrayAccess, \JsonSerializable
         'enabled' => 'getEnabled',
         'brand_color' => 'getBrandColor',
         'accent_color' => 'getAccentColor',
-        'return_url' => 'getReturnUrl',
         'return_domains' => 'getReturnDomains'
     ];
 
@@ -271,7 +265,6 @@ class PortalSettings implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('enabled', $data ?? [], null);
         $this->setIfExists('brand_color', $data ?? [], null);
         $this->setIfExists('accent_color', $data ?? [], null);
-        $this->setIfExists('return_url', $data ?? [], null);
         $this->setIfExists('return_domains', $data ?? [], null);
     }
 
@@ -317,13 +310,6 @@ class PortalSettings implements ModelInterface, ArrayAccess, \JsonSerializable
         }
         if (!is_null($this->container['accent_color']) && !preg_match("/^#[0-9a-f]{6}$\/i/", $this->container['accent_color'])) {
             $invalidProperties[] = "invalid value for 'accent_color', must be conform to the pattern /^#[0-9a-f]{6}$\/i/.";
-        }
-
-        if ($this->container['return_url'] === null && !$this->isNullableSetToNull('return_url')) {
-            $invalidProperties[] = "'return_url' is required";
-        }
-        if (!is_null($this->container['return_url']) && (mb_strlen($this->container['return_url']) > 2000)) {
-            $invalidProperties[] = "invalid value for 'return_url', the character length must be smaller than or equal to 2000.";
         }
 
         if ($this->container['return_domains'] === null) {
@@ -454,44 +440,6 @@ class PortalSettings implements ModelInterface, ArrayAccess, \JsonSerializable
     }
 
     /**
-     * Gets return_url
-     *
-     * @return string|null
-     */
-    public function getReturnUrl()
-    {
-        return $this->container['return_url'];
-    }
-
-    /**
-     * Sets return_url
-     *
-     * @param string|null $return_url Link back to your website shown in the portal, when the portal's URL has no allowed `return_url`. `null` for no link.
-     *
-     * @return self
-     */
-    public function setReturnUrl($return_url)
-    {
-        if (is_null($return_url)) {
-            array_push($this->openAPINullablesSetToNull, 'return_url');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('return_url', $nullablesSetToNull);
-            if ($index !== FALSE) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
-        }
-        if (!is_null($return_url) && (mb_strlen($return_url) > 2000)) {
-            throw new \InvalidArgumentException('invalid length for $return_url when calling PortalSettings., must be smaller than or equal to 2000.');
-        }
-
-        $this->container['return_url'] = $return_url;
-
-        return $this;
-    }
-
-    /**
      * Gets return_domains
      *
      * @return string[]
@@ -504,7 +452,7 @@ class PortalSettings implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets return_domains
      *
-     * @param string[] $return_domains Domains the portal's `return_url` query parameter may point to, their subdomains included. Other return URLs are ignored, in favor of `returnUrl`.
+     * @param string[] $return_domains Domains the portal's `return_url` query parameter may point to, their subdomains included. Other return URLs are ignored, in favor of the product's `websiteUrl`.
      *
      * @return self
      */

@@ -59,6 +59,8 @@ class UpdateProduct implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static $openAPITypes = [
         'name' => 'string',
         'slug' => 'string',
+        'website_url' => 'string',
+        'download_url' => 'string',
         'portal' => '\LicenseManager\Model\UpdateProductPortal',
         'auto_machine_change' => 'bool'
     ];
@@ -73,6 +75,8 @@ class UpdateProduct implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static $openAPIFormats = [
         'name' => null,
         'slug' => null,
+        'website_url' => 'uri',
+        'download_url' => 'uri',
         'portal' => null,
         'auto_machine_change' => null
     ];
@@ -85,6 +89,8 @@ class UpdateProduct implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static array $openAPINullables = [
         'name' => false,
         'slug' => false,
+        'website_url' => true,
+        'download_url' => true,
         'portal' => false,
         'auto_machine_change' => false
     ];
@@ -177,6 +183,8 @@ class UpdateProduct implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static $attributeMap = [
         'name' => 'name',
         'slug' => 'slug',
+        'website_url' => 'websiteUrl',
+        'download_url' => 'downloadUrl',
         'portal' => 'portal',
         'auto_machine_change' => 'autoMachineChange'
     ];
@@ -189,6 +197,8 @@ class UpdateProduct implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static $setters = [
         'name' => 'setName',
         'slug' => 'setSlug',
+        'website_url' => 'setWebsiteUrl',
+        'download_url' => 'setDownloadUrl',
         'portal' => 'setPortal',
         'auto_machine_change' => 'setAutoMachineChange'
     ];
@@ -201,6 +211,8 @@ class UpdateProduct implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static $getters = [
         'name' => 'getName',
         'slug' => 'getSlug',
+        'website_url' => 'getWebsiteUrl',
+        'download_url' => 'getDownloadUrl',
         'portal' => 'getPortal',
         'auto_machine_change' => 'getAutoMachineChange'
     ];
@@ -264,6 +276,8 @@ class UpdateProduct implements ModelInterface, ArrayAccess, \JsonSerializable
     {
         $this->setIfExists('name', $data ?? [], null);
         $this->setIfExists('slug', $data ?? [], null);
+        $this->setIfExists('website_url', $data ?? [], null);
+        $this->setIfExists('download_url', $data ?? [], null);
         $this->setIfExists('portal', $data ?? [], null);
         $this->setIfExists('auto_machine_change', $data ?? [], null);
     }
@@ -313,6 +327,14 @@ class UpdateProduct implements ModelInterface, ArrayAccess, \JsonSerializable
 
         if (!is_null($this->container['slug']) && !preg_match("/^(test_)?[a-z0-9]+(-[a-z0-9]+)*$/", $this->container['slug'])) {
             $invalidProperties[] = "invalid value for 'slug', must be conform to the pattern /^(test_)?[a-z0-9]+(-[a-z0-9]+)*$/.";
+        }
+
+        if (!is_null($this->container['website_url']) && (mb_strlen($this->container['website_url']) > 2000)) {
+            $invalidProperties[] = "invalid value for 'website_url', the character length must be smaller than or equal to 2000.";
+        }
+
+        if (!is_null($this->container['download_url']) && (mb_strlen($this->container['download_url']) > 2000)) {
+            $invalidProperties[] = "invalid value for 'download_url', the character length must be smaller than or equal to 2000.";
         }
 
         return $invalidProperties;
@@ -397,6 +419,82 @@ class UpdateProduct implements ModelInterface, ArrayAccess, \JsonSerializable
         }
 
         $this->container['slug'] = $slug;
+
+        return $this;
+    }
+
+    /**
+     * Gets website_url
+     *
+     * @return string|null
+     */
+    public function getWebsiteUrl()
+    {
+        return $this->container['website_url'];
+    }
+
+    /**
+     * Sets website_url
+     *
+     * @param string|null $website_url The product's website, linked from the customer portal, when its URL has no allowed `return_url`, and from the emails sent to customers. `null` for no link.
+     *
+     * @return self
+     */
+    public function setWebsiteUrl($website_url)
+    {
+        if (is_null($website_url)) {
+            array_push($this->openAPINullablesSetToNull, 'website_url');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('website_url', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        if (!is_null($website_url) && (mb_strlen($website_url) > 2000)) {
+            throw new \InvalidArgumentException('invalid length for $website_url when calling UpdateProduct., must be smaller than or equal to 2000.');
+        }
+
+        $this->container['website_url'] = $website_url;
+
+        return $this;
+    }
+
+    /**
+     * Gets download_url
+     *
+     * @return string|null
+     */
+    public function getDownloadUrl()
+    {
+        return $this->container['download_url'];
+    }
+
+    /**
+     * Sets download_url
+     *
+     * @param string|null $download_url Where customers download the product, linked from the email sending their license keys. `null` for no link.
+     *
+     * @return self
+     */
+    public function setDownloadUrl($download_url)
+    {
+        if (is_null($download_url)) {
+            array_push($this->openAPINullablesSetToNull, 'download_url');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('download_url', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        if (!is_null($download_url) && (mb_strlen($download_url) > 2000)) {
+            throw new \InvalidArgumentException('invalid length for $download_url when calling UpdateProduct., must be smaller than or equal to 2000.');
+        }
+
+        $this->container['download_url'] = $download_url;
 
         return $this;
     }

@@ -62,6 +62,8 @@ class Product implements ModelInterface, ArrayAccess, \JsonSerializable
         'name' => 'string',
         'is_test_from_product_id' => 'string',
         'logo_url' => 'string',
+        'website_url' => 'string',
+        'download_url' => 'string',
         'portal' => '\LicenseManager\Model\PortalSettings',
         'auto_machine_change' => 'bool',
         'created_at' => '\DateTime',
@@ -81,6 +83,8 @@ class Product implements ModelInterface, ArrayAccess, \JsonSerializable
         'name' => null,
         'is_test_from_product_id' => null,
         'logo_url' => 'uri',
+        'website_url' => 'uri',
+        'download_url' => 'uri',
         'portal' => null,
         'auto_machine_change' => null,
         'created_at' => 'date-time',
@@ -98,6 +102,8 @@ class Product implements ModelInterface, ArrayAccess, \JsonSerializable
         'name' => false,
         'is_test_from_product_id' => true,
         'logo_url' => true,
+        'website_url' => true,
+        'download_url' => true,
         'portal' => false,
         'auto_machine_change' => false,
         'created_at' => false,
@@ -195,6 +201,8 @@ class Product implements ModelInterface, ArrayAccess, \JsonSerializable
         'name' => 'name',
         'is_test_from_product_id' => 'isTestFromProductId',
         'logo_url' => 'logoUrl',
+        'website_url' => 'websiteUrl',
+        'download_url' => 'downloadUrl',
         'portal' => 'portal',
         'auto_machine_change' => 'autoMachineChange',
         'created_at' => 'createdAt',
@@ -212,6 +220,8 @@ class Product implements ModelInterface, ArrayAccess, \JsonSerializable
         'name' => 'setName',
         'is_test_from_product_id' => 'setIsTestFromProductId',
         'logo_url' => 'setLogoUrl',
+        'website_url' => 'setWebsiteUrl',
+        'download_url' => 'setDownloadUrl',
         'portal' => 'setPortal',
         'auto_machine_change' => 'setAutoMachineChange',
         'created_at' => 'setCreatedAt',
@@ -229,6 +239,8 @@ class Product implements ModelInterface, ArrayAccess, \JsonSerializable
         'name' => 'getName',
         'is_test_from_product_id' => 'getIsTestFromProductId',
         'logo_url' => 'getLogoUrl',
+        'website_url' => 'getWebsiteUrl',
+        'download_url' => 'getDownloadUrl',
         'portal' => 'getPortal',
         'auto_machine_change' => 'getAutoMachineChange',
         'created_at' => 'getCreatedAt',
@@ -297,6 +309,8 @@ class Product implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->setIfExists('name', $data ?? [], null);
         $this->setIfExists('is_test_from_product_id', $data ?? [], null);
         $this->setIfExists('logo_url', $data ?? [], null);
+        $this->setIfExists('website_url', $data ?? [], null);
+        $this->setIfExists('download_url', $data ?? [], null);
         $this->setIfExists('portal', $data ?? [], null);
         $this->setIfExists('auto_machine_change', $data ?? [], null);
         $this->setIfExists('created_at', $data ?? [], null);
@@ -345,6 +359,20 @@ class Product implements ModelInterface, ArrayAccess, \JsonSerializable
         if ($this->container['logo_url'] === null && !$this->isNullableSetToNull('logo_url')) {
             $invalidProperties[] = "'logo_url' is required";
         }
+        if ($this->container['website_url'] === null && !$this->isNullableSetToNull('website_url')) {
+            $invalidProperties[] = "'website_url' is required";
+        }
+        if (!is_null($this->container['website_url']) && (mb_strlen($this->container['website_url']) > 2000)) {
+            $invalidProperties[] = "invalid value for 'website_url', the character length must be smaller than or equal to 2000.";
+        }
+
+        if ($this->container['download_url'] === null && !$this->isNullableSetToNull('download_url')) {
+            $invalidProperties[] = "'download_url' is required";
+        }
+        if (!is_null($this->container['download_url']) && (mb_strlen($this->container['download_url']) > 2000)) {
+            $invalidProperties[] = "invalid value for 'download_url', the character length must be smaller than or equal to 2000.";
+        }
+
         if ($this->container['portal'] === null) {
             $invalidProperties[] = "'portal' can't be null";
         }
@@ -517,6 +545,82 @@ class Product implements ModelInterface, ArrayAccess, \JsonSerializable
             }
         }
         $this->container['logo_url'] = $logo_url;
+
+        return $this;
+    }
+
+    /**
+     * Gets website_url
+     *
+     * @return string|null
+     */
+    public function getWebsiteUrl()
+    {
+        return $this->container['website_url'];
+    }
+
+    /**
+     * Sets website_url
+     *
+     * @param string|null $website_url The product's website, linked from the customer portal, when its URL has no allowed `return_url`, and from the emails sent to customers. `null` for no link.
+     *
+     * @return self
+     */
+    public function setWebsiteUrl($website_url)
+    {
+        if (is_null($website_url)) {
+            array_push($this->openAPINullablesSetToNull, 'website_url');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('website_url', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        if (!is_null($website_url) && (mb_strlen($website_url) > 2000)) {
+            throw new \InvalidArgumentException('invalid length for $website_url when calling Product., must be smaller than or equal to 2000.');
+        }
+
+        $this->container['website_url'] = $website_url;
+
+        return $this;
+    }
+
+    /**
+     * Gets download_url
+     *
+     * @return string|null
+     */
+    public function getDownloadUrl()
+    {
+        return $this->container['download_url'];
+    }
+
+    /**
+     * Sets download_url
+     *
+     * @param string|null $download_url Where customers download the product, linked from the email sending their license keys. `null` for no link.
+     *
+     * @return self
+     */
+    public function setDownloadUrl($download_url)
+    {
+        if (is_null($download_url)) {
+            array_push($this->openAPINullablesSetToNull, 'download_url');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('download_url', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        if (!is_null($download_url) && (mb_strlen($download_url) > 2000)) {
+            throw new \InvalidArgumentException('invalid length for $download_url when calling Product., must be smaller than or equal to 2000.');
+        }
+
+        $this->container['download_url'] = $download_url;
 
         return $this;
     }

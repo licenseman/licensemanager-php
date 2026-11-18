@@ -98,6 +98,24 @@ class UpdateProductTest extends TestCase
     }
 
     /**
+     * Test attribute "website_url"
+     */
+    public function testPropertyWebsiteUrl()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "download_url"
+     */
+    public function testPropertyDownloadUrl()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "portal"
      */
     public function testPropertyPortal()

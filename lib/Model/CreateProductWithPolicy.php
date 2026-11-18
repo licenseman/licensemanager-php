@@ -444,7 +444,7 @@ class CreateProductWithPolicy implements ModelInterface, ArrayAccess, \JsonSeria
     /**
      * Sets is_test_from_product_id
      *
-     * @param string|null $is_test_from_product_id Creates a test product: a sandbox of this live product of the organization, starting with copies of its policies, releases, portal settings and `autoMachineChange`.
+     * @param string|null $is_test_from_product_id Creates a test product: a sandbox of this live product of the organization, starting with copies of its policies, releases, `websiteUrl`, `downloadUrl`, portal settings and `autoMachineChange`.
      *
      * @return self
      */

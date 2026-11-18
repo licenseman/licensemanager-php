@@ -548,7 +548,7 @@ class Portal implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets return_url
      *
-     * @param string|null $return_url Link back to the product's website: the requested `returnUrl` when its domain is allowed, the product's default return link otherwise. `null` for no link.
+     * @param string|null $return_url Link back to the product's website: the requested `returnUrl` when its domain is allowed, the product's website otherwise. `null` for no link.
      *
      * @return self
      */
